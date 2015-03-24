@@ -29,11 +29,7 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/google/sprout/bluetooth
 
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/root/fstab.sprout
 
-TARGET_KERNEL_SOURCE := kernel/mediatek/sprout
-TARGET_KERNEL_CONFIG := cyanogenmod_sprout_defconfig
-
 BOARD_RECOVERY_SWIPE := true
-KERNEL_TOOLCHAIN := /root/cm11/prebuilts/gcc/linux-x86/arm/arm-eabi-4.7/bin
 
 # TWRP stuff
 RECOVERY_GRAPHICS_USE_LINELENGTH := true

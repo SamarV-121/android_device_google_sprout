@@ -76,6 +76,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/root/ueventd.sprout.rc:root/ueventd.sprout.rc \
     $(LOCAL_PATH)/rootdir/root/init.sprout.usb.rc:root/init.sprout.usb.rc
 
+LOCAL_KERNEL := device/google/sprout/kernel
+PRODUCT_COPY_FILES += $(LOCAL_KERNEL):kernel
+
 DEVICE_PACKAGE_OVERLAYS := device/google/sprout/overlay
 	
 PRODUCT_COPY_FILES += \
