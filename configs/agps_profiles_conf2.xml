@@ -287,6 +287,21 @@
     dedicated_apn_enable:
         enable/disable the dedicated SUPL APN flow
         available value: true, false (default)
+
+    preferred_2g3g_cell_age:
+        max age of 2G / 3G cell info in history is OK to send to SLP server instead if the latest cell is of 3G or 4G.
+        available value: non-negative integer, from 0 ~ 1800, unit in second
+                           0 (always use the latest cell info)
+                         300 (prefer to use 2G / 3G cell if its age is less than 5 mins)
+
+    lpp_enable:
+        enable/disable the LPP capability
+        available value: true (default), false
+
+    cert_from_sdcard:
+        enable/disable the AGPS certification installation from SDCard
+        available value: true (default), false
+
   -->
   <up_setting
     ca_enable="false"
@@ -308,6 +323,9 @@
     qop_delay="0"
     udp_port_enable="false"
     dedicated_apn_enable="false"
+    preferred_2g3g_cell_age="300"
+    lpp_enable="true"
+    cert_from_sdcard="false"
   />
 
 </mtk_agps_profiles>
