@@ -33,8 +33,6 @@ TARGET_KERNEL_SOURCE := kernel/mediatek/sprout
 TARGET_KERNEL_CONFIG := cyanogenmod_sprout_defconfig
 
 BOARD_RECOVERY_SWIPE := true
-KERNEL_TOOLCHAIN := /root/cm11/prebuilts/gcc/linux-x86/arm/arm-eabi-4.7/bin
-
 # TWRP stuff
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 TW_EXTERNAL_STORAGE_PATH := "/external_sd"
@@ -51,6 +49,13 @@ TW_NO_USB_STORAGE := true
 
 USE_OPENGL_RENDERER:= true
 
+BOARD_HAS_QCOM_WLAN              := true
+BOARD_WLAN_DEVICE                := qcwcn
+WPA_SUPPLICANT_VERSION           := VER_0_8_X
+BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+BOARD_HOSTAPD_DRIVER             := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 WIFI_DRIVER_FW_PATH_PARAM:="/dev/wmtWifi"
 WIFI_DRIVER_FW_PATH_STA:=STA
 WIFI_DRIVER_FW_PATH_AP:=AP
