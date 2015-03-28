@@ -107,9 +107,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp,adb \
-
-PRODUCT_PACKAGES += \
-    libbt-vendor
 	
 PRODUCT_PACKAGES += \
     librs_jni \
