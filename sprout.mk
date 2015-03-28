@@ -107,7 +107,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp,adb \
-	ro.telephony.ril_class=SproutRIL \
 
 PRODUCT_PACKAGES += \
     libbt-vendor
