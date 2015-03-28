@@ -97,6 +97,14 @@ PRODUCT_PACKAGES += \
     libaudio-resampler \
     tinymix
 
+# Wifi
+ PRODUCT_PACKAGES += \
+    libwpa_client \
+    hostapd \
+    dhcpcd.conf \
+    wpa_supplicant \
+    wpa_supplicant.conf
+
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp,adb \
     ro.secure=1 \
