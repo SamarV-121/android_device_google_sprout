@@ -119,19 +119,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
-# Delegation for OEM customization
-PRODUCT_OEM_PROPERTIES := \
-    ro.product.device \
-    ro.product.name \
-    ro.product.manufacturer \
-    ro.product.model \
-    ro.product.locale.language \
-    ro.product.locale.region \
-    ro.config.ringtone \
-    ro.config.notification_sound \
-    ro.config.alarm_alert \
-    ro.config.wallpaper
-
 PRODUCT_PACKAGES += Torch
 
 # call the proprietary setup
