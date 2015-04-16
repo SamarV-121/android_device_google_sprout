@@ -85,6 +85,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/root/ueventd.sprout.rc:root/ueventd.sprout.rc \
     $(LOCAL_PATH)/rootdir/root/init.sprout.usb.rc:root/init.sprout.usb.rc
 
+# Audio
+USE_CUSTOM_AUDIO_POLICY := 1
+
 DEVICE_PACKAGE_OVERLAYS := device/google/sprout/overlay
 	
 PRODUCT_COPY_FILES += \
