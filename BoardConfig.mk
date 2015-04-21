@@ -69,6 +69,8 @@ MALLOC_IMPL := dlmalloc
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
 
+BOARD_RIL_CLASS := ../../../device/google/sprout/ril/
+
 TARGET_GLOBAL_CFLAGS   += -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_USERIMAGES_USE_EXT4:=true

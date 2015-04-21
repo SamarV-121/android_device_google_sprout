@@ -100,6 +100,9 @@ PRODUCT_PACKAGES += \
     libaudio-resampler \
     tinymix
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.ril_class=SproutRIL
+
 # Wifi
  PRODUCT_PACKAGES += \
     libwpa_client \
