@@ -1,4 +1,5 @@
 bin/nvram_daemon
+bin/wpa_supplicant
 bin/md_ctrl
 bin/bmc156d
 bin/ccci_mdinit
@@ -27,6 +28,7 @@ lib/libJpgEncPipe.so
 lib/libfeatureio.so
 lib/libcam.utils.so
 lib/libblisrc32.so
+lib/libaudiopolicymanagersprout.so
 lib/libion_mtk.so
 lib/libnvram.so
 lib/libbluetooth_mtk_pure.so
@@ -37,7 +39,7 @@ lib/libcam3_app.so
 lib/lib3a.so
 lib/libbluetooth_mtk.so
 lib/libcam.halsensor.so
-lib/libcamera_metadata.so
+lib/libaudiopolicymanagerdefault.so
 lib/libcameracustom.so
 lib/hw/gralloc.mt6582.so
 lib/hw/camera.mt6582.so
@@ -70,7 +72,9 @@ lib/libcam3_utils.so
 lib/libmtkplayer.so
 lib/libcam.camadapter.so
 lib/libimageio.so
+lib/libcam.iopipe.so
 lib/libimageio_plat_drv_FrmB.so
+lib/libhwm.so
 lib/libfile_op.so
 lib/libcam.exif.so
 lib/egl/libEGL_mali.so
@@ -91,6 +95,7 @@ lib/libcamdrv_FrmB.so
 lib/librilmtk.so
 lib/libaudiomtkdcremoval.so
 lib/libsched.so
+lib/libbt-vendor.so
 lib/libMtkOmxVenc.so
 lib/libvcodecdrv.so
 lib/libcamalgo.so
@@ -105,8 +110,18 @@ lib/libaudiodcrflt.so
 lib/libMali.so
 lib/libssladp.so
 lib/libm4u.so
+vendor/lib/drm/libdrmwvmplugin.so
+vendor/lib/libWVStreamControlAPI_L3.so
+vendor/lib/libWVphoneAPI.so
+vendor/lib/libwvm.so
+vendor/lib/libfrsdk.so
+vendor/lib/mediadrm/libwvdrmengine.so
+vendor/lib/mediadrm/libdrmclearkeyplugin.so
+vendor/lib/libwvdrm_L3.so
 xbin/mnld
 etc/mtk_omx_core.cfg
+etc/wifi/p2p_supplicant_overlay.conf
+etc/wifi/wpa_supplicant_overlay.conf
 etc/wifi/wpa_supplicant.conf
 etc/firmware/mt6627/mt6627_fm_v3_coeff.bin
 etc/firmware/mt6627/mt6627_fm_v5_coeff.bin
