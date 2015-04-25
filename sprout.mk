@@ -121,6 +121,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     setup_fs \
     e2fsck \
+
+# Delegation for OEM customization
+PRODUCT_SYSTEM_PROPERTY_BLACKLIST := \
+    ro.product.name \
+    ro.product.manufacturer \
+    ro.product.model
 	
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
