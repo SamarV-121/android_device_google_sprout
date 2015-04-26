@@ -1,4 +1,4 @@
-LOCAL_PATH := device/google/sprout
+LOCAL_PATH := device/google/sprout-common
 
 TARGET_BOARD_PLATFORM := mt6582
 TARGET_CPU_ABI := armeabi-v7a
@@ -24,7 +24,7 @@ BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 2048
 DEVICE_RESOLUTION := 480x854
 
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/google/sprout/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 
 
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/root/fstab.sprout
@@ -69,7 +69,9 @@ MALLOC_IMPL := dlmalloc
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
 
-BOARD_RIL_CLASS := ../../../device/google/sprout/ril/
+TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
+
+BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril/
 
 TARGET_GLOBAL_CFLAGS   += -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
@@ -77,7 +79,7 @@ TARGET_USERIMAGES_USE_EXT4:=true
 USE_CAMERA_STUB := true
 
 BOARD_SEPOLICY_DIRS += \
-    device/google/sprout/sepolicy
+    device/google/sprout-common/sepolicy
 
 BOARD_SEPOLICY_UNION += \
     file_contexts \
