@@ -117,6 +117,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     camera.disable_zsl_mode=1 \
+    persist.sys.usb.config=mtp
 	
 PRODUCT_PACKAGES += \
     librs_jni \
