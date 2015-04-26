@@ -102,6 +102,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.ril_class=SproutRIL
 
+# FM Radio
+PRODUCT_PACKAGES += \
+    FMRadio \
+    FmRadioTrampoline
+
 # Wifi
  PRODUCT_PACKAGES += \
     libwpa_client \
