@@ -111,7 +111,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     wpa_supplicant.conf
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp,adb \
+    camera.disable_zsl_mode=1 \
 	
 PRODUCT_PACKAGES += \
     librs_jni \
