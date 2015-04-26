@@ -909,3 +909,29 @@ service conn_launcher /system/bin/6620_launcher -p /system/etc/firmware/
 # Connectivity related services (End)
 #
 
+# CM Performance Profiles
+
+# Powersave
+on property:sys.perf.profile=0
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq "747500"
+	write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq "598000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpu2/online "0"
+    write /sys/devices/system/cpu/cpu3/online "0"
+
+# Balanced
+on property:sys.perf.profile=1
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq "1300000"
+	write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq "598000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "hotplug"
+    write /sys/devices/system/cpu/cpu2/online "1"
+    write /sys/devices/system/cpu/cpu3/online "1"
+
+# Performance
+on property:sys.perf.profile=2
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq "1300000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq "1300000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "hotplug"
+    write /sys/devices/system/cpu/cpu2/online "1"
+    write /sys/devices/system/cpu/cpu3/online "1"
+
