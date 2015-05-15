@@ -124,6 +124,12 @@ PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
 PRODUCT_PACKAGES += \
+    charger \
+    charger_res_images \
+    libnl_2 \
+    libtinyxml
+
+PRODUCT_PACKAGES += \
     setup_fs \
     e2fsck \
 
