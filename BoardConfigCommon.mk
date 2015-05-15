@@ -82,7 +82,11 @@ BOARD_SEPOLICY_DIRS += \
     device/google/sprout-common/sepolicy
 
 BOARD_SEPOLICY_UNION += \
-    file_contexts \
-    device.te \
     app.te \
-    netd.te
+    device.te \
+    file_contexts \
+    mediaserver.te \
+    netd.te \
+    radio.te \
+    surfaceflinger.te \
+    system_server.te

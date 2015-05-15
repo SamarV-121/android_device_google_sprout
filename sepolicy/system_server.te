@@ -1,0 +1,2 @@
+allow system_server device:chr_file { read ioctl open };
+allow system_server init:unix_dgram_socket sendto;
