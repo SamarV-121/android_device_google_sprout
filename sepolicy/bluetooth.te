@@ -1,0 +1,1 @@
+allow bluetooth nvram_data_file:file read;

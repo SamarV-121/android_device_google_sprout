@@ -83,10 +83,15 @@ BOARD_SEPOLICY_DIRS += \
 
 BOARD_SEPOLICY_UNION += \
     app.te \
+    bluetooth.te \
     device.te \
     file_contexts \
+    init.te \
+    kernel.te \
     mediaserver.te \
     netd.te \
-    radio.te \
-    surfaceflinger.te \
-    system_server.te
+    servicemanager.te \
+    shell.te \
+    sysfs.te \
+    system_server.te \
+    zygote.te
