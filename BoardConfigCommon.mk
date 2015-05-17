@@ -82,12 +82,14 @@ BOARD_SEPOLICY_DIRS += \
     device/google/sprout-common/sepolicy
 
 BOARD_SEPOLICY_UNION += \
+    adbd.te \
     app.te \
     bluetooth.te \
     device.te \
     file_contexts \
     init.te \
     kernel.te \
+    logd.te \
     mediaserver.te \
     netd.te \
     servicemanager.te \

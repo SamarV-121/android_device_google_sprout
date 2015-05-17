@@ -2,3 +2,4 @@ allow init node:tcp_socket node_bind;
 allow init port:tcp_socket name_bind;
 allow init self:tcp_socket { bind create setopt accept listen };
 allow init self:tcp_socket { write read connect shutdown };
+allow init logd:process ptrace;
