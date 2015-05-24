@@ -1,0 +1,2 @@
+allow system_app init:unix_dgram_socket write;
+allow system_app init_tmpfs:file read;

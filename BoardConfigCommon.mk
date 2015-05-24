@@ -92,7 +92,11 @@ BOARD_SEPOLICY_UNION += \
     logd.te \
     mediaserver.te \
     netd.te \
+    oemfs.te \
+    platform_app.te \
+    radio.te \
     servicemanager.te \
+    shared_relro.te \
     shell.te \
     sysfs.te \
     system_server.te \
