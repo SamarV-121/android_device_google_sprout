@@ -100,4 +100,5 @@ BOARD_SEPOLICY_UNION += \
     shell.te \
     sysfs.te \
     system_server.te \
+    untrusted_app.te \
     zygote.te
