@@ -19,9 +19,91 @@
 #include "android_drv.h"
 #endif
 
-int send_and_recv_msgs(struct wpa_driver_nl80211_data *drv, struct nl_msg *msg,
-		       int (*valid_handler)(struct nl_msg *, void *),
-		       void *valid_data);
+/* nl80211 code */
+static int ack_handler(struct nl_msg *msg, void *arg)
+{
+	int *err = arg;
+	*err = 0;
+	return NL_STOP;
+}
+
+static int finish_handler(struct nl_msg *msg, void *arg)
+{
+	int *ret = arg;
+	*ret = 0;
+	return NL_SKIP;
+}
+
+static int error_handler(struct sockaddr_nl *nla, struct nlmsgerr *err,
+			 void *arg)
+{
+	int *ret = arg;
+	*ret = err->error;
+	return NL_SKIP;
+}
+
+
+static int no_seq_check(struct nl_msg *msg, void *arg)
+{
+	return NL_OK;
+}
+
+static int send_and_recv(struct nl80211_global *global,
+			 struct nl_handle *nl_handle, struct nl_msg *msg,
+			 int (*valid_handler)(struct nl_msg *, void *),
+			 void *valid_data)
+{
+	struct nl_cb *cb;
+	int err = -ENOMEM;
+
+	cb = nl_cb_clone(global->nl_cb);
+	if (!cb)
+		goto out;
+
+	err = nl_send_auto_complete(nl_handle, msg);
+	if (err < 0)
+		goto out;
+
+	err = 1;
+
+	nl_cb_err(cb, NL_CB_CUSTOM, error_handler, &err);
+	nl_cb_set(cb, NL_CB_FINISH, NL_CB_CUSTOM, finish_handler, &err);
+	nl_cb_set(cb, NL_CB_ACK, NL_CB_CUSTOM, ack_handler, &err);
+
+	if (valid_handler)
+		nl_cb_set(cb, NL_CB_VALID, NL_CB_CUSTOM,
+			  valid_handler, valid_data);
+
+	while (err > 0)
+		nl_recvmsgs(nl_handle, cb);
+ out:
+	nl_cb_put(cb);
+	nlmsg_free(msg);
+	return err;
+}
+
+
+static int send_and_recv_msgs_global(struct nl80211_global *global,
+				     struct nl_msg *msg,
+				     int (*valid_handler)(struct nl_msg *, void *),
+				     void *valid_data)
+{
+	return send_and_recv(global, global->nl, msg, valid_handler,
+			     valid_data);
+}
+
+
+#ifndef ANDROID
+static
+#endif
+int send_and_recv_msgs(struct wpa_driver_nl80211_data *drv,
+			      struct nl_msg *msg,
+			      int (*valid_handler)(struct nl_msg *, void *),
+			      void *valid_data)
+{
+	return send_and_recv(drv->global, drv->global->nl, msg,
+			     valid_handler, valid_data);
+}
 
 static int testmode_sta_statistics_handler(struct nl_msg *msg, void *arg)
 {
@@ -398,42 +480,4 @@ int wpa_driver_nl80211_driver_cmd(void *priv, char *cmd, char *buf,
     }
 
     return ret;
-}
-
-int wpa_driver_set_p2p_noa(void *priv, u8 count, int start, int duration)
-{
-	struct i802_bss *bss = priv;
-	struct wpa_driver_nl80211_data *drv = bss->drv;
-
-	wpa_printf(MSG_DEBUG, "iface %s P2P_SET_NOA %d %d %d, ignored", bss->ifname, count, start, duration); 
-	return -1;
-}
-
-int wpa_driver_get_p2p_noa(void *priv, u8 *buf, size_t len)
-{
-	struct i802_bss *bss = priv;
-	struct wpa_driver_nl80211_data *drv = bss->drv;
-
-	wpa_printf(MSG_DEBUG, "iface %s P2P_GET_NOA, ignored"); 
-	return -1;
-}
-
-int wpa_driver_set_p2p_ps(void *priv, int legacy_ps, int opp_ps, int ctwindow)
-{
-	struct i802_bss *bss = priv;
-	struct wpa_driver_nl80211_data *drv = bss->drv;
-
-	wpa_printf(MSG_DEBUG, "iface %s P2P_SET_PS, ignored"); 
-	return -1;
-}
-
-int wpa_driver_set_ap_wps_p2p_ie(void *priv, const struct wpabuf *beacon,
-				 const struct wpabuf *proberesp,
-				 const struct wpabuf *assocresp)
-{
-	struct i802_bss *bss = priv;
-	struct wpa_driver_nl80211_data *drv = bss->drv;
-
-	wpa_printf(MSG_DEBUG, "iface %s set_ap_wps_p2p_ie, ignored"); 
-	return -1;
 }
