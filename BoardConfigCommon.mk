@@ -97,6 +97,7 @@ BOARD_SEPOLICY_UNION += \
     servicemanager.te \
     shared_relro.te \
     shell.te \
+    surfaceflinger.te \
     sysfs.te \
     system_server.te \
     untrusted_app.te \

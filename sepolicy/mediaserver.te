@@ -3,3 +3,4 @@ allow mediaserver ccci_device:chr_file { read write open };
 allow mediaserver ebc_device:chr_file { read write open };
 allow mediaserver system_server:unix_stream_socket { read write };
 allow mediaserver fm_device:chr_file { read write ioctl open };
+allow mediaserver Vcodec_device:chr_file { ioctl open read write };
