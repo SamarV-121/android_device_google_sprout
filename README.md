@@ -18,4 +18,4 @@ Camera  | 5MPx, LED Flash
 
 ![Android One](http://news.bbcimg.co.uk/media/images/77588000/jpg/_77588715_09e78d0d-b02b-418e-8bd0-a4176c985978.jpg "All three android one devices")
 
-This branch is for building CyanogenMod 11 (or Android KitKat 4.4 AOSP based roms) ROMS.
+This branch is for building CyanogenMod 12.1 (or Android Lollipop 5.1 AOSP based roms) ROMS.

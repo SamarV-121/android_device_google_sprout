@@ -39,11 +39,11 @@ public class SproutRIL extends RIL implements CommandsInterface {
 static final int RIL_REQUEST_SET_3G_CAPABILITY = 128;
 
     public SproutRIL(Context context, int networkMode, int cdmaSubscription) {
-	    super(context, networkMode, cdmaSubscription, null);
+        super(context, networkMode, cdmaSubscription, null);
     }
 
     public SproutRIL(Context context, int networkMode, int cdmaSubscription, Integer instanceId) {
-	    super(context, networkMode, cdmaSubscription, instanceId);
+        super(context, networkMode, cdmaSubscription, instanceId);
     }
 
     private static int readRilMessage(InputStream is, byte[] buffer)
@@ -259,7 +259,7 @@ static final int RIL_REQUEST_SET_3G_CAPABILITY = 128;
 
 
 
-	protected RILRequest
+    protected RILRequest
     processSolicited (Parcel p) {
         int serial, error;
         boolean found = false;
@@ -498,7 +498,7 @@ static final int RIL_REQUEST_SET_3G_CAPABILITY = 128;
         return rr;
     }
 
-	static String
+    static String
     requestToString(int request) {
 /*
  cat libs/telephony/ril_commands.h \
@@ -698,9 +698,9 @@ static final int RIL_REQUEST_SET_3G_CAPABILITY = 128;
         send(rr);
     }
 
-	public void setDataAllowed(boolean allowed, Message result) {
-		handle3GSwitch();
-		RILRequest rr = RILRequest.obtain(125, result);
+    public void setDataAllowed(boolean allowed, Message result) {
+        handle3GSwitch();
+        RILRequest rr = RILRequest.obtain(125, result);
         if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest)
                 + " " + allowed);
         rr.mParcel.writeInt(1);
@@ -708,13 +708,13 @@ static final int RIL_REQUEST_SET_3G_CAPABILITY = 128;
         send(rr);
     }
 
-	public void handle3GSwitch() {
-		int simId = mInstanceId == null ? 0 : mInstanceId;
+    public void handle3GSwitch() {
+        int simId = mInstanceId == null ? 0 : mInstanceId;
         int newsim = SystemProperties.getInt("gsm.3gswitch", 0);
         newsim = newsim-1;
         if(!(simId==newsim))
-		{
-		int prop = SystemProperties.getInt("gsm.3gswitch", 0);
+        {
+        int prop = SystemProperties.getInt("gsm.3gswitch", 0);
         if (RILJ_LOGD) riljLog("Setting data subscription on SIM"+(simId+1)+" mInstanceid="+mInstanceId+" gsm.3gswitch="+prop);
         RILRequest rr = RILRequest.obtain(RIL_REQUEST_SET_3G_CAPABILITY, null);
         rr.mParcel.writeInt(1);
@@ -722,19 +722,19 @@ static final int RIL_REQUEST_SET_3G_CAPABILITY = 128;
         rr.mParcel.writeInt(realsim);
         if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest));
         send(rr);
-		try {
+        try {
              Thread.sleep(1000);
             } catch (InterruptedException er) {
             }
-		resetRadio(null);
-		try {
+        resetRadio(null);
+        try {
              Thread.sleep(4*1000);
             } catch (InterruptedException er) {
             }
-		}
-		else
-		{
+        }
+        else
+        {
         if (RILJ_LOGD) riljLog("Not setting data subscription on same SIM");
-		}
-	}
+        }
+    }
 }
