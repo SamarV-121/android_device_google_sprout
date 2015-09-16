@@ -89,6 +89,7 @@ BOARD_SEPOLICY_UNION += \
     adbd.te \
     app.te \
     bluetooth.te \
+    debuggerd.te \
     device.te \
     file_contexts \
     init.te \
