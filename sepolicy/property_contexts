@@ -1,0 +1,4 @@
+af.modem_1.                           u:object_r:modem_prop:s0
+persist.af.modem.                     u:object_r:modem_prop:s0
+debug.hwc.                            u:object_r:hwc_prop:s0
+debug.st.                             u:object_r:hwc_prop:s0

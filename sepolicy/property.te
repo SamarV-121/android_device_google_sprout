@@ -1,0 +1,2 @@
+type modem_prop, property_type;
+type hwc_prop, property_type;

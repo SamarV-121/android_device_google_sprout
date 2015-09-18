@@ -99,6 +99,8 @@ BOARD_SEPOLICY_UNION += \
     netd.te \
     oemfs.te \
     platform_app.te \
+    property_contexts \
+    property.te \
     radio.te \
     servicemanager.te \
     shared_relro.te \
