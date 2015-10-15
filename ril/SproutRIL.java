@@ -17,7 +17,11 @@
 package com.android.internal.telephony;
 
 import static com.android.internal.telephony.RILConstants.*;
+import static com.android.internal.telephony.TelephonyIntents.*;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.LocalSocket;
 import android.net.LocalSocketAddress;
 import android.os.AsyncResult;
@@ -27,6 +31,8 @@ import android.os.Parcel;
 import android.os.SystemProperties;
 import android.telephony.Rlog;
 import android.telephony.SignalStrength;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,6 +43,9 @@ import com.android.internal.telephony.uicc.IccIoResult;
 public class SproutRIL extends RIL implements CommandsInterface {
 
 static final int RIL_REQUEST_SET_3G_CAPABILITY = 128;
+static final int RIL_REQUEST_ALLOW_DATA = 125;
+static int skipSwitch = 0;
+static int registered = 0;
 
     public SproutRIL(Context context, int networkMode, int cdmaSubscription) {
         super(context, networkMode, cdmaSubscription, null);
@@ -423,7 +432,6 @@ static final int RIL_REQUEST_SET_3G_CAPABILITY = 128;
             case RIL_REQUEST_SET_UICC_SUBSCRIPTION: ret = responseVoid(p); break;
             case RIL_REQUEST_ALLOW_DATA: ret = responseVoid(p); break;
             case RIL_REQUEST_GET_HARDWARE_CONFIG: ret = responseHardwareConfig(p); break;
-            case RIL_REQUEST_SIM_AUTHENTICATION: ret =  responseICC_IOBase64(p); break;
             case RIL_REQUEST_SHUTDOWN: ret = responseVoid(p); break;
             default:
                 throw new RuntimeException("Unrecognized solicited response: " + rr.mRequest);
@@ -632,7 +640,6 @@ static final int RIL_REQUEST_SET_3G_CAPABILITY = 128;
             case RIL_REQUEST_ALLOW_DATA: return "RIL_REQUEST_ALLOW_DATA";
             case RIL_REQUEST_GET_HARDWARE_CONFIG: return "GET_HARDWARE_CONFIG";
             case RIL_REQUEST_SET_3G_CAPABILITY: return "RIL_REQUEST_SET_3G_CAPABILITY";
-            case RIL_REQUEST_SIM_AUTHENTICATION: return "RIL_REQUEST_SIM_AUTHENTICATION";
             case RIL_REQUEST_SHUTDOWN: return "RIL_REQUEST_SHUTDOWN";
             default: return "<unknown request>";
         }
@@ -699,8 +706,27 @@ static final int RIL_REQUEST_SET_3G_CAPABILITY = 128;
     }
 
     public void setDataAllowed(boolean allowed, Message result) {
-        handle3GSwitch();
-        RILRequest rr = RILRequest.obtain(125, result);
+        int currentSimId = mInstanceId == null ? 0 : mInstanceId;
+        int m3gSimId = get3gSimId();
+        if((m3gSimId-1) != currentSimId && skipSwitch == 0) {
+            Toast.makeText(mContext, "Switching data SIM, this may take up to a minute...",
+			         Toast.LENGTH_LONG).show();
+            RILRequest rr = RILRequest.obtain(RIL_REQUEST_SET_3G_CAPABILITY, null);
+            rr.mParcel.writeInt(1);
+            rr.mParcel.writeInt(currentSimId+1);
+            send(rr);
+            resetRadio(null);
+            skipSwitch = 1;
+        }
+        else {
+            if(skipSwitch == 1)
+                Rlog.i(RILJ_LOG_TAG, "Skipping switch");
+            else
+                Rlog.i(RILJ_LOG_TAG, "Not setting data subscription on same SIM, requested="
+			           +(currentSimId+1)+" current="+m3gSimId);
+            skipSwitch = 0;
+        }
+        RILRequest rr = RILRequest.obtain(RIL_REQUEST_ALLOW_DATA, result);
         if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest)
                 + " " + allowed);
         rr.mParcel.writeInt(1);
@@ -708,33 +734,7 @@ static final int RIL_REQUEST_SET_3G_CAPABILITY = 128;
         send(rr);
     }
 
-    public void handle3GSwitch() {
-        int simId = mInstanceId == null ? 0 : mInstanceId;
-        int newsim = SystemProperties.getInt("gsm.3gswitch", 0);
-        newsim = newsim-1;
-        if(!(simId==newsim))
-        {
-        int prop = SystemProperties.getInt("gsm.3gswitch", 0);
-        if (RILJ_LOGD) riljLog("Setting data subscription on SIM"+(simId+1)+" mInstanceid="+mInstanceId+" gsm.3gswitch="+prop);
-        RILRequest rr = RILRequest.obtain(RIL_REQUEST_SET_3G_CAPABILITY, null);
-        rr.mParcel.writeInt(1);
-        int realsim = simId + 1;
-        rr.mParcel.writeInt(realsim);
-        if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest));
-        send(rr);
-        try {
-             Thread.sleep(1000);
-            } catch (InterruptedException er) {
-            }
-        resetRadio(null);
-        try {
-             Thread.sleep(4*1000);
-            } catch (InterruptedException er) {
-            }
-        }
-        else
-        {
-        if (RILJ_LOGD) riljLog("Not setting data subscription on same SIM");
-        }
-    }
+	public int get3gSimId() {
+	   return SystemProperties.getInt("gsm.3gswitch", 0);
+	}
 }
