@@ -84,29 +84,3 @@ USE_CAMERA_STUB := true
 # SELinux
 BOARD_SEPOLICY_DIRS += \
     device/google/sprout-common/sepolicy
-
-BOARD_SEPOLICY_UNION += \
-    adbd.te \
-    app.te \
-    bluetooth.te \
-    debuggerd.te \
-    device.te \
-    file_contexts \
-    init.te \
-    kernel.te \
-    logd.te \
-    mediaserver.te \
-    netd.te \
-    oemfs.te \
-    platform_app.te \
-    property_contexts \
-    property.te \
-    radio.te \
-    servicemanager.te \
-    shared_relro.te \
-    shell.te \
-    surfaceflinger.te \
-    sysfs.te \
-    system_server.te \
-    untrusted_app.te \
-    zygote.te
