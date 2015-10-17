@@ -1,3 +1,2 @@
 allow shell protect_f_data_file:dir getattr;
 allow shell protect_s_data_file:dir getattr;
-allow shell dalvikcache_data_file:file write;
