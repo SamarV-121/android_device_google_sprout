@@ -1,17 +1,15 @@
 # platform specific configuration items
+import /init.sprout_svelte.rc
 import /init.sprout.usb.rc
 import /init.modem.rc
 
 on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug
     setprop ro.mtk.hardware mt6582
-    rm /sbin/multi_init
 
 on init
     mkdir /protect_f 0771 system system
     mkdir /protect_s 0771 system system
-
-    mkdir /oem 0000 root root
 
     # Change ION driver permission
     chmod 0666 /dev/ion
@@ -317,10 +315,6 @@ on post-fs-data
     chmod 0660 /dev/sw_sync
     chown system graphics /dev/sw_sync
 
-    # EM baseband file
-    chown root diag /system/bin/baseband_regdump
-    chmod 4750 /system/bin/baseband_regdump
-
     #pmu
     chown root radio /sys/devices/platform/mt-pmic/pmic_access
     chmod 0664 /sys/devices/platform/mt-pmic/pmic_access
@@ -436,9 +430,6 @@ on post-fs-data
 
     exec 0666 /system/xbin/autosanity
 
-    mkdir /data/media 0770 media_rw media_rw
-    chown media_rw media_rw /data/media
-
 #
 # Connectivity related device nodes & configuration (begin)
 #
@@ -448,11 +439,11 @@ on post-fs-data
     chown system system /dev/ttyMT2
 
 # GPS
-    chown gps gps /sys/class/gpsdrv/gps/pwrctl
-    chown gps gps /sys/class/gpsdrv/gps/suspend
-    chown gps gps /sys/class/gpsdrv/gps/state
-    chown gps gps /sys/class/gpsdrv/gps/pwrsave
-    chown gps gps /sys/class/gpsdrv/gps/status
+    chown gps gps /sys/devices/virtual/gpsdrv/gps/pwrctl
+    chown gps gps /sys/devices/virtual/gpsdrv/gps/suspend
+    chown gps gps /sys/devices/virtual/gpsdrv/gps/state
+    chown gps gps /sys/devices/virtual/gpsdrv/gps/pwrsave
+    chown gps gps /sys/devices/virtual/gpsdrv/gps/status
 
 # WiFi
     mkdir /data/misc/wifi 0770 wifi wifi
@@ -572,9 +563,6 @@ on boot
     chown radio system /proc/cpufreq/cpufreq_cur_freq
     chown radio system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 
-# BFQ IOSched prop
-    write /sys/block/mmcblk0/queue/iosched/slice_idle 0
-
 # WMT proc
     chown shell system /proc/driver/wmt_dbg
     chown shell system /proc/driver/wmt_aee
@@ -665,17 +653,6 @@ service audio-daemon /system/bin/audiocmdservice_atci
     disabled
     oneshot
 
-#
-# MT6620 related services (Begin)
-#
-
-# monitor property and power on/off wlan
-on property:wlan.driver.status=ok
-    write /dev/wmtWifi "1"
-
-on property:wlan.driver.status=unloaded
-    write /dev/wmtWifi "0"
-
 service insmod insmod
     disabled
     oneshot
@@ -714,18 +691,12 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     disabled
     oneshot
 
-#
-# MT6620 related services (End)
-#
-
 service dhcpcd_bt-pan /system/bin/dhcpcd -A -BK -dd
     class main
     user dhcp
     group net_admin net_raw
     disabled
     oneshot
-
-
 
 service dhcpcd_wlan0 /system/bin/dhcpcd -A -BK -dd
     class main
@@ -891,7 +862,7 @@ service thermal_manager /system/bin/thermal_manager
 
 service battery_charger /charger
     class charger
-
+    seclabel u:r:healthd:s0
 #
 # Connectivity related services (Begin)
 #
@@ -911,51 +882,4 @@ service conn_launcher /system/bin/6620_launcher -p /system/etc/firmware/
 #
 # Connectivity related services (End)
 #
-
-# CM Performance Profiles
-
-# Powersave
-on property:sys.perf.profile=0
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq "747500"
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq "747500"
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq "598000"
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq "598000"
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "interactive"
-    write /sys/devices/system/cpu/cpu2/online "0"
-    write /sys/devices/system/cpu/cpu3/online "0"
-
-# Balanced
-on property:sys.perf.profile=1
-    write /sys/devices/system/cpu/cpu2/online "1"
-    write /sys/devices/system/cpu/cpu3/online "1"
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq "1300000"
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq "1300000"
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq "1300000"
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq "1300000"
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq "598000"
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq "598000"
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq "598000"
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq "598000"
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "interactive"
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "interactive"
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "interactive"
-
-# Performance
-on property:sys.perf.profile=2
-    write /sys/devices/system/cpu/cpu2/online "1"
-    write /sys/devices/system/cpu/cpu3/online "1"
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq "1300000"
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq "1300000"
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq "1300000"
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq "1300000"
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq "598000"
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq "598000"
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq "598000"
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq "598000"
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "performance"
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "ondemand"
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "ondemand"
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "ondemand"
 
