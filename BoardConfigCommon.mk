@@ -91,6 +91,9 @@ BLOCK_BASED_OTA := true
 # FRAMEWORK WITH OUT SYNC
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 
+# Use half res bootanimation to speed up first boot sequence
+TARGET_BOOTANIMATION_HALF_RES := true
+
 # Fonts
 EXTENDED_FONT_FOOTPRINT := true
 
