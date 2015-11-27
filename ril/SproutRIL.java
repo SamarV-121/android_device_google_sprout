@@ -44,7 +44,6 @@ public class SproutRIL extends RIL implements CommandsInterface {
 
 static final int RIL_REQUEST_SET_3G_CAPABILITY = 128;
 static final int RIL_REQUEST_ALLOW_DATA = 125;
-static int skipSwitch = 0;
 static int registered = 0;
 
     public SproutRIL(Context context, int networkMode, int cdmaSubscription) {
@@ -683,7 +682,7 @@ static int registered = 0;
     public void setDataAllowed(boolean allowed, Message result) {
         int currentSimId = mInstanceId == null ? 0 : mInstanceId;
         int m3gSimId = get3gSimId();
-        if((m3gSimId-1) != currentSimId && skipSwitch == 0) {
+        if((m3gSimId-1) != currentSimId) {
             Toast.makeText(mContext, "Switching data SIM, this may take up to a minute...",
 			         Toast.LENGTH_LONG).show();
             RILRequest rr = RILRequest.obtain(RIL_REQUEST_SET_3G_CAPABILITY, null);
@@ -694,12 +693,8 @@ static int registered = 0;
             skipSwitch = 1;
         }
         else {
-            if(skipSwitch == 1)
-                Rlog.i(RILJ_LOG_TAG, "Skipping switch");
-            else
-                Rlog.i(RILJ_LOG_TAG, "Not setting data subscription on same SIM, requested="
-			           +(currentSimId+1)+" current="+m3gSimId);
-            skipSwitch = 0;
+            Rlog.i(RILJ_LOG_TAG, "Not setting data subscription on same SIM, requested="
+			       +(currentSimId+1)+" current="+m3gSimId);
         }
         RILRequest rr = RILRequest.obtain(RIL_REQUEST_ALLOW_DATA, result);
         if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest)
