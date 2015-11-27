@@ -268,7 +268,7 @@ static int registered = 0;
 
 
 
-    protected RILRequest
+   protected RILRequest
     processSolicited (Parcel p) {
         int serial, error;
         boolean found = false;
@@ -303,6 +303,7 @@ static int registered = 0;
             case RIL_REQUEST_ENTER_SIM_PUK2: ret =  responseInts(p); break;
             case RIL_REQUEST_CHANGE_SIM_PIN: ret =  responseInts(p); break;
             case RIL_REQUEST_CHANGE_SIM_PIN2: ret =  responseInts(p); break;
+            case RIL_REQUEST_ENTER_NETWORK_DEPERSONALIZATION: ret =  responseInts(p); break;
             case RIL_REQUEST_GET_CURRENT_CALLS: ret =  responseCallList(p); break;
             case RIL_REQUEST_DIAL: ret =  responseVoid(p); break;
             case RIL_REQUEST_GET_IMSI: ret =  responseString(p); break;
@@ -321,7 +322,7 @@ static int registered = 0;
             case RIL_REQUEST_SWITCH_WAITING_OR_HOLDING_AND_ACTIVE: ret =  responseVoid(p); break;
             case RIL_REQUEST_CONFERENCE: ret =  responseVoid(p); break;
             case RIL_REQUEST_UDUB: ret =  responseVoid(p); break;
-            case RIL_REQUEST_LAST_CALL_FAIL_CAUSE: ret =  responseInts(p); break;
+            case RIL_REQUEST_LAST_CALL_FAIL_CAUSE: ret =  responseFailCause(p); break;
             case RIL_REQUEST_SIGNAL_STRENGTH: ret =  responseSignalStrength(p); break;
             case RIL_REQUEST_VOICE_REGISTRATION_STATE: ret =  responseStrings(p); break;
             case RIL_REQUEST_DATA_REGISTRATION_STATE: ret =  responseStrings(p); break;
@@ -415,6 +416,7 @@ static int registered = 0;
             case RIL_REQUEST_GET_CELL_INFO_LIST: ret = responseCellInfoList(p); break;
             case RIL_REQUEST_SET_UNSOL_CELL_INFO_LIST_RATE: ret = responseVoid(p); break;
             case RIL_REQUEST_SET_INITIAL_ATTACH_APN: ret = responseVoid(p); break;
+            case RIL_REQUEST_SET_DATA_PROFILE: ret = responseVoid(p); break;
             case RIL_REQUEST_IMS_REGISTRATION_STATE: ret = responseInts(p); break;
             case RIL_REQUEST_IMS_SEND_SMS: ret =  responseSMS(p); break;
             case RIL_REQUEST_SIM_TRANSMIT_APDU_BASIC: ret =  responseICC_IO(p); break;
@@ -430,7 +432,14 @@ static int registered = 0;
             case RIL_REQUEST_SET_UICC_SUBSCRIPTION: ret = responseVoid(p); break;
             case RIL_REQUEST_ALLOW_DATA: ret = responseVoid(p); break;
             case RIL_REQUEST_GET_HARDWARE_CONFIG: ret = responseHardwareConfig(p); break;
+            case RIL_REQUEST_SIM_AUTHENTICATION: ret =  responseICC_IOBase64(p); break;
             case RIL_REQUEST_SHUTDOWN: ret = responseVoid(p); break;
+            case RIL_REQUEST_GET_RADIO_CAPABILITY: ret =  responseRadioCapability(p); break;
+            case RIL_REQUEST_SET_RADIO_CAPABILITY: ret =  responseRadioCapability(p); break;
+            case RIL_REQUEST_START_LCE: ret = responseLceStatus(p); break;
+            case RIL_REQUEST_STOP_LCE: ret = responseLceStatus(p); break;
+            case RIL_REQUEST_PULL_LCEDATA: ret = responseLceData(p); break;
+            case RIL_REQUEST_GET_ACTIVITY_INFO: ret = responseActivityData(p); break;
             default:
                 throw new RuntimeException("Unrecognized solicited response: " + rr.mRequest);
             //break;
@@ -488,10 +497,29 @@ static int registered = 0;
                         mIccStatusChangedRegistrants.notifyRegistrants();
                     }
                     break;
+                case RIL_REQUEST_GET_RADIO_CAPABILITY: {
+                    // Ideally RIL's would support this or at least give NOT_SUPPORTED
+                    // but the hammerhead RIL reports GENERIC :(
+                    // TODO - remove GENERIC_FAILURE catching: b/21079604
+                    if (REQUEST_NOT_SUPPORTED == error ||
+                            GENERIC_FAILURE == error) {
+                        // we should construct the RAF bitmask the radio
+                        // supports based on preferred network bitmasks
+                        ret = makeStaticRadioCapability();
+                        error = 0;
+                    }
+                    break;
+                }
+                case RIL_REQUEST_GET_ACTIVITY_INFO:
+                    ret = new ModemActivityInfo(0, 0, 0,
+                            new int [ModemActivityInfo.TX_POWER_LEVELS], 0, 0);
+                    error = 0;
+                    break;
             }
 
-            rr.onError(error, ret);
-        } else {
+            if (error != 0) rr.onError(error, ret);
+        }
+        if (error == 0) {
 
             if (RILJ_LOGD) riljLog(rr.serialString() + "< " + requestToString(rr.mRequest)
                     + " " + retToString(rr.mRequest, ret));
@@ -519,6 +547,7 @@ static int registered = 0;
             case RIL_REQUEST_ENTER_SIM_PUK2: return "ENTER_SIM_PUK2";
             case RIL_REQUEST_CHANGE_SIM_PIN: return "CHANGE_SIM_PIN";
             case RIL_REQUEST_CHANGE_SIM_PIN2: return "CHANGE_SIM_PIN2";
+            case RIL_REQUEST_ENTER_NETWORK_DEPERSONALIZATION: return "ENTER_NETWORK_DEPERSONALIZATION";
             case RIL_REQUEST_GET_CURRENT_CALLS: return "GET_CURRENT_CALLS";
             case RIL_REQUEST_DIAL: return "DIAL";
             case RIL_REQUEST_GET_IMSI: return "GET_IMSI";
@@ -622,6 +651,7 @@ static int registered = 0;
             case RIL_REQUEST_GET_CELL_INFO_LIST: return "RIL_REQUEST_GET_CELL_INFO_LIST";
             case RIL_REQUEST_SET_UNSOL_CELL_INFO_LIST_RATE: return "RIL_REQUEST_SET_CELL_INFO_LIST_RATE";
             case RIL_REQUEST_SET_INITIAL_ATTACH_APN: return "RIL_REQUEST_SET_INITIAL_ATTACH_APN";
+            case RIL_REQUEST_SET_DATA_PROFILE: return "RIL_REQUEST_SET_DATA_PROFILE";
             case RIL_REQUEST_IMS_REGISTRATION_STATE: return "RIL_REQUEST_IMS_REGISTRATION_STATE";
             case RIL_REQUEST_IMS_SEND_SMS: return "RIL_REQUEST_IMS_SEND_SMS";
             case RIL_REQUEST_SIM_TRANSMIT_APDU_BASIC: return "RIL_REQUEST_SIM_TRANSMIT_APDU_BASIC";
@@ -635,8 +665,17 @@ static int registered = 0;
             case RIL_REQUEST_SET_UICC_SUBSCRIPTION: return "RIL_REQUEST_SET_UICC_SUBSCRIPTION";
             case RIL_REQUEST_ALLOW_DATA: return "RIL_REQUEST_ALLOW_DATA";
             case RIL_REQUEST_GET_HARDWARE_CONFIG: return "GET_HARDWARE_CONFIG";
-            case RIL_REQUEST_SET_3G_CAPABILITY: return "RIL_REQUEST_SET_3G_CAPABILITY";
+            case RIL_REQUEST_SIM_AUTHENTICATION: return "RIL_REQUEST_SIM_AUTHENTICATION";
             case RIL_REQUEST_SHUTDOWN: return "RIL_REQUEST_SHUTDOWN";
+            case RIL_REQUEST_SET_RADIO_CAPABILITY:
+                    return "RIL_REQUEST_SET_RADIO_CAPABILITY";
+            case RIL_REQUEST_GET_RADIO_CAPABILITY:
+                    return "RIL_REQUEST_GET_RADIO_CAPABILITY";
+			case RIL_REQUEST_SET_3G_CAPABILITY: return "RIL_REQUEST_SET_3G_CAPABILITY";
+            case RIL_REQUEST_START_LCE: return "RIL_REQUEST_START_LCE";
+            case RIL_REQUEST_STOP_LCE: return "RIL_REQUEST_STOP_LCE";
+            case RIL_REQUEST_PULL_LCEDATA: return "RIL_REQUEST_PULL_LCEDATA";
+            case RIL_REQUEST_GET_ACTIVITY_INFO: return "RIL_REQUEST_GET_ACTIVITY_INFO";
             default: return "<unknown request>";
         }
     }
