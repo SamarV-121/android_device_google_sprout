@@ -74,7 +74,7 @@ EXTENDED_FONT_FOOTPRINT := true
 
 TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 
-BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril/
+# BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril/
 
 TARGET_GLOBAL_CFLAGS   += -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
