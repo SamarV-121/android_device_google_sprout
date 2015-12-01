@@ -415,7 +415,6 @@ static int registered = 0;
             case RIL_REQUEST_GET_CELL_INFO_LIST: ret = responseCellInfoList(p); break;
             case RIL_REQUEST_SET_UNSOL_CELL_INFO_LIST_RATE: ret = responseVoid(p); break;
             case RIL_REQUEST_SET_INITIAL_ATTACH_APN: ret = responseVoid(p); break;
-            case RIL_REQUEST_SET_DATA_PROFILE: ret = responseVoid(p); break;
             case RIL_REQUEST_IMS_REGISTRATION_STATE: ret = responseInts(p); break;
             case RIL_REQUEST_IMS_SEND_SMS: ret =  responseSMS(p); break;
             case RIL_REQUEST_SIM_TRANSMIT_APDU_BASIC: ret =  responseICC_IO(p); break;
@@ -431,7 +430,6 @@ static int registered = 0;
             case RIL_REQUEST_SET_UICC_SUBSCRIPTION: ret = responseVoid(p); break;
             case RIL_REQUEST_ALLOW_DATA: ret = responseVoid(p); break;
             case RIL_REQUEST_GET_HARDWARE_CONFIG: ret = responseHardwareConfig(p); break;
-            case RIL_REQUEST_SIM_AUTHENTICATION: ret =  responseICC_IOBase64(p); break;
             case RIL_REQUEST_SHUTDOWN: ret = responseVoid(p); break;
             case RIL_REQUEST_GET_RADIO_CAPABILITY: ret =  responseRadioCapability(p); break;
             case RIL_REQUEST_SET_RADIO_CAPABILITY: ret =  responseRadioCapability(p); break;
@@ -509,11 +507,6 @@ static int registered = 0;
                     }
                     break;
                 }
-                case RIL_REQUEST_GET_ACTIVITY_INFO:
-                    ret = new ModemActivityInfo(0, 0, 0,
-                            new int [ModemActivityInfo.TX_POWER_LEVELS], 0, 0);
-                    error = 0;
-                    break;
             }
 
             if (error != 0) rr.onError(error, ret);
@@ -650,7 +643,6 @@ static int registered = 0;
             case RIL_REQUEST_GET_CELL_INFO_LIST: return "RIL_REQUEST_GET_CELL_INFO_LIST";
             case RIL_REQUEST_SET_UNSOL_CELL_INFO_LIST_RATE: return "RIL_REQUEST_SET_CELL_INFO_LIST_RATE";
             case RIL_REQUEST_SET_INITIAL_ATTACH_APN: return "RIL_REQUEST_SET_INITIAL_ATTACH_APN";
-            case RIL_REQUEST_SET_DATA_PROFILE: return "RIL_REQUEST_SET_DATA_PROFILE";
             case RIL_REQUEST_IMS_REGISTRATION_STATE: return "RIL_REQUEST_IMS_REGISTRATION_STATE";
             case RIL_REQUEST_IMS_SEND_SMS: return "RIL_REQUEST_IMS_SEND_SMS";
             case RIL_REQUEST_SIM_TRANSMIT_APDU_BASIC: return "RIL_REQUEST_SIM_TRANSMIT_APDU_BASIC";
@@ -664,7 +656,6 @@ static int registered = 0;
             case RIL_REQUEST_SET_UICC_SUBSCRIPTION: return "RIL_REQUEST_SET_UICC_SUBSCRIPTION";
             case RIL_REQUEST_ALLOW_DATA: return "RIL_REQUEST_ALLOW_DATA";
             case RIL_REQUEST_GET_HARDWARE_CONFIG: return "GET_HARDWARE_CONFIG";
-            case RIL_REQUEST_SIM_AUTHENTICATION: return "RIL_REQUEST_SIM_AUTHENTICATION";
             case RIL_REQUEST_SHUTDOWN: return "RIL_REQUEST_SHUTDOWN";
             case RIL_REQUEST_SET_RADIO_CAPABILITY:
                     return "RIL_REQUEST_SET_RADIO_CAPABILITY";
