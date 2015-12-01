@@ -683,14 +683,11 @@ static int registered = 0;
         int currentSimId = mInstanceId == null ? 0 : mInstanceId;
         int m3gSimId = get3gSimId();
         if((m3gSimId-1) != currentSimId) {
-            Toast.makeText(mContext, "Switching data SIM, this may take up to a minute...",
-			         Toast.LENGTH_LONG).show();
             RILRequest rr = RILRequest.obtain(RIL_REQUEST_SET_3G_CAPABILITY, null);
             rr.mParcel.writeInt(1);
             rr.mParcel.writeInt(currentSimId+1);
             send(rr);
             resetRadio(null);
-            skipSwitch = 1;
         }
         else {
             Rlog.i(RILJ_LOG_TAG, "Not setting data subscription on same SIM, requested="
