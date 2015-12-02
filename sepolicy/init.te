@@ -1,4 +1,4 @@
-allow init mnld_socket:sock_file create;
+allow init mnld_socket:sock_file { create unlink setattr };
 allow init mtk_agpsd_exec:file { read open getattr execute };
 allow init nvram_daemon_exec:file { read open getattr execute };
 allow init sysfs_msensord_daemon_file:file relabelto;

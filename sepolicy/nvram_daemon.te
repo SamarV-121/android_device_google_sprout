@@ -3,3 +3,7 @@ type nvram_daemon_exec, exec_type, file_type;
 
 init_daemon_domain(nvram_daemon)
 allow nvram_daemon nvram_daemon_exec:file { read open getattr execute execute_no_trans};
+allow nvram_daemon nvram_data_file:dir { getattr search };
+allow nvram_daemon nvram_device:blk_file { open read write };
+allow nvram_daemon property_socket:sock_file write;
+allow nvram_daemon init:unix_stream_socket connectto;
