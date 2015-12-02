@@ -4,4 +4,4 @@ type wmt_loader_exec, exec_type, file_type;
 init_daemon_domain(wmt_loader)
 allow wmt_loader wmt_loader_exec:file { read open getattr execute execute_no_trans};
 allow wmt_loader self:capability dac_override;
-allow wmt_loader wmtdetect_device:chr_file { read write };
+allow wmt_loader wmtdetect_device:chr_file { open read write };
