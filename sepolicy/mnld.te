@@ -3,5 +3,5 @@ type mnld_exec, exec_type, file_type;
 
 init_daemon_domain(mnld)
 allow mnld mnld_exec:file { read open getattr execute execute_no_trans};
-allow mnld mnld_data_file:dir { remove_name search write };
+allow mnld mnld_data_file:dir { add_name remove_name search write };
 allow mnld mnld_data_file:sock_file unlink;

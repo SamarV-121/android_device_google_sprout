@@ -3,3 +3,5 @@ type conn_launcher_exec, exec_type, file_type;
 
 init_daemon_domain(conn_launcher)
 allow conn_launcher conn_launcher_exec:file { read open getattr execute execute_no_trans};
+allow conn_launcher stpwmt_device:chr_file { open read write };
+

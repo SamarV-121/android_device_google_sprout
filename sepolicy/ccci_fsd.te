@@ -8,4 +8,4 @@ allow ccci_fsd nvram_data_file:dir { getattr search };
 allow ccci_fsd property_socket:sock_file write;
 allow ccci_fsd sysfs_wake_lock:file { read write };
 allow ccci_fsd init:unix_stream_socket connectto;
-allow ccci_fsd default_prop:property_service set;
+allow ccci_fsd ccci_decrypt_state_prop:property_service set;

@@ -3,5 +3,5 @@ type mtk_agpsd_exec, exec_type, file_type;
 
 init_daemon_domain(mtk_agpsd)
 allow mtk_agpsd mtk_agpsd_exec:file { read open getattr execute execute_no_trans};
-allow mtk_agpsd agpsd_data_file:dir { write search };
+allow mtk_agpsd agpsd_data_file:dir { remove_name write search };
 allow mtk_agpsd agpsd_data_file:sock_file setattr;
