@@ -1,0 +1,6 @@
+type ccci_fsd, domain;
+type ccci_fsd_exec, exec_type, file_type;
+
+init_daemon_domain(ccci_fsd)
+allow ccci_fsd ccci_fsd_exec:file { read open getattr execute execute_no_trans};
+allow ccci_fsd ccci_device:chr_file { open read write };

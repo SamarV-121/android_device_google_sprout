@@ -1,8 +1,4 @@
-allow init ccci_fsd_exec:file { read open getattr execute };
-allow init ccci_mdinit_exec:file { read open getattr execute };
-allow init conn_launcher_exec:file { read open getattr execute };
-allow init mnld_exec:file { read open getattr execute };
-allow init msensord_exec:file { read open getattr execute };
+allow init mnld_socket:sock_file create;
 allow init mtk_agpsd_exec:file { read open getattr execute };
 allow init nvram_daemon_exec:file { read open getattr execute };
 allow init sysfs_msensord_daemon_file:file relabelto;

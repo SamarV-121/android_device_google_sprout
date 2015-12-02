@@ -1,0 +1,5 @@
+type nvram_daemon, domain;
+type nvram_daemon_exec, exec_type, file_type;
+
+init_daemon_domain(nvram_daemon)
+allow nvram_daemon nvram_daemon_exec:file { read open getattr execute execute_no_trans};

@@ -1,0 +1,6 @@
+type msensord, domain;
+type msensord_exec, exec_type, file_type;
+
+init_daemon_domain(msensord)
+allow msensord msensord_exec:file { read open getattr execute execute_no_trans};
+allow msensord sysfs_sensor_file:dir search;

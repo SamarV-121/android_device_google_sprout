@@ -1,0 +1,5 @@
+type ccci_mdinit, domain;
+type ccci_mdinit_exec, exec_type, file_type;
+
+init_daemon_domain(ccci_mdinit)
+allow ccci_mdinit ccci_mdinit_exec:file { read open getattr execute execute_no_trans};
