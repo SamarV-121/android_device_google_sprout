@@ -27,6 +27,10 @@
 /dev/devmap           u:object_r:devmap_device:s0
 /dev/block/mmcblk0p1  u:object_r:nvram_device:s0
 /dev/block/mmcblk0p2  u:object_r:nvram_device:s0
+/dev/block/mmcblk0p3  u:object_r:protect_device:s0
+/dev/block/mmcblk0p4  u:object_r:protect_device:s0
+/dev/block/mmcblk0p15 u:object_r:cache_device:s0
+/dev/block/mmcblk0p16 u:object_r:userdata_device:s0
 /dev/block/mmcblk0p18 u:object_r:frp_block_device:s0
 /dev/ccci_.*          u:object_r:ccci_device:s0
 /dev/fm(/.*)?         u:object_r:fm_device:s0
@@ -96,3 +100,6 @@
 /data/misc/mblog(/.*)?   u:object_r:logmisc_data_file:s0
 /data/log_temp(/.*)?     u:object_r:logtemp_data_file:s0
 /data/mdl(/.*)?          u:object_r:mdl_data_file:s0
+
+/data/misc/sensor/.id                      u:object_r:sensord_data_file:s0
+/data/misc/sensor/sensord.log              u:object_r:sensord_data_file:s0

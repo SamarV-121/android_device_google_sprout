@@ -3,5 +3,8 @@ type mtk_agpsd_exec, exec_type, file_type;
 
 init_daemon_domain(mtk_agpsd)
 allow mtk_agpsd mtk_agpsd_exec:file { read open getattr execute execute_no_trans};
-allow mtk_agpsd agpsd_data_file:dir { remove_name write search };
-allow mtk_agpsd agpsd_data_file:sock_file setattr;
+allow mtk_agpsd agpsd_data_file:dir { add_name remove_name write search };
+allow mtk_agpsd agpsd_data_file:sock_file { write create unlink setattr };
+allow mtk_agpsd agps_device:chr_file { rw_file_perms };
+allow mtk_agpsd self:udp_socket create;
+allow mtk_agpsd mnld:unix_dgram_socket sendto;

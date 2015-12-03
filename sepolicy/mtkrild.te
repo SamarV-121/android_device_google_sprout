@@ -1,0 +1,5 @@
+type mtkrild, domain;
+type mtkrild_exec, exec_type, file_type;
+
+init_daemon_domain(mtkrild)
+allow mtkrild mtkrild_exec:file { read open getattr execute execute_no_trans};

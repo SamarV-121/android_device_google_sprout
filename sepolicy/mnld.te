@@ -3,5 +3,12 @@ type mnld_exec, exec_type, file_type;
 
 init_daemon_domain(mnld)
 allow mnld mnld_exec:file { read open getattr execute execute_no_trans};
-allow mnld mnld_data_file:dir { add_name remove_name search write };
-allow mnld mnld_data_file:sock_file unlink;
+allow mnld mnld_data_file:dir { create add_name remove_name search write };
+allow mnld mnld_data_file:sock_file { setattr create unlink };
+allow mnld agpsd_data_file:dir { rw_dir_perms };
+allow mnld sysfs:file { open read write };
+allow mnld gps_data_file:dir rw_dir_perms;
+allow mnld agpsd_data_file:sock_file { setattr create rw_file_perms unlink };
+allow mnld nvram_data_file:dir rw_dir_perms;
+allow mnld mtk_agpsd:unix_dgram_socket sendto;
+allow mnld nvram_data_file:file { rw_file_perms };
