@@ -6,12 +6,12 @@ import /init.modem.rc
 on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug
     setprop ro.mtk.hardware mt6582
+    export LD_SHIM_LIBS /system/lib/librilmtk.so|libsprout.so
 
 on init
     mkdir /protect_f 0771 system system
     mkdir /protect_s 0771 system system
 
-	export LD_SHIM_LIBS /system/lib/liblog.so|libsprout.so
 
     # Change ION driver permission
     chmod 0666 /dev/ion
