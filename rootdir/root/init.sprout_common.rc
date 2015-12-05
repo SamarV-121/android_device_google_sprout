@@ -6,9 +6,9 @@ import /init.modem.rc
 on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug
     setprop ro.mtk.hardware mt6582
-    export LD_SHIM_LIBS /system/lib/librilmtk.so|libsprout.so
 
 on init
+    export LD_PRELOAD /system/lib/libsprout.so
     mkdir /protect_f 0771 system system
     mkdir /protect_s 0771 system system
 
