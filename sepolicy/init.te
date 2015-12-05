@@ -5,3 +5,4 @@ allow init sysfs_sensor_file:dir relabelto;
 allow init sysfs_sensor_file:file { relabelto setattr };
 allow init sysfs_sensor_file:lnk_file relabelto;
 allow init tmpfs:lnk_file create;
+allow init { domain -lmkd }:process noatsecure;
