@@ -103,9 +103,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.ril_class=SproutRIL
 
 # FM Radio
-# PRODUCT_PACKAGES += \
-#    FMRadio \
-#    FmRadioTrampoline
+PRODUCT_PACKAGES += \
+    FMRadioGoogle \
+    FmRadioTrampoline2
 
 # Wifi
  PRODUCT_PACKAGES += \
