@@ -682,6 +682,24 @@ static int registered = 0;
         send(rr);
     }
 
+    protected Object
+    responseFailCause(Parcel p) {
+        int numInts;
+        int response[];
+
+        numInts = p.readInt();
+        response = new int[numInts];
+        for (int i = 0 ; i < numInts ; i++) {
+            response[i] = p.readInt();
+        }
+        LastCallFailCause failCause = new LastCallFailCause();
+        failCause.causeCode = response[0];
+        if (p.dataAvail() > 0) {
+          failCause.vendorCause = p.readString();
+        }
+        return failCause;
+    }
+
     public void setDataAllowed(boolean allowed, Message result) {
         int currentSimId = mInstanceId == null ? 0 : mInstanceId;
         int m3gSimId = get3gSimId();
