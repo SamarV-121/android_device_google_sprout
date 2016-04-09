@@ -83,6 +83,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     DozeServices
 
+# Power
+PRODUCT_PACKAGES += \
+    power.default \
+    power.mt6582
+
 # Correct bootanimation size for the screen
 TARGET_SCREEN_HEIGHT := 854
 TARGET_SCREEN_WIDTH := 480
