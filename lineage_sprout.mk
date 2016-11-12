@@ -1,5 +1,8 @@
 $(call inherit-product, device/google/sprout/device.mk)
 
+# Bootanimation
+TARGET_BOOTANIMATION_HALF_RES := true
+
 # Inherit some common Lineage stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
