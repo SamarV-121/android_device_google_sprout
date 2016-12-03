@@ -6,9 +6,9 @@ import /init.modem.rc
 on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug
     setprop ro.mtk.hardware mt6582
+    export LD_SHIM_LIBS /system/lib/librilmtk.so|libsprout.so:/system/lib/libmtkjpeg.so|libsprout.so:/system/bin/wpa_supplicant|libsprout.so
 
 on init
-    export LD_PRELOAD /system/lib/libsprout.so
     mkdir /protect_f 0771 system system
     mkdir /protect_s 0771 system system
 
@@ -755,13 +755,13 @@ service bluetoothd /system/bin/bluetoothd -n
 #  External Modme control related services
 #
 
-service agpsd /system/bin/mtk_agpsd
-    class main
-    socket agpsd stream 660 gps system
-    socket agpsd2 stream 660 gps inet
-    socket agpsd3 stream 660 gps inet
-    user gps
-    group gps inet sdcard_r sdcard_rw misc radio
+# service agpsd /system/bin/mtk_agpsd
+#     class main
+#     socket agpsd stream 660 gps system
+#     socket agpsd2 stream 660 gps inet
+#     socket agpsd3 stream 660 gps inet
+#     user gps
+#     group gps inet sdcard_r sdcard_rw misc radio
 
 service mnld /system/xbin/mnld
     class main

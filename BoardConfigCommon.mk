@@ -29,6 +29,9 @@ BOARD_KERNEL_CMDLINE :=
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x04000000 --tags_offset 0x00000100
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 2048
+# KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-linux-androideabi-4.9/bin/
+KERNEL_TOOLCHAIN := /home/varunchitre15/cm13/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin/
+KERNEL_TOOLCHAIN_PREFIX := arm-eabi-
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
@@ -67,7 +70,7 @@ WIFI_DRIVER_FW_PATH_STA:=P2P
 # Enable Minikin text layout engine (will be the default soon)
 USE_MINIKIN := true
 
-MALLOC_IMPL := dlmalloc
+MALLOC_SVELTE := true
 DEVICE_RESOLUTION := 480x854
 
 
@@ -86,3 +89,4 @@ USE_CAMERA_STUB := true
 # SELinux
 BOARD_SEPOLICY_DIRS += \
     device/google/sprout-common/sepolicy
+BOARD_SECCOMP_POLICY += device/google/sprout-common/seccomp
