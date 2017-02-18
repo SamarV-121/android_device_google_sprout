@@ -79,7 +79,6 @@ lib/hw/radio.fm.mt6582.so
 bin/mtk_agpsd
 lib/libmnl.so
 lib/libssladp.so
-lib/hw/gps.default.so
 xbin/mnld
 
 # Lights
