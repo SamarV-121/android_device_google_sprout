@@ -99,6 +99,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.ril_class=SproutRIL
 
 # FM Radio
+# Camera
+PRODUCT_PACKAGES += \
+	Snap
 PRODUCT_PACKAGES += \
     FMRadioGoogle \
     FmRadioTrampoline2
@@ -147,3 +150,34 @@ $(call inherit-product, vendor/google/sprout/sprout-vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
+	ro.crypto.state=unencrypted \
+	ro.mount.fs=EXT4 \
+	ro.secure=1 \
+	ro.allow.mock.location=0 \
+	ro.debuggable=1 \
+	ro.zygote=zygote32 \
+	camera.disable_zsl_mode=1 \
+	dalvik.vm.dex2oat-Xms=64m \
+	dalvik.vm.dex2oat-Xmx=512m \
+	dalvik.vm.image-dex2oat-Xms=64m \
+	dalvik.vm.image-dex2oat-Xmx=64m \
+	ro.dalvik.vm.native.bridge=0 \
+	ro.hardware=sprout \
+	ro.telephony.ril_class=MT6735 \
+	ro.telephony.ril.config=fakeiccid 
+
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    pm.dexopt.first-boot=verify-at-runtime \
+    pm.dexopt.boot=verify-at-runtime \
+    pm.dexopt.install=interpret-only \
+    pm.dexopt.bg-dexopt=speed-profile \
+    pm.dexopt.ab-ota=speed-profile \
+    pm.dexopt.nsys-library=speed \
+    pm.dexopt.shared-apk=speed \
+    pm.dexopt.forced-dexopt=speed \
+    pm.dexopt.core-app=speed
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.dex2oat-filter=speed \
+    dalvik.vm.dex2oat-swap=false
