@@ -77,7 +77,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/root/init.modem.rc:root/init.modem.rc \
     $(LOCAL_PATH)/rootdir/root/factory_init.rc:root/factory_init.rc \
     $(LOCAL_PATH)/rootdir/root/ueventd.sprout.rc:root/ueventd.sprout.rc \
-    $(LOCAL_PATH)/rootdir/root/init.sprout.usb.rc:root/init.sprout.usb.rc
+    $(LOCAL_PATH)/rootdir/root/init.sprout.usb.rc:root/init.sprout.usb.rc \
+    $(LOCAL_PATH)/rootdir/root/init.zeta0y_core.rc:root/init.zeta0y_core.rc
 
 # Correct bootanimation size for the screen
 TARGET_SCREEN_HEIGHT := 854

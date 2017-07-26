@@ -1,14 +1,13 @@
 # platform specific configuration items
-import /init.sprout_svelte.rc
 import /init.sprout.usb.rc
 import /init.modem.rc
 
 on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug
     setprop ro.mtk.hardware mt6582
-    export LD_SHIM_LIBS /system/lib/librilmtk.so|libsprout.so:/system/lib/libmtkjpeg.so|libsprout.so:/system/bin/wpa_supplicant|libsprout.so
 
 on init
+    export LD_PRELOAD "/system/lib/libxlog.so /system/lib/libsprout.so"
     mkdir /protect_f 0771 system system
     mkdir /protect_s 0771 system system
 
@@ -382,7 +381,8 @@ on post-fs-data
     chmod 0660 /dev/GAF002AF
     chmod 0660 /dev/GAF008AF
     chmod 0660 /dev/CAM_CAL_DRV
-
+    chmod 0660 /dev/EEPROM_M24C08F
+    chown media media /sys/devices/platform/mt-i2c.1/i2c-1/1-007f/antibanding
     chown system camera /dev/camera-sysram
     chown system camera /dev/camera-isp
     chown system camera /dev/camera-pipemgr
@@ -394,6 +394,8 @@ on post-fs-data
     chown system camera /dev/GAF002AF
     chown system camera /dev/GAF008AF
     chown system camera /dev/CAM_CAL_DRV
+    chown system camera /dev/EEPROM_M24C08F
+
 
     #MATV
     chmod 0660 /dev/MATV
@@ -425,8 +427,9 @@ on post-fs-data
     chmod 666 /dev/mali
     chown system graphics /dev/mali
 
-
-
+    #BT SCO CVSD, for MT6582 CVSD codec on AP
+    chmod 0660 /dev/ebc
+    chown system media /dev/ebc														
     #sbchk
     mkdir /data/sec 0750 system system
 
@@ -439,6 +442,7 @@ on post-fs-data
 #/dev/ttyMT2 for Connectivity BT/FM/GPS usage
     chmod 0660 /dev/ttyMT2
     chown system system /dev/ttyMT2
+    chown system system /proc/secmem0
 
 # GPS
     chown gps gps /sys/devices/virtual/gpsdrv/gps/pwrctl
@@ -587,7 +591,7 @@ on property:vold.decrypt=trigger_reset_main
 
 on property:vold.decrypt=trigger_restart_min_framework
     start start_modem
-
+    start msensord
 on property:vold.decrypt=trigger_restart_framework
     start nvram_daemon
     start start_modem
@@ -755,13 +759,13 @@ service bluetoothd /system/bin/bluetoothd -n
 #  External Modme control related services
 #
 
-# service agpsd /system/bin/mtk_agpsd
-#     class main
-#     socket agpsd stream 660 gps system
-#     socket agpsd2 stream 660 gps inet
-#     socket agpsd3 stream 660 gps inet
-#     user gps
-#     group gps inet sdcard_r sdcard_rw misc radio
+ service agpsd /system/bin/mtk_agpsd
+     class main
+     socket agpsd stream 660 gps system
+     socket agpsd2 stream 660 gps inet
+    socket agpsd3 stream 660 gps inet
+     user gps
+     group gps inet sdcard_r sdcard_rw misc radio
 
 service mnld /system/xbin/mnld
     class main
@@ -815,7 +819,7 @@ service akmd8963 /system/bin/akmd8963
     group system
 
 service bmm050d /system/bin/bmm050d
-    disabled
+	class main
     user system
     group system
 
@@ -839,9 +843,9 @@ service geomagneticd /system/bin/geomagneticd
     user system
     group system input
 service bmc156d /system/bin/bmc156d
-    disabled
+			
     class main
-    user system
+    user root
     group system input
 service lsm303md /system/bin/lsm303md
     disabled
@@ -857,6 +861,10 @@ service shutdown /system/bin/shutdown
     group root
     disabled
 
+service NvRAMAgent /system/bin/nvram_agent_binder
+    class main
+    user system
+    group system												 
 service thermal_manager /system/bin/thermal_manager
     class main
     user root
@@ -884,4 +892,3 @@ service conn_launcher /system/bin/6620_launcher -p /system/etc/firmware/
 #
 # Connectivity related services (End)
 #
-
