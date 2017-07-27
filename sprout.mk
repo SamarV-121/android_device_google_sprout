@@ -96,7 +96,7 @@ PRODUCT_PACKAGES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-	Snap
+	SnapdragonCamera
 
 # FM Radio
 PRODUCT_PACKAGES += \
