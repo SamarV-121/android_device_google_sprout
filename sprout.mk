@@ -95,8 +95,8 @@ PRODUCT_PACKAGES += \
     tinymix
 
 # Camera
-PRODUCT_PACKAGES += \
-	SnapdragonCamera
+#PRODUCT_PACKAGES += \
+#	SnapdragonCamera
 
 # FM Radio
 PRODUCT_PACKAGES += \
