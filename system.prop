@@ -90,6 +90,19 @@ ril.current.share_modem=2
 ril.radiooff.poweroffMD=0
 media.stagefright.legacyencoder=true
 media.stagefright.less-secure=true
+persist.camera.HAL3.enabled=1
+camera.HAL3.enabled=1
+persist.camera.eis.enable=1
+camera.eis.enable=1
+persist.camera.is_mode=4
+camera.is_mode=4
+persist.camera.disable_zsl_mode=0
+camera.disable_zsl_mode=0
+persist.camera.gyro.android=4
+camera.gyro.android=4
+persist.camera.tof.direct=1
+camera.tof.direct=1
+
 
 
 # OEM props
