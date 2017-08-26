@@ -95,6 +95,9 @@ BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril/
 TARGET_GLOBAL_CFLAGS   += -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_USERIMAGES_USE_EXT4:=true
+
+# Camera
+TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 USE_CAMERA_STUB := true
 
 # SELinux
