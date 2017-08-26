@@ -1,9 +1,6 @@
 #include <stdint.h>
+#include <ui/PixelFormat.h>
 
 extern "C" {
-    void _ZN7android14SurfaceControl8setLayerEj(uint32_t);
-
-    void _ZN7android14SurfaceControl8setLayerEi(int32_t layer){
-        _ZN7android14SurfaceControl8setLayerEj(static_cast<uint32_t>(layer));
-    }
+    void _ZN7android13GraphicBufferC1Ejjij(void *instance, uint32_t inWidth, uint32_t inHeight, android::PixelFormat inFormat, uint32_t inUsage);
 }
