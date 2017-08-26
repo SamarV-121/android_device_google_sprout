@@ -101,3 +101,6 @@ USE_CAMERA_STUB := true
 BOARD_SEPOLICY_DIRS += \
     device/google/sprout-common/sepolicy
 BOARD_SECCOMP_POLICY += device/google/sprout-common/seccomp
+
+TARGET_LDPRELOAD += libxlog.so:libmtk_symbols.so
+
