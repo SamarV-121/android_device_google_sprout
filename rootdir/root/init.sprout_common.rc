@@ -276,6 +276,10 @@ on post-fs-data
     chmod 0660 /dev/Vcodec
     chown media media /dev/Vcodec
 
+    # Display
+    chmod 0660 /sys/devices/platform/mtk_disp_mgr.0/rgb
+    chown system system /sys/devices/platform/mtk_disp_mgr.0/rgb
+
     #kpd
     chown radio radio /sys/devices/platform/mtk-kpd/driver/kpd_call_state
 
