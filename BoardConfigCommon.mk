@@ -109,5 +109,9 @@ BOARD_SEPOLICY_DIRS += \
     device/google/sprout-common/sepolicy
 BOARD_SECCOMP_POLICY += device/google/sprout-common/seccomp
 
+# PowerHAL|native tap-to-wake 
+TARGET_POWERHAL_VARIANT := mtk-xen0n
+TARGET_POWER_SET_FEATURE_LIB := power-feature-sprout
+
 TARGET_LDPRELOAD += libxlog.so:libmtk_symbols.so
 

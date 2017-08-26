@@ -187,5 +187,4 @@ PRODUCT_PACKAGES += \
 
 # MTK PowerHAL
 PRODUCT_PACKAGES += \
-    power.default \
     power.mt6582
