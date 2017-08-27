@@ -157,7 +157,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
 	dalvik.vm.image-dex2oat-Xmx=64m \
 	ro.dalvik.vm.native.bridge=0 \
 	ro.hardware=sprout \
-	ro.telephony.ril_class=MT6735 \
+	ro.telephony.ril_class=MediaTekRIL \
 	ro.telephony.ril.config=fakeiccid 
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -185,6 +185,3 @@ PRODUCT_PACKAGES += \
     libmtk_shyms \
     libxlog
 
-# MTK PowerHAL
-PRODUCT_PACKAGES += \
-    power.mt6582
