@@ -2,36 +2,13 @@
 # system.prop for sprout
 #
 				  
-
 rild.libpath=/system/lib/mtk-ril.so
 rild.libargs=-d /dev/ttyC0
 
-
-# MTK, Infinity, 20090720 {
-wifi.interface=wlan0
-ro.hardware=sprout
-# MTK, Infinity, 20090720 }
-
-# MTK, mtk03034, 20101210 {
-ro.mediatek.wlan.wsc=1
-# MTK, mtk03034 20101210}
-# MTK, mtk03034, 20110318 {
-ro.mediatek.wlan.p2p=1
-# MTK, mtk03034 20110318}
-
-# MTK, mtk03034, 20101213 {
-mediatek.wlan.ctia=0
-# MTK, mtk03034 20101213}
-
-
-#
-wifi.tethering.interface=ap0
-#
+# LCD Density
 ro.sf.lcd_density=240
 						   
 ro.opengles.version=131072
-
-wifi.direct.interface=p2p0
 
 # USB MTP WHQL
 ro.sys.usb.mtp.whql.enable=0
@@ -50,13 +27,14 @@ ro.sys.usb.charging.only=yes
 # temporary enables NAV bar (soft keys)
 qemu.hw.mainkeys=0
 
-# audio
+# Audio
 ro.camera.sound.forced=0
 ro.audio.silent=0
 
 ro.zygote.preload.enable=0
-
 ro.kernel.zio=38,108,105,16
+
+# Selinux
 ro.boot.selinux=disable
 
 # Disable dirty region for Mali
@@ -67,14 +45,18 @@ ro.mediatek.version.release=ALPS.W10.24.p0
 ro.mediatek.platform=MT6582
 ro.mediatek.version.sdk=1
 ro.crypto.state=unencrypted
-ro.telephony.sim.count=2
-persist.radio.default.sim=0
-persist.radio.multisim.config=dsds
-persist.radio.fd.counter=15
-persist.radio.fd.off.counter=5
-persist.radio.fd.r8.counter=15
-persist.radio.fd.off.r8.counter=5
+
+# Wifi
 wifi.supplicant_scan_interval=15
+wifi.interface=wlan0
+ro.hardware=sprout
+ro.mediatek.wlan.wsc=1
+ro.mediatek.wlan.p2p=1
+mediatek.wlan.ctia=0
+wifi.tethering.interface=ap0
+wifi.direct.interface=p2p0
+
+# RIL
 ro.telephony.default_network=0,1
 ril.first.md=1
 ril.flightmode.poweroffMD=1
@@ -86,8 +68,20 @@ ril.external.md=0
 ro.sf.hwrotation=0
 ril.current.share_modem=2
 ril.radiooff.poweroffMD=0
+ro.telephony.sim.count=2
+persist.radio.default.sim=0
+persist.radio.multisim.config=dsds
+persist.radio.fd.counter=15
+persist.radio.fd.off.counter=5
+persist.radio.fd.r8.counter=15
+persist.radio.fd.off.r8.counter=5
+
+# Media
 media.stagefright.legacyencoder=true
 media.stagefright.less-secure=true
+
+# Camera
+camera2.portability.force_api=1
 persist.camera.HAL3.enabled=1
 camera.HAL3.enabled=1
 persist.camera.eis.enable=1

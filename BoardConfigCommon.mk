@@ -77,6 +77,7 @@ MALLOC_SVELTE := true
 DEVICE_RESOLUTION := 480x854
 
 # Mediatek flags
+BOARD_USES_LEGACY_MTK_AV_BLOB := true
 BOARD_HAS_MTK_HARDWARE := true
 BOARD_USES_MTK_HARDWARE := true
 MTK_HARDWARE := true
@@ -102,6 +103,7 @@ TARGET_USERIMAGES_USE_EXT4:=true
 
 # Camera
 TARGET_HAS_LEGACY_CAMERA_HAL1 := true
+BOARD_GLOBAL_CFLAGS += -DMETADATA_CAMERA_SOURCE
 USE_CAMERA_STUB := true
 
 # SELinux
@@ -109,7 +111,7 @@ BOARD_SEPOLICY_DIRS += \
     device/google/sprout-common/sepolicy
 BOARD_SECCOMP_POLICY += device/google/sprout-common/seccomp
 
-# PowerHAL|native tap-to-wake 
+# PowerHAL|native tap-to-wake
 TARGET_POWERHAL_VARIANT := mtk-xen0n
 TARGET_POWER_SET_FEATURE_LIB := power-feature-sprout
 
