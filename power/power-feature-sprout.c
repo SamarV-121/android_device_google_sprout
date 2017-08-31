@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2015 The CyanogenMod Project
- * Copyright (C) 2017 The Lineage OS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,11 +29,11 @@
 #include <hardware/power.h>
 #include "power-feature.h"
 
-#define GESTURE_CONTROL_PATH "/sys/android_touch/doubletap2wake"
-#define DOUBLE_TAP_TO_WAKE_ENABLE_VALUE "1"
-#define DOUBLE_TAP_TO_WAKE_DISABLE_VALUE "/sys/android_touch/doubletap2wake"
+#define GESTURE_CONTROL_PATH "/sys/devices/mx_tsp/gesture_hex"
+#define DOUBLE_TAP_TO_WAKE_ENABLE_VALUE "00020001"
+#define DOUBLE_TAP_TO_WAKE_DISABLE_VALUE "00010000"
 
-#define DOUBLE_TAP_TO_WAKE_STORE_PROP ""
+#define DOUBLE_TAP_TO_WAKE_STORE_PROP "persist.cmhw.mz_taptowake"
 #define DOUBLE_TAP_TO_WAKE_STORE_DEFAULT 0
 
 
