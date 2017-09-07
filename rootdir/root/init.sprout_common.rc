@@ -5,6 +5,7 @@ import /init.modem.rc
 on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug
     setprop ro.mtk.hardware mt6582
+    export LD_SHIM_LIBS /system/lib/librilmtk.so|libshim_ril.so:/system/lib/libmtkjpeg.so|libshim_ril.so:/system/bin/wpa_supplicant|libshim_wpa_supplicant.so:/system/lib/hw/camera.mt6582.so|libshim_gui.so:/system/vendor/lib/libwvm.so|libshim_wvm.so:/system/lib/libcam.client.so|libcam_platform.so
 
 on init
     mkdir /protect_f 0771 system system
