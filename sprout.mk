@@ -178,9 +178,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     DozeServices
 
-# MTK Shims
-PRODUCT_PACKAGES += \
-    libmtk_symbols \
-    libmtk_shyms \
-    libxlog
 

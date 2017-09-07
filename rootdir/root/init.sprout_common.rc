@@ -7,7 +7,6 @@ on early-init
     setprop ro.mtk.hardware mt6582
 
 on init
-    export LD_SHIM_LIBS /system/libdpframework.so|libmtk_shyms.so
     mkdir /protect_f 0771 system system
     mkdir /protect_s 0771 system system
 

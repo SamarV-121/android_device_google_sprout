@@ -118,5 +118,4 @@ BOARD_SECCOMP_POLICY += device/google/sprout-common/seccomp
 TARGET_POWERHAL_VARIANT := mtk-xen0n
 TARGET_POWER_SET_FEATURE_LIB := power-feature-sprout
 
-TARGET_LDPRELOAD += libxlog.so:libmtk_symbols.so
 
