@@ -16,7 +16,7 @@
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/configs/agps_profiles_conf2.xml:system/etc/agps_profiles_conf2.xml \
 
-# Audio	
+# Media
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/system/etc/media_profiles.xml:system/etc/media_profiles.xml \
     $(LOCAL_PATH)/rootdir/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
@@ -62,11 +62,6 @@ PRODUCT_COPY_FILES += \
 # Keylayout
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/system/usr/keylayout/mtk-kpd.kl:system/usr/keylayout/mtk-kpd.kl \
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf \
-    $(LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd.accept:system/etc/hostapd/hostapd.accept \
-    $(LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd.deny:system/etc/hostapd/hostapd.deny
 	
 PRODUCT_TAGS += dalvik.gc.type-precise
 
@@ -78,7 +73,18 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/root/factory_init.rc:root/factory_init.rc \
     $(LOCAL_PATH)/rootdir/root/ueventd.sprout.rc:root/ueventd.sprout.rc \
     $(LOCAL_PATH)/rootdir/root/init.sprout.usb.rc:root/init.sprout.usb.rc \
-    $(LOCAL_PATH)/rootdir/root/init.zeta0y_core.rc:root/init.zeta0y_core.rc
+
+# Symbols for Sprout
+PRODUCT_PACKAGES += \
+    libshim_gui.cpp.so
+    libshim_ril.cpp.so
+    libshim_wpa_supplicant.cpp.so
+    libshim_wvm.cpp.so
+    libcam_platform.so
+
+# Doze
+PRODUCT_PACKAGES += \
+    DozeServices
 
 # Correct bootanimation size for the screen
 TARGET_SCREEN_HEIGHT := 854
@@ -86,17 +92,14 @@ TARGET_SCREEN_WIDTH := 480
 	
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/root/twrp.fstab:recovery/root/etc/twrp.fstab
-	
+
+# Audio	
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default \
     libaudio-resampler \
     tinymix
-
-# Camera
-#PRODUCT_PACKAGES += \
-#	SnapdragonCamera
 
 # FM Radio
 PRODUCT_PACKAGES += \
@@ -110,13 +113,17 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_supplicant.conf
 
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    camera.disable_zsl_mode=1
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd_default.conf:system/etc/hostapd/hostapd_defaul$
+    $(LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd.accept:system/etc/hostapd/hostapd.accept \
+    $(LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd.deny:system/etc/hostapd/hostapd.deny
 
+# USB
 PRODUCT_PACKAGES += \
     librs_jni \
     com.android.future.usb.accessory
 
+# Charger
 PRODUCT_PACKAGES += \
     charger \
     charger_res_images \
@@ -157,7 +164,8 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
 	ro.dalvik.vm.native.bridge=0 \
 	ro.hardware=sprout \
 	ro.telephony.ril_class=MediaTekRIL \
-	ro.telephony.ril.config=fakeiccid 
+	ro.telephony.ril.config=fakeiccid \ 
+        camera.disable_zsl_mode=1
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     pm.dexopt.first-boot=verify-at-runtime \
@@ -173,9 +181,4 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-filter=speed \
     dalvik.vm.dex2oat-swap=false
-
-# Doze
-PRODUCT_PACKAGES += \
-    DozeServices
-
 
