@@ -1,4 +1,4 @@
-# Copyright (C) 2013 The Android Open Source Project
+# Copyright (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -76,11 +76,11 @@ PRODUCT_COPY_FILES += \
 
 # Symbols for Sprout
 PRODUCT_PACKAGES += \
-    libshim_gui.cpp.so
-    libshim_ril.cpp.so
-    libshim_wpa_supplicant.cpp.so
-    libshim_wvm.cpp.so
-    libcam_platform.so
+    libshim_gui \ 
+    libshim_ril \
+    libshim_wpa_supplicant \
+    libshim_wvm \
+    libcam_platform 
 
 # Doze
 PRODUCT_PACKAGES += \
@@ -114,7 +114,7 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd_default.conf:system/etc/hostapd/hostapd_defaul$
+    $(LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf \
     $(LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd.accept:system/etc/hostapd/hostapd.accept \
     $(LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd.deny:system/etc/hostapd/hostapd.deny
 
@@ -133,12 +133,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     setup_fs \
     e2fsck \
-
-# Dynamically set props
-PRODUCT_SYSTEM_PROPERTY_BLACKLIST := \
-    ro.product.name \
-    ro.product.manufacturer \
-    ro.product.model
 	
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
@@ -149,6 +143,13 @@ $(call inherit-product, vendor/google/sprout/sprout-vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
+
+# Dynamically set props
+PRODUCT_SYSTEM_PROPERTY_BLACKLIST := \
+    ro.product.name \
+    ro.product.manufacturer \
+    ro.product.model
+    
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
 	ro.crypto.state=unencrypted \
 	ro.mount.fs=EXT4 \
