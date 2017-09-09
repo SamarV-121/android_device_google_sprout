@@ -1,1 +1,1 @@
-allow debuggerd ccci_device:chr_file read;
+#allow debuggerd ccci_device:chr_file read;

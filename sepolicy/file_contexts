@@ -1,15 +1,10 @@
 /system/bin/mtk_agpsd         u:object_r:mtk_agpsd_exec:s0
 /system/bin/6620_launcher     u:object_r:conn_launcher_exec:s0
 /system/bin/ccci_fsd          u:object_r:ccci_fsd_exec:s0
-/system/bin/ccci_rpcd          u:object_r:ccci_rpcd_exec:s0														   
 /system/bin/ccci_mdinit       u:object_r:ccci_mdinit_exec:s0
-/system/bin/lgpserver         u:object_r:lgpserver_exec:s0													  
 /system/bin/drvbd             u:object_r:drvbd_exec:s0
-/system/bin/nvram_agent_binder u:object_r:nvram_agent_binder_exec:s0
 /system/bin/nvram_daemon      u:object_r:nvram_daemon_exec:s0
 /system/xbin/mnld             u:object_r:mnld_exec:s0
-/system/bin/bmm050d           u:object_r:bmm050d_exec:s0
-/system/bin/permission_check  u:object_r:permission_check_exec:s0														
 /system/bin/msensord          u:object_r:msensord_exec:s0
 /system/bin/thermal_manager   u:object_r:thermal_manager_exec:s0
 /system/bin/wmt_loader        u:object_r:wmt_loader_exec:s0
@@ -54,7 +49,6 @@
 /sys/devices/platform/gyroscope/driver(/.*)?	u:object_r:sysfs_sensor_file:s0
 /sys/bus/platform/drivers/msensor(/.*)?		u:object_r:sysfs_sensor_file:s0
 /sys/bus/platform/drivers/gsensor(/.*)?		u:object_r:sysfs_sensor_file:s0
-/sys/devices/platform/mtk_disp_mgr.0/rgb                        u:object_r:livedisplay_sysfs:s0
 
 /dev/ttyC0         u:object_r:gsm0710muxd_device:s0
 /dev/ttyC1         u:object_r:mdlog_device:s0
@@ -75,7 +69,7 @@
 /dev/GAF008AF      u:object_r:camera_device:s0
 /dev/stpbt         u:object_r:hci_attach_dev:s0
 /dev/hwmsensor     u:object_r:sensors_device:s0
-/dev/gps           u:object_r:gps_device:s0
+#/dev/gps           u:object_r:gps_device:s0
 /dev/stpgps        u:object_r:mnld_device:s0
 /dev/radio(/*)?    u:object_r:radio_device:s0
 /dev/aed[0-9]+     u:object_r:aed_device:s0
@@ -88,8 +82,6 @@
 /dev/MT_pmic_adc_cali  u:object_r:MT_pmic_adc_cali_device:s0
 /dev/als_ps            u:object_r:als_ps_device:s0
 /dev/mtk_jpeg      u:object_r:mtk_jpeg_device:s0
-/dev/nvram	u:object_r:nvram_device:s0
-						 
 
 /protect_f(/.*)?         u:object_r:protect_f_data_file:s0
 /protect_s(/.*)?         u:object_r:protect_s_data_file:s0
@@ -101,19 +93,13 @@
 /data/nvram/media(/.*)?  u:object_r:nvram_media_data_file:s0
 /data/agps_supl(/.*)?    u:object_r:agpsd_data_file:s0
 /sys/class/gpsdrv/gps(/.*)?   u:object_r:sysfs_gpsdrv:s0
-/data/misc/gps(/.*)?     u:object_r:gps_data_file:s0
+#/data/misc/gps(/.*)?   u:object_r:gps_data_file:s0
 /data/core(/.*)?         u:object_r:aee_core_data_file:s0
 /data/aee_exp(/.*)?      u:object_r:aee_exp_data_file:s0
 /data/dumpsys(/.*)?      u:object_r:aee_dumpsys_data_file:s0
 /data/misc/mblog(/.*)?   u:object_r:logmisc_data_file:s0
 /data/log_temp(/.*)?     u:object_r:logtemp_data_file:s0
 /data/mdl(/.*)?          u:object_r:mdl_data_file:s0
-/data/ccci_cfg(/.*)?     u:object_r:nvram_data_file:s0
-/dev/preloader(/.*)?     u:object_r:preloader_device:s0
-/dev/pro_info(/.*)?      u:object_r:pro_info_device:s0
-/dev/misc-sd(/.*)?       u:object_r:misc_sd_device:s0
-/dev/misc(/.*)?          u:object_r:misc_device:s0 
-/dev/misc2               u:object_r:misc_device:s0 
-/dev/sec_ro(/.*)?        u:object_r:sec_ro_device:s0 								  
+
 /data/misc/sensor/.id                      u:object_r:sensord_data_file:s0
 /data/misc/sensor/sensord.log              u:object_r:sensord_data_file:s0
