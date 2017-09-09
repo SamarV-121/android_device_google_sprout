@@ -6,3 +6,5 @@ allow init sysfs_sensor_file:file { relabelto setattr };
 allow init sysfs_sensor_file:lnk_file relabelto;
 allow init tmpfs:lnk_file create;
 allow init { domain -lmkd }:process noatsecure;
+allow init muxreport_exec:file { getattr };
+
