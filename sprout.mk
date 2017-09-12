@@ -164,7 +164,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
 	dalvik.vm.image-dex2oat-Xmx=64m \
 	ro.dalvik.vm.native.bridge=0 \
 	ro.hardware=sprout \
-	ro.telephony.ril_class=MediaTekRIL \
+	ro.telephony.ril_class=SproutRIL \
 	ro.telephony.ril.config=fakeiccid \ 
         camera.disable_zsl_mode=1
 
