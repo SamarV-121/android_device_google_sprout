@@ -24,6 +24,9 @@ ro.sys.usb.bicr=yes
 # USB Charge only function
 ro.sys.usb.charging.only=yes
 
+# sdcardfs
+ro.sys.sdcardfs=true
+
 # temporary enables NAV bar (soft keys)
 qemu.hw.mainkeys=0
 
@@ -40,6 +43,7 @@ ro.boot.selinux=disable
 # Disable dirty region for Mali
 debug.hwui.render_dirty_regions=false
 
+# MTK H/W
 ro.mediatek.chip_ver=S01
 ro.mediatek.version.release=ALPS.W10.24.p0
 ro.mediatek.platform=MT6582
