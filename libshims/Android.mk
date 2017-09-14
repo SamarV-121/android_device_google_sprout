@@ -52,3 +52,10 @@ LOCAL_SHARED_LIBRARIES := libgui libutils liblog libbinder libandroid libui
 LOCAL_MODULE := libcam_platform
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES := libshim_gps.cpp
+LOCAL_SHARED_LIBRARIES := libicuuc
+LOCAL_MODULE := libshim_gps
+LOCAL_MODULE_TAGS := optional
+include $(BUILD_SHARED_LIBRARY)

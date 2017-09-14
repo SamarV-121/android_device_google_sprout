@@ -76,11 +76,12 @@ PRODUCT_COPY_FILES += \
 
 # Symbols for Sprout
 PRODUCT_PACKAGES += \
-    libshim_gui \ 
+    libshim_gui \
+    libshim_gps \    
     libshim_ril \
     libshim_wpa_supplicant \
     libshim_wvm \
-    libcam_platform 
+    libcam_platform
 
 # Doze
 PRODUCT_PACKAGES += \
@@ -149,7 +150,7 @@ PRODUCT_SYSTEM_PROPERTY_BLACKLIST := \
     ro.product.name \
     ro.product.manufacturer \
     ro.product.model
-    
+
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
 	ro.crypto.state=unencrypted \
 	ro.mount.fs=EXT4 \
@@ -165,7 +166,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
 	ro.dalvik.vm.native.bridge=0 \
 	ro.hardware=sprout \
 	ro.telephony.ril_class=SproutRIL \
-	ro.telephony.ril.config=fakeiccid \ 
+	ro.telephony.ril.config=fakeiccid \
         camera.disable_zsl_mode=1
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \

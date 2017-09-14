@@ -24,3 +24,4 @@ extern "C" int _ZN7android6Parcel13writeString16EPKtj() {
 extern "C" int _ZN7android6Parcel13writeString16EPKtjparcel_writeString();
 extern "C" int _ZN7android6Parcel13writeString16EPKtjparcel_writeString() {
     return _ZN7android6Parcel13writeString16EPKtjparcel_writeString();
+}
