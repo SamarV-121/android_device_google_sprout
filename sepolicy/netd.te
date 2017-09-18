@@ -5,3 +5,5 @@ allow netd init:tcp_socket { read write setopt getopt };
 allow netd self:capability fsetid;
 allow netd mtk_agpsd:fd use;
 allow netd mtk_agpsd:tcp_socket { setopt getopt read write };
+allow netd wifi_data_file:sock_file { create setattr write unlink };
+allow netd dhcp_data_file:dir { setattr };
