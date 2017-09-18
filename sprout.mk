@@ -78,6 +78,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libshims
 
+# Power
+PRODUCT_PACKAGES += \
+    power-feature-sprout
+
 # Doze
 PRODUCT_PACKAGES += \
     DozeServices

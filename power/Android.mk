@@ -50,7 +50,7 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES := \
     power-feature-sprout.c \
 
-LOCAL_MODULE := power-feature-krillin
+LOCAL_MODULE := power-feature-sprout
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_STATIC_LIBRARY)
