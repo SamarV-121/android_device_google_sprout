@@ -23,4 +23,4 @@ allow mnld self:tcp_socket { accept listen bind create setopt };
 allow mnld port:tcp_socket name_bind;
 allow mnld node:tcp_socket node_bind;
 allow mnld device:chr_file { read write open };
-allow mnld system_data_file:file { read opem write getattr setattr };
+allow mnld system_data_file:file { read open write getattr setattr };
