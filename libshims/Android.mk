@@ -16,46 +16,8 @@
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := libshim_ril.cpp
-LOCAL_SHARED_LIBRARIES := libbinder
-LOCAL_MODULE := libshim_ril
-LOCAL_MODULE_TAGS := optional
-include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_SRC_FILES := libshim_wpa_supplicant.cpp
-LOCAL_SHARED_LIBRARIES := libbinder
-LOCAL_MODULE := libshim_wpa_supplicant
-LOCAL_MODULE_TAGS := optional
-include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_SRC_FILES := libshim_gui.cpp
-LOCAL_C_INCLUDES := gui
-LOCAL_SHARED_LIBRARIES := libgui libutils liblog libbinder libandroid libui
-LOCAL_MODULE := libshim_gui
-LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_SRC_FILES := libshim_wvm.cpp
-LOCAL_SHARED_LIBRARIES := libstagefright_foundation
-LOCAL_MODULE := libshim_wvm
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_SRC_FILES := libshim_gui.cpp
-LOCAL_C_INCLUDES := gui
-LOCAL_SHARED_LIBRARIES := libgui libutils liblog libbinder libandroid libui
-LOCAL_MODULE := libcam_platform
-LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_SRC_FILES := libshim_gps.cpp
-LOCAL_SHARED_LIBRARIES := libicuuc
-LOCAL_MODULE := libshim_gps
+LOCAL_SRC_FILES := libshim_ril.cpp libshim_wpa_supplicant.cpp libshim_gui.cpp libshim_wvm.cpp libshim_gps.cpp
+LOCAL_SHARED_LIBRARIES := libbinder libgui libutils liblog libbinder libandroid libui libmedia libstagefright_foundation libicuuc
+LOCAL_MODULE := libshims
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_SHARED_LIBRARY)

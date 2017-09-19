@@ -76,12 +76,7 @@ PRODUCT_COPY_FILES += \
 
 # Symbols for Sprout
 PRODUCT_PACKAGES += \
-    libshim_gui \
-    libshim_gps \    
-    libshim_ril \
-    libshim_wpa_supplicant \
-    libshim_wvm \
-    libcam_platform
+    libshims
 
 # Doze
 PRODUCT_PACKAGES += \
