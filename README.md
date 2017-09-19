@@ -19,7 +19,6 @@ Camera  | 5MPx, LED Flash
 This branch is for building LineageOS 14.1 ROMS.
 
 #### Whats Working ?
- * Hardware acceleration (Youtube Videos Also Works)
  * Wifi
  * Bluetooth
  * Vibration
@@ -32,7 +31,7 @@ This branch is for building LineageOS 14.1 ROMS.
  * All sensors
  * Doze
  * Offline charging
- * RIL
+ * RIL (Call,Data,Msg)
  * Operator name
  * GPS
  * Audio over Bluetooth (music, calls .etc)
@@ -45,4 +44,4 @@ This branch is for building LineageOS 14.1 ROMS.
 * Varun Chitre
 * Xcore_rj
 * Chymardos
-* && ME :)
+* Pablito

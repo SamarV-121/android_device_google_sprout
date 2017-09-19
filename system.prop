@@ -24,7 +24,7 @@ ro.sys.usb.bicr=yes
 # USB Charge only function
 ro.sys.usb.charging.only=yes
 
-# sdcardfs
+# Sdcardfs
 ro.sys.sdcardfs=true
 
 # temporary enables NAV bar (soft keys)
