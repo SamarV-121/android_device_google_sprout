@@ -43,7 +43,6 @@ This branch is for building LineageOS 14.1 ROMS.
 #### Thanks to: 
 * Varun Chitre
 * Divis1969
-* Xen0n
 * Xcore_rj
 * Chymardos
 * Pablito

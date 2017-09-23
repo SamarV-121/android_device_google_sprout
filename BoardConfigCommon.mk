@@ -134,8 +134,4 @@ BOARD_SEPOLICY_DIRS += \
 # Seccomp Policy
 BOARD_SECCOMP_POLICY += device/google/sprout-common/seccomp
 
-# PowerHAL
-TARGET_POWERHAL_VARIANT := mtk-xen0n
-TARGET_POWER_SET_FEATURE_LIB := power-feature-sprout
-
 
