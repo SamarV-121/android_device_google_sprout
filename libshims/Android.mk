@@ -16,8 +16,8 @@
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := libshim_ril.cpp libshim_wpa_supplicant.cpp libshim_gui.cpp libshim_wvm.cpp libshim_gps.cpp
-LOCAL_SHARED_LIBRARIES := libbinder libgui libutils liblog libandroid libui libstagefright_foundation libicuuc
+LOCAL_SRC_FILES := libshim_ril.cpp libshim_wpa_supplicant.cpp libshim_gui.cpp libshim_wvm.cpp libshim_wvm2.cpp libshim_gps.cpp
+LOCAL_SHARED_LIBRARIES := libbinder libgui libutils liblog libandroid libui libmedia libstagefright_foundation libicuuc
 LOCAL_MODULE := libshims
 LOCAL_32_BIT_ONLY := true
 LOCAL_MODULE_TAGS := optional
