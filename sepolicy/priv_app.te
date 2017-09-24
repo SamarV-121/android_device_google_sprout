@@ -1,0 +1,2 @@
+allow priv_app cache_private_backup_file:dir getattr;
+

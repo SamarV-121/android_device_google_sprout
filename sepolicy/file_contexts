@@ -100,6 +100,9 @@
 /data/misc/mblog(/.*)?   u:object_r:logmisc_data_file:s0
 /data/log_temp(/.*)?     u:object_r:logtemp_data_file:s0
 /data/mdl(/.*)?          u:object_r:mdl_data_file:s0
+/data/cache/backup(/.*)?       u:object_r:cache_private_backup_file:s0
 
 /data/misc/sensor/.id                      u:object_r:sensord_data_file:s0
 /data/misc/sensor/sensord.log              u:object_r:sensord_data_file:s0
+/data/misc/gps/EPO.DAT                     u:object_r:system_data_file:s0
+
