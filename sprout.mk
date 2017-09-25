@@ -145,7 +145,8 @@ PRODUCT_SYSTEM_PROPERTY_BLACKLIST := \
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
     ro.telephony.ril_class=SproutRIL \
-    camera.disable_zsl_mode=1
+    camera.disable_zsl_mode=1 \
+    ro.hardware=sprout
 
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
