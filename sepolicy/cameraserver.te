@@ -1,2 +1,3 @@
 allow cameraserver camera_device:chr_file { read write open ioctl };
+allow cameraserver gpu_device:chr_file { read open ioctl };
 

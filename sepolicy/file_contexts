@@ -50,6 +50,7 @@
 /sys/devices/platform/gyroscope/driver(/.*)?	u:object_r:sysfs_sensor_file:s0
 /sys/bus/platform/drivers/msensor(/.*)?		u:object_r:sysfs_sensor_file:s0
 /sys/bus/platform/drivers/gsensor(/.*)?		u:object_r:sysfs_sensor_file:s0
+/sys/bus/platform/drivers/dev_info/dev_info     u:object_r:sysfs:s0
 
 /dev/ttyC0         u:object_r:gsm0710muxd_device:s0
 /dev/ttyC1         u:object_r:mdlog_device:s0
