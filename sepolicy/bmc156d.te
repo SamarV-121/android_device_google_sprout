@@ -11,5 +11,4 @@ allow bmc156d msensor_device:chr_file rw_file_perms;
 allow bmc156d sysfs_sensor_file:file { rw_file_perms };
 allow bmc156d system_data_file:dir { setattr rw_dir_perms };
 allow bmc156d sensord_data_file:file { create setattr rw_file_perms};
-allow bmc156d system_data_file:file write;
 
