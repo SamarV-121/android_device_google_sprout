@@ -25,16 +25,36 @@
 /dev/ccci_monitor     u:object_r:ccci_monitor_device:s0
 /dev/mtk-adc-cali     u:object_r:mtk_adc_cali_device:s0
 /dev/devmap           u:object_r:devmap_device:s0
-/dev/block/mmcblk0p1  u:object_r:nvram_device:s0
+/dev/block/mmcblk0p1  u:object_r:proinfo_device:s0
 /dev/block/mmcblk0p2  u:object_r:nvram_device:s0
-/dev/block/mmcblk0p3  u:object_r:protect_device:s0
-/dev/block/mmcblk0p4  u:object_r:protect_device:s0
+/dev/block/mmcblk0p3  u:object_r:protect1_device:s0
+/dev/block/mmcblk0p4  u:object_r:protect2_device:s0
+/dev/block/mmcblk0p5  u:object_r:seccfg_device:s0
+/dev/block/mmcblk0p6  u:object_r:bootloader_block_device:s0
+/dev/block/mmcblk0p7  u:object_r:boot_block_device:s0
+/dev/block/mmcblk0p8  u:object_r:recovery_block_device:s0
+/dev/block/mmcblk0p9  u:object_r:secro_device:s0
+/dev/block/mmcblk0p10 u:object_r:para_block_device:s0
+/dev/block/mmcblk0p11 u:object_r:logo_block_device:s0
+/dev/block/mmcblk0p12 u:object_r:oem_device:s0
+/dev/block/mmcblk0p13 u:object_r:expdb_device:s0
+/dev/block/mmcblk0p14 u:object_r:system_device:s0
 /dev/block/mmcblk0p15 u:object_r:cache_device:s0
 /dev/block/mmcblk0p16 u:object_r:userdata_device:s0
-/dev/block/mmcblk0p18 u:object_r:frp_block_device:s0
+/dev/block/mmcblk0p17 u:object_r:metadata_block_device:s0
+/dev/block/mmcblk0p18 u:object_r:gen_block_device:s0
+/dev/block/mmcblk1    u:object_r:mmc_device:s0
+/dev/block/zram0      u:object_r:swap_block_device:s0
 /dev/ccci_.*          u:object_r:ccci_device:s0
 /dev/fm(/.*)?         u:object_r:fm_device:s0
-/dev/socket/rild(.*)? u:object_r:rild_socket:s0
+/dev/socket/rild           u:object_r:rild_socket:s0
+/dev/socket/rild2          u:object_r:rild_socket:s0
+/dev/socket/rild3          u:object_r:rild_socket:s0
+/dev/socket/rild4          u:object_r:rild_socket:s0
+/dev/socket/rild-atci      u:object_r:rild_socket:s0
+/dev/socket/rild-debug     u:object_r:rild_socket:s0
+/dev/socket/rild-mtk-modem u:object_r:rild_socket:s0
+/dev/socket/rild-oem       u:object_r:rild_socket:s0
 /dev/socket/agpsd2(/.*)? u:object_r:agpsd_socket:s0
 /dev/socket/agpsd3(/.*)? u:object_r:agpsd_socket:s0
 /dev/socket/agpsd(/.*)?  u:object_r:agpsd_socket:s0
@@ -50,11 +70,13 @@
 /sys/bus/platform/drivers/msensor(/.*)?		u:object_r:sysfs_sensor_file:s0
 /sys/bus/platform/drivers/gsensor(/.*)?		u:object_r:sysfs_sensor_file:s0
 
+/dev/accdet        u:object_r:accdet_device:s0
 /dev/ttyC0         u:object_r:gsm0710muxd_device:s0
 /dev/ttyC1         u:object_r:mdlog_device:s0
 /dev/ttyC2         u:object_r:agps_device:s0
 /dev/msensor       u:object_r:msensor_device:s0
 /dev/mali          u:object_r:gpu_device:s0
+/dev/mtk_disp      u:object_r:graphics_device:s0
 /dev/M4U_device    u:object_r:gpu_device:s0
 /dev/mtkfb_vsync   u:object_r:gpu_device:s0
 /dev/camera-isp    u:object_r:camera_device:s0
@@ -67,7 +89,7 @@
 /dev/GAF001AF      u:object_r:camera_device:s0
 /dev/GAF002AF      u:object_r:camera_device:s0
 /dev/GAF008AF      u:object_r:camera_device:s0
-/dev/stpbt         u:object_r:hci_attach_dev:s0
+/dev/stpbt         u:object_r:stpbt_device:s0
 /dev/hwmsensor     u:object_r:sensors_device:s0
 /dev/gps           u:object_r:gps_device:s0
 /dev/stpgps        u:object_r:mnld_device:s0
@@ -76,12 +98,12 @@
 /dev/block/mmcblk0p13 u:object_r:aed_block_device:s0
 /dev/Vcodec        u:object_r:Vcodec_device:s0
 /dev/ebc           u:object_r:ebc_device:s0
-/dev/sw_sync       u:object_r:sw_sync_device:s0
+/dev/sw_sync       u:object_r:graphics_device:s0
 /dev/ttyGS.* u:object_r:ttyGS_device:s0
 /dev/ttyMT.* u:object_r:ttyMT_device:s0
 /dev/MT_pmic_adc_cali  u:object_r:MT_pmic_adc_cali_device:s0
 /dev/als_ps            u:object_r:als_ps_device:s0
-/dev/mtk_jpeg      u:object_r:mtk_jpeg_device:s0
+/dev/mtk_jpeg      u:object_r:camera_device:s0
 
 /protect_f(/.*)?         u:object_r:protect_f_data_file:s0
 /protect_s(/.*)?         u:object_r:protect_s_data_file:s0
@@ -100,9 +122,7 @@
 /data/misc/mblog(/.*)?   u:object_r:logmisc_data_file:s0
 /data/log_temp(/.*)?     u:object_r:logtemp_data_file:s0
 /data/mdl(/.*)?          u:object_r:mdl_data_file:s0
-/data/cache/backup(/.*)?       u:object_r:cache_private_backup_file:s0
 
 /data/misc/sensor/.id                      u:object_r:sensord_data_file:s0
 /data/misc/sensor/sensord.log              u:object_r:sensord_data_file:s0
 /data/misc/gps/EPO.DAT                     u:object_r:system_data_file:s0
-
