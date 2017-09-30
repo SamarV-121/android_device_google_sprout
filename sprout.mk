@@ -171,6 +171,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.power@1.0-impl
 
+# Lights
+PRODUCT_PACKAGES += \
+    android.hardware.light@2.0-impl
+
 # HIDL
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/manifest.xml:system/vendor/manifest.xml
