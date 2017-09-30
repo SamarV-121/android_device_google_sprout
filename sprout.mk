@@ -99,15 +99,15 @@ PRODUCT_PACKAGES += \
     libaudio-resampler \
     tinymix
 
-USE_CUSTOM_AUDIO_POLICY := 1
+# USE_CUSTOM_AUDIO_POLICY := 1
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.ril_class=SproutRIL
 
 # FM Radio
-PRODUCT_PACKAGES += \
-    FMRadioGoogle \
-    FmRadioTrampoline2
+# PRODUCT_PACKAGES += \
+#     FMRadioGoogle \
+#    FmRadioTrampoline2
 
 # Wifi
  PRODUCT_PACKAGES += \
