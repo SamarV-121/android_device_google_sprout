@@ -147,6 +147,10 @@ PRODUCT_SYSTEM_PROPERTY_BLACKLIST := \
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl
 
+# WiFi
+PRODUCT_PACKAGES += \
+    android.hardware.wifi@1.0-service
+
 # HIDL
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/manifest.xml:system/vendor/manifest.xml
