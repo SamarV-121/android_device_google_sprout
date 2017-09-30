@@ -143,6 +143,10 @@ PRODUCT_SYSTEM_PROPERTY_BLACKLIST := \
     ro.product.manufacturer \
     ro.product.model
 
+# Bluetooth
+PRODUCT_PACKAGES += \
+    android.hardware.bluetooth@1.0-impl
+
 # HIDL
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/manifest.xml:system/vendor/manifest.xml
