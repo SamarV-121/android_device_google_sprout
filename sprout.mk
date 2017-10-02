@@ -168,7 +168,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
 	ro.dalvik.vm.native.bridge=0 \
 	ro.hardware=sprout \
 	ro.telephony.ril_class=SproutRIL \
-	ro.telephony.ril.config=fakeiccid \
         camera.disable_zsl_mode=1
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \

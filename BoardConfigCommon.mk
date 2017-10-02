@@ -83,18 +83,16 @@ MALLOC_SVELTE := true
 # Device Resolution
 DEVICE_RESOLUTION := 480x854
 
-# Mediatek flags
-BOARD_USES_LEGACY_MTK_AV_BLOB := true
+# Mediatek Hardware Support
 BOARD_HAS_MTK_HARDWARE := true
 BOARD_USES_MTK_HARDWARE := true
 MTK_HARDWARE := true
+
+BOARD_USES_LEGACY_MTK_AV_BLOB := true
 BOARD_GLOBAL_CFLAGS += -DMTK_HARDWARE -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL
 BOARD_GLOBAL_CPPFLAGS += -DMTK_HARDWARE
 
-# Block base OTA
-BLOCK_BASED_OTA := true
-
-# FRAMEWORK WITH OUT SYNC
+# Framework without Sync
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 
 # Enable dex-preoptimization to speed up first boot sequence
@@ -112,8 +110,6 @@ TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 
 # Dual SIM
 SIM_COUNT := 2
-TARGET_GLOBAL_CFLAGS += -DANDROID_MULTI_SIM
-TARGET_GLOBAL_CPPFLAGS += -DANDROID_MULTI_SIM
 
 # Custom RIL
 BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril/
@@ -124,12 +120,10 @@ TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 
 # Camera
 TARGET_HAS_LEGACY_CAMERA_HAL1 := true
-# BOARD_GLOBAL_CFLAGS += -DMETADATA_CAMERA_SOURCE
 USE_CAMERA_STUB := true
 
 # SELinux Policy
-BOARD_SEPOLICY_DIRS += \
-    device/google/sprout-common/sepolicy
+BOARD_SEPOLICY_DIRS += device/google/sprout-common/sepolicy
 
 # Seccomp Policy
 BOARD_SECCOMP_POLICY += device/google/sprout-common/seccomp
