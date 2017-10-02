@@ -16,8 +16,9 @@
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := libshim_ril.cpp libshim_wpa_supplicant.cpp libshim_gui.cpp libshim_wvm.cpp libshim_gps.cpp
-LOCAL_SHARED_LIBRARIES := libbinder libgui libutils liblog libandroid libui libstagefright_foundation libicuuc
+LOCAL_SRC_FILES := libshim_ril.cpp libshim_wpa_supplicant.cpp libshim_gui.cpp libshim_wvm.cpp libshim_wvm2.cpp libshim_gps.cpp libshim_audio.cpp libshim_ui.cpp xlog.c
+LOCAL_C_INCLUDES += frameworks/av/media/mtp/ system/core/include/ frameworks/rs/server/ frameworks/av/include/ hardware/libhardware/include/ frameworks/av/
+LOCAL_SHARED_LIBRARIES := libbinder libgui libutils liblog libandroid libui libstagefright_foundation libicuuc libcutils libmedia
 LOCAL_MODULE := libshims
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_SHARED_LIBRARY)
