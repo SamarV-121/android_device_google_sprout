@@ -17,4 +17,4 @@ allow mtkrild ccci_device:chr_file { rw_file_perms };
 allow mtkrild sysfs_wake_lock:file { rw_file_perms };
 allow mtkrild self:udp_socket { connect create bind ioctl };
 allow mtkrild shell_exec:file { read open execute execute_no_trans };
-allow mtkrild proc:file write;
+allow mtkrild proc:file { read open write };

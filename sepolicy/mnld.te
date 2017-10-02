@@ -23,3 +23,5 @@ allow mnld self:tcp_socket { accept listen bind create setopt };
 allow mnld port:tcp_socket name_bind;
 allow mnld node:tcp_socket node_bind;
 allow mnld system_data_file:dir { write add_name create remove_name };
+allow mnld wcn_combo_chip_prop:file { read open getattr }; 
+

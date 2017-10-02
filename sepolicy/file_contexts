@@ -51,6 +51,8 @@
 /sys/bus/platform/drivers/msensor(/.*)?		u:object_r:sysfs_sensor_file:s0
 /sys/bus/platform/drivers/gsensor(/.*)?		u:object_r:sysfs_sensor_file:s0
 /sys/bus/platform/drivers/dev_info/dev_info     u:object_r:sysfs:s0
+/sys/bus/platform/drivers/gyroscope/rawdata     u:object_r:sysfs:s0
+/sys/kernel/ccci/version                        u:object_r:sysfs:s0
 
 /dev/ttyC0         u:object_r:gsm0710muxd_device:s0
 /dev/ttyC1         u:object_r:mdlog_device:s0
@@ -84,6 +86,11 @@
 /dev/MT_pmic_adc_cali  u:object_r:MT_pmic_adc_cali_device:s0
 /dev/als_ps            u:object_r:als_ps_device:s0
 /dev/mtk_jpeg      u:object_r:mtk_jpeg_device:s0
+/dev/__properties__/u:object_r:ccci_decrypt_state_prop:s0         u:object_r:ccci_decrypt_state_prop:s0 
+/dev/__properties__/u:object_r:wcn_combo_chip_prop:s0             u:object_r:wcn_combo_chip_prop:s0
+
+/proc/mtkcooler/1200   u:object_r:proc:s0
+/proc/cmdline    u:object_r:proc:s0
 
 /protect_f(/.*)?         u:object_r:protect_f_data_file:s0
 /protect_s(/.*)?         u:object_r:protect_s_data_file:s0
@@ -106,4 +113,5 @@
 /data/misc/sensor/.id                      u:object_r:sensord_data_file:s0
 /data/misc/sensor/sensord.log              u:object_r:sensord_data_file:s0
 /data/misc/gps/EPO.DAT                     u:object_r:system_data_file:s0
+/data/misc/sensor/.id                      u:object_r:system_data_file:s0
 
