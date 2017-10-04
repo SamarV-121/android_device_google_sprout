@@ -100,6 +100,7 @@
 # Proc
 /proc/mtkcooler/1200   u:object_r:proc:s0
 /proc/cmdline          u:object_r:proc:s0
+/proc/lk_env           u:object_r:proc:s0
 
 # Files from firmware/nv partitions
 /protect_f(/.*)?         u:object_r:protect_f_data_file:s0
