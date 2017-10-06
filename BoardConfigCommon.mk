@@ -24,7 +24,6 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 134217728
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USERIMAGES_USE_EXT4 := true
-TARGET_USERIMAGES_USE_F2FS := true
 
 # Kernel Stuff
 TARGET_KERNEL_SOURCE := kernel/mediatek/sprout
@@ -59,10 +58,6 @@ TW_NO_USB_STORAGE := true
 # OpenGL
 USE_OPENGL_RENDERER:= true
 
-# Cyanogen Hardware
-BOARD_USES_CYANOGEN_HARDWARE := true
-BOARD_HARDWARE_CLASS += $(LOCAL_PATH)/cmhw
-
 # WiFi
 WPA_SUPPLICANT_VERSION           := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
@@ -74,6 +69,10 @@ WIFI_DRIVER_FW_PATH_STA:=STA
 WIFI_DRIVER_FW_PATH_AP:=AP
 WIFI_DRIVER_FW_PATH_STA:=P2P
 
+
+# MediaTek Support
+BOARD_USES_MTK_HARDWARE := true
+
 # Enable Minikin text layout engine (will be the default soon)
 USE_MINIKIN := true
 
@@ -83,35 +82,13 @@ MALLOC_SVELTE := true
 # Device Resolution
 DEVICE_RESOLUTION := 480x854
 
-# Mediatek Hardware Support
-BOARD_HAS_MTK_HARDWARE := true
-BOARD_USES_MTK_HARDWARE := true
-MTK_HARDWARE := true
-
-BOARD_USES_LEGACY_MTK_AV_BLOB := true
-BOARD_GLOBAL_CFLAGS += -DMTK_HARDWARE -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL
-BOARD_GLOBAL_CPPFLAGS += -DMTK_HARDWARE
-
-# Framework without Sync
-TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
-
-# Enable dex-preoptimization to speed up first boot sequence
-WITH_DEXPREOPT := true
-DONT_DEXPREOPT_PREBUILTS := true
-
-# Use half res bootanimation to speed up first boot sequence
-TARGET_BOOTANIMATION_HALF_RES := true
-
 # Fonts
 EXTENDED_FONT_FOOTPRINT := true
 
 # System Properties
 TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 
-# Dual SIM
-SIM_COUNT := 2
-
-# Custom RIL
+# Custom RIL Class
 BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril/
 
 # Neon Flags

@@ -83,11 +83,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     DozeServices
 
-# Power
-PRODUCT_PACKAGES += \
-    power.default \
-    power.mt6582
-
 # Correct bootanimation size for the screen
 TARGET_SCREEN_HEIGHT := 854
 TARGET_SCREEN_WIDTH := 480
@@ -152,36 +147,4 @@ PRODUCT_SYSTEM_PROPERTY_BLACKLIST := \
     ro.product.name \
     ro.product.manufacturer \
     ro.product.model
-
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
-	ro.crypto.state=unencrypted \
-	ro.mount.fs=EXT4 \
-	ro.secure=1 \
-	ro.allow.mock.location=0 \
-	ro.debuggable=1 \
-	ro.zygote=zygote32 \
-	camera.disable_zsl_mode=1 \
-	dalvik.vm.dex2oat-Xms=64m \
-	dalvik.vm.dex2oat-Xmx=512m \
-	dalvik.vm.image-dex2oat-Xms=64m \
-	dalvik.vm.image-dex2oat-Xmx=64m \
-	ro.dalvik.vm.native.bridge=0 \
-	ro.hardware=sprout \
-	ro.telephony.ril_class=SproutRIL \
-        camera.disable_zsl_mode=1
-
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    pm.dexopt.first-boot=verify-at-runtime \
-    pm.dexopt.boot=verify-at-runtime \
-    pm.dexopt.install=interpret-only \
-    pm.dexopt.bg-dexopt=speed-profile \
-    pm.dexopt.ab-ota=speed-profile \
-    pm.dexopt.nsys-library=speed \
-    pm.dexopt.shared-apk=speed \
-    pm.dexopt.forced-dexopt=speed \
-    pm.dexopt.core-app=speed
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.dex2oat-filter=speed \
-    dalvik.vm.dex2oat-swap=false
 
