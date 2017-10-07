@@ -23,4 +23,9 @@ extern "C"{
         android::IMediaSource::ReadOptions *rop = static_cast<android::IMediaSource::ReadOptions *>(obj);
         rop->setSeekTo(time_us, mode);
     }
+
+    extern bool _ZNK7android11MediaSource11ReadOptions14getNonBlockingEv(void * obj) {
+        android::IMediaSource::ReadOptions *rop = static_cast<android::IMediaSource::ReadOptions *>(obj);
+        return rop->getNonBlocking();
+    }
 }
