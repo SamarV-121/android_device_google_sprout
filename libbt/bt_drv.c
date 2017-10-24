@@ -82,8 +82,9 @@ static int mtk_bt_op(bt_vendor_opcode_t opcode, void *param)
 	break;
 
       case BT_VND_OP_USERIAL_OPEN:
-	ret = init_uart(param);
-	LOG_DBG("BT_VND_OP_USERIAL_OPEN fd=%d\n", bt_fd);
+        LOG_DBG("BT_VND_OP_USERIAL_OPEN\n");
+        ((int*)param)[0] = init_uart();
+        ret = 1; // CMD/EVT/ACL-In/ACL-Out via the same fd
 	break;
 
       case BT_VND_OP_USERIAL_CLOSE:
