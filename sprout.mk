@@ -81,7 +81,7 @@ PRODUCT_PACKAGES += \
 
 # Doze
 PRODUCT_PACKAGES += \
-    DozeServices
+    Doze
 
 # Correct bootanimation size for the screen
 TARGET_SCREEN_HEIGHT := 854
