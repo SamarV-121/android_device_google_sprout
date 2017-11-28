@@ -39,9 +39,6 @@ ro.boot.selinux=disable
 # Disable dirty region for Mali
 debug.hwui.render_dirty_regions=false
 
-# Sprout Hardware
-ro.hardware=sprout
-
 # MediaTek Hardware
 ro.mediatek.chip_ver=S01
 ro.mediatek.version.release=ALPS.W10.24.p0
@@ -78,13 +75,10 @@ persist.radio.fd.counter=15
 persist.radio.fd.off.counter=5
 persist.radio.fd.r8.counter=15
 persist.radio.fd.off.r8.counter=5
-ro.telephony.ril_class=SproutRIL
-ro.telephony.ril.config=fakeiccid
 
 # Media
 media.stagefright.legacyencoder=true
 media.stagefright.less-secure=true
-camera.disable_zsl_mode=1
 
 # OEM props
 import /oem/oem.prop ro.product.name

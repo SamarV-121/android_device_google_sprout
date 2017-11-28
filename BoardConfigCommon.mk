@@ -75,6 +75,8 @@ WIFI_DRIVER_STATE_OFF := 0
 
 # MediaTek Support
 BOARD_USES_MTK_HARDWARE := true
+BOARD_HAS_MTK_HARDWARE := true
+MTK_HARDWARE := true
 
 # Enable Minikin text layout engine (will be the default soon)
 USE_MINIKIN := true
@@ -103,7 +105,8 @@ TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 USE_CAMERA_STUB := true
 
 # SELinux Policy
-BOARD_SEPOLICY_DIRS += device/google/sprout-common/sepolicy
+BOARD_SEPOLICY_DIRS += \
+    device/google/sprout-common/sepolicy
 
 # Seccomp Policy
 BOARD_SECCOMP_POLICY += device/google/sprout-common/seccomp
