@@ -37,6 +37,7 @@
 /dev/socket/agpsd3(/.*)?  u:object_r:agpsd_socket:s0
 /dev/socket/agpsd(/.*)?   u:object_r:agpsd_socket:s0
 /dev/socket/mnld(/.*)?    u:object_r:mnld_socket:s0
+/dev/socket/property_service(/.*)?  u:object_r:property_socket:s0
 
 # Sysfs nodes
 /sys/bus/platform/drivers/msensor/daemon2 	 u:object_r:sysfs_msensord_daemon_file:s0
@@ -50,6 +51,9 @@
 /sys/bus/platform/drivers/dev_info/dev_info      u:object_r:sysfs:s0
 /sys/bus/platform/drivers/gyroscope/rawdata      u:object_r:sysfs:s0
 /sys/kernel/ccci/version                         u:object_r:sysfs:s0
+/sys/devices/platform/mt-wifi/net/wlan0/statistics/rx_bytes   u:object_r:sysfs:s0
+/sys/kernel/debug/mali/gpu_memory                             u:object_r:debugfs:s0
+/sys/kernel/debug/ion/clients                                 u:object_r:debugfs:s0
 
 # Hardware nodes
 /dev/ttyC0                 u:object_r:gsm0710muxd_device:s0
@@ -94,8 +98,8 @@
 /dev/ccci_monitor          u:object_r:ccci_monitor_device:s0
 /dev/mtk-adc-cali          u:object_r:mtk_adc_cali_device:s0
 /dev/devmap                u:object_r:devmap_device:s0
-#/dev/__properties__/u:object_r:ccci_decrypt_state_prop:s0         u:object_r:ccci_decrypt_state_prop:s0 
-#/dev/__properties__/u:object_r:wcn_combo_chip_prop:s0             u:object_r:wcn_combo_chip_prop:s0
+/dev/__properties__/u:object_r:ccci_decrypt_state_prop:s0         u:object_r:ccci_decrypt_state_prop:s0 
+/dev/__properties__/u:object_r:wcn_combo_chip_prop:s0             u:object_r:wcn_combo_chip_prop:s0
 
 # Proc
 /proc/mtkcooler/1200   u:object_r:proc:s0
@@ -125,4 +129,5 @@
 /data/misc/sensor/.id          u:object_r:sensord_data_file:s0
 /data/misc/sensor/sensord.log  u:object_r:sensord_data_file:s0
 /data/misc/gps/EPO.DAT         u:object_r:system_data_file:s0
-/data/misc/sensor/.id(/.*)     u:object_r:system_data_file:s0
+/data/user_de/0/com.android.settings   u:object_r:system_app_data_file:s0
+

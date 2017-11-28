@@ -11,5 +11,4 @@ allow ccci_mdinit property_socket:sock_file { rw_file_perms };
 allow ccci_mdinit init:unix_stream_socket connectto;
 allow ccci_mdinit ctl_default_prop:property_service set;
 allow ccci_mdinit ctl_rildaemon_prop:property_service set;
-#allow ccci_mdinit ccci_decrypt_state_prop:file { open read getattr };
-
+allow ccci_mdinit ccci_decrypt_state_prop:file { open read getattr };

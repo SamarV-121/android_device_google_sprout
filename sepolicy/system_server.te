@@ -8,4 +8,7 @@ allow system_server mnld_data_file:sock_file { write create unlink setattr };
 allow system_server zygote:binder call;
 allow system_server mnld:unix_dgram_socket sendto;
 allow system_server debugfs:dir { read open };
+allow system_server wmtWifi_device:chr_file { write open };  
+allow system_server wifi_data_file:sock_file unlink;
+allow system_server unlabeled:file unlink;
 

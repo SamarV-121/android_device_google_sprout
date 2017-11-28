@@ -13,5 +13,7 @@ allow ccci_fsd sysfs_wake_lock:file { rw_file_perms };
 allow ccci_fsd nvram_data_file:file { unlink create rw_file_perms };
 allow ccci_fsd protect_f_data_file:dir { rw_dir_perms };
 allow ccci_fsd protect_s_data_file:dir { rw_dir_perms };
-allow ccci_fsd protect_f_data_file:file { rw_file_perms };
+allow ccci_fsd protect_f_data_file:file { rw_file_perms create };
 allow ccci_fsd protect_s_data_file:file { rw_file_perms };
+allow ccci_fsd sysfs:file { read open };
+

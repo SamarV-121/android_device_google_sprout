@@ -1,1 +1,1 @@
-allow wpa wifi_data_file:sock_file { unlink create setattr };
+allow wpa wifi_data_file:sock_file { unlink create setattr write };

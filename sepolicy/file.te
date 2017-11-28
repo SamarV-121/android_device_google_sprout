@@ -1,0 +1,2 @@
+type ccci_decrypt_state_prop, fs_type, dev_type, file_type;
+type wcn_combo_chip_prop, fs_type, dev_type, file_type;
