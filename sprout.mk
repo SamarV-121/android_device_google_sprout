@@ -77,7 +77,7 @@ PRODUCT_COPY_FILES += \
 
 # Symbols for Sprout
 PRODUCT_PACKAGES += \
-    libshims
+    libsprout
 
 # Doze
 PRODUCT_PACKAGES += \

@@ -10,7 +10,7 @@ on early-init
 on init
     mkdir /protect_f 0771 system system
     mkdir /protect_s 0771 system system
-    export LD_PRELOAD "/system/lib/libshims.so"
+    export LD_PRELOAD "/system/lib/libsprout.so"
 
     # Change ION driver permission
     chmod 0666 /dev/ion
