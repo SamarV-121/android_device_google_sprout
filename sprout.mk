@@ -148,6 +148,11 @@ PRODUCT_SYSTEM_PROPERTY_BLACKLIST := \
     ro.product.manufacturer \
     ro.product.model
 
+# ADB on boot
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.adb.secure=0 \
+    ro.secure=0
+
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
 	ro.crypto.state=unencrypted \
 	ro.mount.fs=EXT4 \
