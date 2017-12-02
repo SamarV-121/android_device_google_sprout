@@ -55,14 +55,14 @@ PRODUCT_COPY_FILES += \
 
 # Thermal
 PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/configs/thermal.conf:system/etc/.tp/thermal.conf \
-     $(LOCAL_PATH)/configs/.ht120.mtc:system/etc/.tp/.ht120.mtc \
+     $(LOCAL_PATH)/configs/thermal.conf:system/etc/.tp/thermal.conf
+     $(LOCAL_PATH)/configs/.ht120.mtc:system/etc/.tp/.ht120.mtc
      $(LOCAL_PATH)/configs/thermal.off.conf:system/etc/.tp/thermal.off.conf
-	
+
 # Keylayout
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/system/usr/keylayout/mtk-kpd.kl:system/usr/keylayout/mtk-kpd.kl \
-	
+
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 # Ramdisk
@@ -91,7 +91,7 @@ TARGET_SCREEN_WIDTH := 480
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/root/twrp.fstab:recovery/root/etc/twrp.fstab
 
-# Audio	
+# Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.usb.default \
@@ -131,7 +131,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     setup_fs \
     e2fsck \
-	
+
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
