@@ -56,7 +56,8 @@ TARGET_SCREEN_WIDTH := 480
 
 # Camera
 PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.4-impl-legacy
+    android.hardware.camera.provider@2.4-impl-legacy \
+    libcam.client
 	
 # Dalvik	
 PRODUCT_TAGS += dalvik.gc.type-precise
