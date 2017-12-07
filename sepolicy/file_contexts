@@ -28,7 +28,7 @@
 /dev/block/mmcblk0p15 u:object_r:cache_device:s0
 /dev/block/mmcblk0p16 u:object_r:userdata_device:s0
 /dev/block/mmcblk0p18 u:object_r:frp_block_device:s0
-/dev/block/zram0      u:object_r:swap_block_device:s0
+# /dev/block/zram0      u:object_r:swap_block_device:s0
 
 # Sockets
 /dev/socket/netdiag(/.*)? u:object_r:netdiag_socket:s0
@@ -98,8 +98,8 @@
 /dev/ccci_monitor          u:object_r:ccci_monitor_device:s0
 /dev/mtk-adc-cali          u:object_r:mtk_adc_cali_device:s0
 /dev/devmap                u:object_r:devmap_device:s0
-/dev/__properties__/u:object_r:ccci_decrypt_state_prop:s0         u:object_r:ccci_decrypt_state_prop:s0 
-/dev/__properties__/u:object_r:wcn_combo_chip_prop:s0             u:object_r:wcn_combo_chip_prop:s0
+# /dev/__properties__/u:object_r:ccci_decrypt_state_prop:s0         u:object_r:ccci_decrypt_state_prop:s0 
+# /dev/__properties__/u:object_r:wcn_combo_chip_prop:s0             u:object_r:wcn_combo_chip_prop:s0
 
 # Proc
 /proc/mtkcooler/1200   u:object_r:proc:s0
