@@ -82,3 +82,7 @@ persist.radio.fd.off.r8.counter=5
 media.stagefright.legacyencoder=true
 media.stagefright.less-secure=true
 
+# OEM props
+import /oem/oem.prop ro.product.name
+import /oem/oem.prop ro.product.manufacturer
+import /oem/oem.prop ro.product.model
