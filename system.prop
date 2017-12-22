@@ -2,7 +2,7 @@
 # system.prop for sprout
 #
 				  
-rild.libpath=/system/lib/mtk-ril.so
+rild.libpath=mtk-ril.so
 rild.libargs=-d /dev/ttyC0
 
 # LCD 
@@ -39,6 +39,9 @@ ro.boot.selinux=disable
 # Disable dirty region for Mali
 debug.hwui.render_dirty_regions=false
 
+# Rotation
+ro.sf.hwrotation=0
+
 # MediaTek Hardware
 ro.mediatek.chip_ver=S01
 ro.mediatek.version.release=ALPS.W10.24.p0
@@ -65,7 +68,6 @@ persist.mtk.wcn.combo.chipid=-1
 ril.specific.sm_cause=0
 bgw.current3gband=0
 ril.external.md=0
-ro.sf.hwrotation=0
 ril.current.share_modem=2
 ril.radiooff.poweroffMD=0
 ro.telephony.sim.count=2
@@ -80,7 +82,3 @@ persist.radio.fd.off.r8.counter=5
 media.stagefright.legacyencoder=true
 media.stagefright.less-secure=true
 
-# OEM props
-import /oem/oem.prop ro.product.name
-import /oem/oem.prop ro.product.manufacturer
-import /oem/oem.prop ro.product.model

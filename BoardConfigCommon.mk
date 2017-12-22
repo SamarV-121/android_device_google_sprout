@@ -24,6 +24,7 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 134217728
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USES_MKE2FS := true
 
 # Kernel Stuff
 TARGET_KERNEL_SOURCE := kernel/mediatek/sprout
@@ -109,6 +110,6 @@ BOARD_SEPOLICY_DIRS += \
     device/google/sprout-common/sepolicy
 
 # Seccomp Policy
-BOARD_SECCOMP_POLICY += device/google/sprout-common/seccomp
+# BOARD_SECCOMP_POLICY += device/google/sprout-common/seccomp
 
 

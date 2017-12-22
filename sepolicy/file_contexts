@@ -18,6 +18,7 @@
 /system/bin/mdlogger           u:object_r:mdlogger_exec:s0
 /system/bin/netdiag            u:object_r:netdiag_exec:s0
 /system/bin/meta_tst           u:object_r:meta_tst_exec:s0
+/system/bin/meizupshelper      u:object_r:meizupshelper_exec:s0
 
 # Block devices
 /dev/block/mmcblk0p1  u:object_r:nvram_device:s0
@@ -28,7 +29,7 @@
 /dev/block/mmcblk0p15 u:object_r:cache_device:s0
 /dev/block/mmcblk0p16 u:object_r:userdata_device:s0
 /dev/block/mmcblk0p18 u:object_r:frp_block_device:s0
-# /dev/block/zram0      u:object_r:swap_block_device:s0
+/dev/block/zram0      u:object_r:swap_block_device:s0
 
 # Sockets
 /dev/socket/netdiag(/.*)? u:object_r:netdiag_socket:s0
@@ -52,7 +53,7 @@
 /sys/bus/platform/drivers/gyroscope/rawdata      u:object_r:sysfs:s0
 /sys/kernel/ccci/version                         u:object_r:sysfs:s0
 /sys/devices/platform/mt-wifi/net/wlan0/statistics/rx_bytes   u:object_r:sysfs:s0
-/sys/kernel/debug/mali/gpu_memory                             u:object_r:debugfs:s0
+# /sys/kernel/debug/mali/gpu_memory                             u:object_r:debugfs:s0
 /sys/kernel/debug/ion/clients                                 u:object_r:debugfs:s0
 
 # Hardware nodes
@@ -128,6 +129,6 @@
 /data/cache/backup             u:object_r:cache_private_backup_file:s0
 /data/misc/sensor/.id          u:object_r:sensord_data_file:s0
 /data/misc/sensor/sensord.log  u:object_r:sensord_data_file:s0
-/data/misc/gps/EPO.DAT         u:object_r:system_data_file:s0
-/data/user_de/0/com.android.settings   u:object_r:system_app_data_file:s0
+# /data/misc/sensor/profile_calib_m      u:object_r:system_data_file:s0
+# /data/misc/gps/EPO.DAT         u:object_r:system_data_file:s0
 
