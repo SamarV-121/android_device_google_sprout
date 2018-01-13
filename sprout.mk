@@ -83,9 +83,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Doze
 
-PRODUCT_PACKAGES += \
-    meizupshelper
-
 # Correct bootanimation size for the screen
 TARGET_SCREEN_HEIGHT := 854
 TARGET_SCREEN_WIDTH := 480

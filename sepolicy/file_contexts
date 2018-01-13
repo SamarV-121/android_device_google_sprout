@@ -18,7 +18,6 @@
 /system/bin/mdlogger           u:object_r:mdlogger_exec:s0
 /system/bin/netdiag            u:object_r:netdiag_exec:s0
 /system/bin/meta_tst           u:object_r:meta_tst_exec:s0
-/system/bin/meizupshelper      u:object_r:meizupshelper_exec:s0
 
 # Block devices
 /dev/block/mmcblk0p1  u:object_r:nvram_device:s0
