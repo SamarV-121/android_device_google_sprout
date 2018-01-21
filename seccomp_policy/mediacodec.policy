@@ -1,2 +1,4 @@
 # device specific syscalls
 sysinfo: 1
+sched_getparam: 1
+pselect6: 1
