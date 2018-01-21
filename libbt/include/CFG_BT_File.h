@@ -35,84 +35,35 @@
  * any receiver's applicable license agreements with MediaTek Inc.
  */
 
-#include "bt_vendor_lib.h"
-#include "bt_mtk.h"
 
-//=============== I N T E R F A C E S =======================
+#ifndef _CFG_BT_FILE_H
+#define _CFG_BT_FILE_H
 
-int mtk_bt_init(const bt_vendor_callbacks_t* p_cb, UNUSED_ATTR unsigned char *local_bdaddr)
+
+/* The record structure of bt nvram file */
+typedef struct
 {
-    LOG_TRC();
-    set_callbacks(p_cb);
-    return 0;
-}
+    unsigned char addr[6];            /* BT address */
+    unsigned char Voice[2];           /* Voice setting for SCO connection */
+    unsigned char Codec[4];           /* PCM codec setting */
+    unsigned char Radio[6];           /* RF configuration */
+    unsigned char Sleep[7];           /* Sleep mode configuration */
+    unsigned char BtFTR[2];           /* Other feature setting */
+    unsigned char TxPWOffset[3];      /* TX power channel offset compensation */
+    unsigned char CoexAdjust[6];      /* BT/WIFI coexistence performance adjustment */
+    unsigned char Radio_ext[2];       /* RF configuration extended parameters */
+    unsigned char TxPWOffset_ext[4];  /* Tx power channel offset compensation with new range */
+    unsigned char Reserved1[2];       /* Reserved */
+    unsigned char Reserved2[4];       /* Reserved */
+    unsigned char Reserved3[8];       /* Reserved */
+    unsigned char Reserved4[8];       /* Reserved */
+} ap_nvram_btradio_struct, ap_nvram_btradio_mt6610_struct;
 
-int mtk_bt_op(bt_vendor_opcode_t opcode, void *param)
-{
-    int ret = 0;
 
-    switch(opcode)
-    {
-      case BT_VND_OP_POWER_CTRL:
-	LOG_DBG("BT_VND_OP_POWER_CTRL %d\n", *((int*)param));
-	/* DO NOTHING on combo chip */
-	break;
+/* The record size and number of bt nvram file */
+#define CFG_FILE_BT_ADDR_REC_SIZE    sizeof(ap_nvram_btradio_struct)
+#define CFG_FILE_BT_ADDR_REC_TOTAL   1
 
-      case BT_VND_OP_USERIAL_OPEN:
-	LOG_DBG("BT_VND_OP_USERIAL_OPEN\n");
+#endif
 
-	((int*)param)[0] = init_uart();
-	ret = 1; /* CMD/EVT/ACL-In/ACL-Out via the same fd */
-	break;
 
-      case BT_VND_OP_USERIAL_CLOSE:
-	LOG_DBG("BT_VND_OP_USERIAL_CLOSE\n");
-	close_uart();
-	break;
-
-      case BT_VND_OP_FW_CFG:
-	LOG_DBG("BT_VND_OP_FW_CFG\n");
-	ret = mtk_fw_cfg();
-	break;
-
-      case BT_VND_OP_GET_LPM_IDLE_TIMEOUT:
-	LOG_DBG("BT_VND_OP_GET_LPM_IDLE_TIMEOUT\n");
-	*((uint32_t*)param) = 5000; //ms
-	break;
-
-      case BT_VND_OP_LPM_SET_MODE:
-	LOG_DBG("BT_VND_OP_LPM_SET_MODE %d\n", *((uint8_t*)param));
-	break;
-
-      case BT_VND_OP_LPM_WAKE_SET_STATE:
-	LOG_DBG("BT_VND_OP_LPM_WAKE_SET_STATE\n");
-	break;
-
-      case BT_VND_OP_EPILOG:
-	LOG_DBG("BT_VND_OP_EPILOG\n");
-	ret = mtk_prepare_off();
-	break;
-
-      default:
-	LOG_DBG("Unknown operation %d\n", opcode);
-	ret = -1;
-	break;
-    }
-
-    return ret;
-}
-
-void mtk_bt_cleanup()
-{
-    LOG_TRC();
-    clean_resource();
-    clean_callbacks();
-    return;
-}
-
-const bt_vendor_interface_t BLUETOOTH_VENDOR_LIB_INTERFACE = {
-    sizeof(bt_vendor_interface_t),
-    mtk_bt_init,
-    mtk_bt_op,
-    mtk_bt_cleanup
-};

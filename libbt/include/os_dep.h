@@ -35,84 +35,57 @@
  * any receiver's applicable license agreements with MediaTek Inc.
  */
 
-#include "bt_vendor_lib.h"
-#include "bt_mtk.h"
+#ifndef _OS_DEP_H
+#define _OS_DEP_H
 
-//=============== I N T E R F A C E S =======================
+#include <string.h>
+#include <errno.h>
+#include <unistd.h>
+#include <stdbool.h>
 
-int mtk_bt_init(const bt_vendor_callbacks_t* p_cb, UNUSED_ATTR unsigned char *local_bdaddr)
-{
-    LOG_TRC();
-    set_callbacks(p_cb);
-    return 0;
-}
 
-int mtk_bt_op(bt_vendor_opcode_t opcode, void *param)
-{
-    int ret = 0;
+#ifndef FALSE
+#define FALSE    0
+#endif
+#ifndef TRUE
+#define TRUE     1
+#endif
+#ifndef BOOL
+#define BOOL     bool
+#endif
 
-    switch(opcode)
-    {
-      case BT_VND_OP_POWER_CTRL:
-	LOG_DBG("BT_VND_OP_POWER_CTRL %d\n", *((int*)param));
-	/* DO NOTHING on combo chip */
-	break;
+typedef unsigned char BYTE;
+typedef unsigned char UCHAR;
+typedef unsigned char UINT8;
+typedef unsigned short UINT16;
+typedef unsigned int UINT32;
+typedef unsigned long long UINT64;
+typedef unsigned char* PBYTE;
+typedef unsigned char* PUCHAR;
+typedef char INT8;
+typedef short INT16;
+typedef int INT32;
+typedef long long INT64;
+typedef void VOID;
+typedef void* PVOID;
 
-      case BT_VND_OP_USERIAL_OPEN:
-	LOG_DBG("BT_VND_OP_USERIAL_OPEN\n");
+#define UNUSED_ATTR __attribute__((unused))
 
-	((int*)param)[0] = init_uart();
-	ret = 1; /* CMD/EVT/ACL-In/ACL-Out via the same fd */
-	break;
+/* LOG_TAG must be defined before log.h */
+#ifdef  LOG_TAG
+#undef  LOG_TAG
+#endif
+#define LOG_TAG               "[BT]"
+#include <log/log.h>
 
-      case BT_VND_OP_USERIAL_CLOSE:
-	LOG_DBG("BT_VND_OP_USERIAL_CLOSE\n");
-	close_uart();
-	break;
-
-      case BT_VND_OP_FW_CFG:
-	LOG_DBG("BT_VND_OP_FW_CFG\n");
-	ret = mtk_fw_cfg();
-	break;
-
-      case BT_VND_OP_GET_LPM_IDLE_TIMEOUT:
-	LOG_DBG("BT_VND_OP_GET_LPM_IDLE_TIMEOUT\n");
-	*((uint32_t*)param) = 5000; //ms
-	break;
-
-      case BT_VND_OP_LPM_SET_MODE:
-	LOG_DBG("BT_VND_OP_LPM_SET_MODE %d\n", *((uint8_t*)param));
-	break;
-
-      case BT_VND_OP_LPM_WAKE_SET_STATE:
-	LOG_DBG("BT_VND_OP_LPM_WAKE_SET_STATE\n");
-	break;
-
-      case BT_VND_OP_EPILOG:
-	LOG_DBG("BT_VND_OP_EPILOG\n");
-	ret = mtk_prepare_off();
-	break;
-
-      default:
-	LOG_DBG("Unknown operation %d\n", opcode);
-	ret = -1;
-	break;
-    }
-
-    return ret;
-}
-
-void mtk_bt_cleanup()
-{
-    LOG_TRC();
-    clean_resource();
-    clean_callbacks();
-    return;
-}
-
-const bt_vendor_interface_t BLUETOOTH_VENDOR_LIB_INTERFACE = {
-    sizeof(bt_vendor_interface_t),
-    mtk_bt_init,
-    mtk_bt_op,
-    mtk_bt_cleanup
-};
+#define BT_DRIVER_DEBUG       1
+#define LOG_ERR(f, ...)       ALOGE("%s: " f, __FUNCTION__, ##__VA_ARGS__)
+#define LOG_WAN(f, ...)       ALOGW("%s: " f, __FUNCTION__, ##__VA_ARGS__)
+#if BT_DRIVER_DEBUG
+#define LOG_DBG(f, ...)       ALOGD("%s: " f,  __FUNCTION__, ##__VA_ARGS__)
+#define LOG_TRC(f)            ALOGW("%s #%d", __FUNCTION__, __LINE__)
+#else
+#define LOG_DBG(...)          ((void)0)
+#define LOG_TRC(f)            ((void)0)
+#endif
+#endif

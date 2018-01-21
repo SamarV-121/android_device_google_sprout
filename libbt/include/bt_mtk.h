@@ -35,84 +35,71 @@
  * any receiver's applicable license agreements with MediaTek Inc.
  */
 
+#ifndef _BT_MTK_H
+#define _BT_MTK_H
+
+#include "bt_hci_bdroid.h"
 #include "bt_vendor_lib.h"
-#include "bt_mtk.h"
+#include "CFG_BT_File.h"
+#include "os_dep.h"
 
-//=============== I N T E R F A C E S =======================
 
-int mtk_bt_init(const bt_vendor_callbacks_t* p_cb, UNUSED_ATTR unsigned char *local_bdaddr)
-{
-    LOG_TRC();
-    set_callbacks(p_cb);
-    return 0;
-}
+#define HCI_CMD_MAX_SIZE        251
 
-int mtk_bt_op(bt_vendor_opcode_t opcode, void *param)
-{
-    int ret = 0;
+/********************************************************************************
+** Macros to get and put bytes to and from a stream (Little Endian format).
+*/
+#define UINT16_TO_STREAM(p, u16) {*(p)++ = (UINT8)(u16); *(p)++ = (UINT8)((u16) >> 8);}
+#define STREAM_TO_UINT16(u16, p) {u16 = ((UINT16)(*(p)) + (((UINT16)(*((p) + 1))) << 8)); (p) += 2;}
 
-    switch(opcode)
-    {
-      case BT_VND_OP_POWER_CTRL:
-	LOG_DBG("BT_VND_OP_POWER_CTRL %d\n", *((int*)param));
-	/* DO NOTHING on combo chip */
-	break;
 
-      case BT_VND_OP_USERIAL_OPEN:
-	LOG_DBG("BT_VND_OP_USERIAL_OPEN\n");
+/********************************************************************************
+** Structure Definitions
+*/
+typedef enum {
+  CMD_SUCCESS,
+  CMD_FAIL,
+  CMD_PENDING,
+  CMD_TERMINATE,
+} HCI_CMD_STATUS_T;
 
-	((int*)param)[0] = init_uart();
-	ret = 1; /* CMD/EVT/ACL-In/ACL-Out via the same fd */
-	break;
+typedef union {
+  ap_nvram_btradio_struct fields;
+  unsigned char raw[sizeof(ap_nvram_btradio_struct)];
+} BT_NVRAM_DATA_T;
 
-      case BT_VND_OP_USERIAL_CLOSE:
-	LOG_DBG("BT_VND_OP_USERIAL_CLOSE\n");
-	close_uart();
-	break;
+typedef BOOL (*HCI_CMD_FUNC_T) (HC_BT_HDR *);
+typedef struct {
+  HCI_CMD_FUNC_T command_func;
+} HCI_SEQ_T;
 
-      case BT_VND_OP_FW_CFG:
-	LOG_DBG("BT_VND_OP_FW_CFG\n");
-	ret = mtk_fw_cfg();
-	break;
+typedef struct {
+  UINT32 chip_id;
+  BT_NVRAM_DATA_T bt_nvram;
+  HCI_SEQ_T *cur_script;
+} BT_INIT_VAR_T;
 
-      case BT_VND_OP_GET_LPM_IDLE_TIMEOUT:
-	LOG_DBG("BT_VND_OP_GET_LPM_IDLE_TIMEOUT\n");
-	*((uint32_t*)param) = 5000; //ms
-	break;
+/* Thread control block for Controller initialize */
+typedef struct {
+  pthread_t worker_thread;
+  pthread_mutex_t mutex;
+  pthread_mutexattr_t attr;
+  pthread_cond_t cond;
+  BOOL worker_thread_running;
+} BT_INIT_CB_T;
 
-      case BT_VND_OP_LPM_SET_MODE:
-	LOG_DBG("BT_VND_OP_LPM_SET_MODE %d\n", *((uint8_t*)param));
-	break;
 
-      case BT_VND_OP_LPM_WAKE_SET_STATE:
-	LOG_DBG("BT_VND_OP_LPM_WAKE_SET_STATE\n");
-	break;
+/********************************************************************************
+** Function Declaration
+*/
+void set_callbacks(const bt_vendor_callbacks_t* p_cb);
+void clean_callbacks(void);
+int init_uart(void);
+void close_uart(void);
+int mtk_fw_cfg(void);
+int mtk_prepare_off(void);
+int mtk_set_fw_assert(uint32_t reason);
+int mtk_set_psm_control(bool enable);
+void clean_resource(void);
 
-      case BT_VND_OP_EPILOG:
-	LOG_DBG("BT_VND_OP_EPILOG\n");
-	ret = mtk_prepare_off();
-	break;
-
-      default:
-	LOG_DBG("Unknown operation %d\n", opcode);
-	ret = -1;
-	break;
-    }
-
-    return ret;
-}
-
-void mtk_bt_cleanup()
-{
-    LOG_TRC();
-    clean_resource();
-    clean_callbacks();
-    return;
-}
-
-const bt_vendor_interface_t BLUETOOTH_VENDOR_LIB_INTERFACE = {
-    sizeof(bt_vendor_interface_t),
-    mtk_bt_init,
-    mtk_bt_op,
-    mtk_bt_cleanup
-};
+#endif

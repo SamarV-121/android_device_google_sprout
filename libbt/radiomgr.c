@@ -35,84 +35,72 @@
  * any receiver's applicable license agreements with MediaTek Inc.
  */
 
-#include "bt_vendor_lib.h"
+
+#include <stdlib.h>
+#include <pthread.h>
+
 #include "bt_mtk.h"
 
-//=============== I N T E R F A C E S =======================
 
-int mtk_bt_init(const bt_vendor_callbacks_t* p_cb, UNUSED_ATTR unsigned char *local_bdaddr)
+/**************************************************************************
+ *                  G L O B A L   V A R I A B L E S                       *
+***************************************************************************/
+
+extern BT_INIT_VAR_T btinit[1];
+extern BT_INIT_CB_T btinit_ctrl;
+
+/**************************************************************************
+ *                          F U N C T I O N S                             *
+***************************************************************************/
+
+extern VOID *GORM_FW_Init_Thread(VOID *ptr);
+extern VOID notify_thread_exit(VOID);
+
+
+BOOL BT_InitDevice(UINT32 chipId, PUCHAR pucNvRamData)
 {
-    LOG_TRC();
-    set_callbacks(p_cb);
-    return 0;
-}
+    LOG_DBG("BT_InitDevice\n");
 
-int mtk_bt_op(bt_vendor_opcode_t opcode, void *param)
-{
-    int ret = 0;
+    memset(btinit, 0, sizeof(BT_INIT_VAR_T));
+    btinit_ctrl.worker_thread_running = FALSE;
 
-    switch(opcode)
-    {
-      case BT_VND_OP_POWER_CTRL:
-	LOG_DBG("BT_VND_OP_POWER_CTRL %d\n", *((int*)param));
-	/* DO NOTHING on combo chip */
-	break;
+    btinit->chip_id = chipId;
+    /* Copy configuration data */
+    memcpy(btinit->bt_nvram.raw, pucNvRamData, sizeof(ap_nvram_btradio_struct));
 
-      case BT_VND_OP_USERIAL_OPEN:
-	LOG_DBG("BT_VND_OP_USERIAL_OPEN\n");
-
-	((int*)param)[0] = init_uart();
-	ret = 1; /* CMD/EVT/ACL-In/ACL-Out via the same fd */
-	break;
-
-      case BT_VND_OP_USERIAL_CLOSE:
-	LOG_DBG("BT_VND_OP_USERIAL_CLOSE\n");
-	close_uart();
-	break;
-
-      case BT_VND_OP_FW_CFG:
-	LOG_DBG("BT_VND_OP_FW_CFG\n");
-	ret = mtk_fw_cfg();
-	break;
-
-      case BT_VND_OP_GET_LPM_IDLE_TIMEOUT:
-	LOG_DBG("BT_VND_OP_GET_LPM_IDLE_TIMEOUT\n");
-	*((uint32_t*)param) = 5000; //ms
-	break;
-
-      case BT_VND_OP_LPM_SET_MODE:
-	LOG_DBG("BT_VND_OP_LPM_SET_MODE %d\n", *((uint8_t*)param));
-	break;
-
-      case BT_VND_OP_LPM_WAKE_SET_STATE:
-	LOG_DBG("BT_VND_OP_LPM_WAKE_SET_STATE\n");
-	break;
-
-      case BT_VND_OP_EPILOG:
-	LOG_DBG("BT_VND_OP_EPILOG\n");
-	ret = mtk_prepare_off();
-	break;
-
-      default:
-	LOG_DBG("Unknown operation %d\n", opcode);
-	ret = -1;
-	break;
+    if (pthread_create(&btinit_ctrl.worker_thread, NULL, \
+          GORM_FW_Init_Thread, NULL) != 0) {
+        LOG_ERR("Create FW init thread fails\n");
+        return FALSE;
     }
-
-    return ret;
+    else {
+        btinit_ctrl.worker_thread_running = TRUE;
+        return TRUE;
+    }
 }
 
-void mtk_bt_cleanup()
+BOOL BT_DeinitDevice(VOID)
 {
-    LOG_TRC();
-    clean_resource();
-    clean_callbacks();
+    LOG_DBG("BT_DeinitDevice\n");
+    /* Do nothing on combo chip */
+    return TRUE;
+}
+
+VOID BT_Cleanup(VOID)
+{
+    /* Cancel any remaining running thread */
+    if (btinit_ctrl.worker_thread_running)
+        notify_thread_exit();
+
+    /*
+     * Since Android M, pthread_exit only frees mapped space (including pthread_internal_t and thread stack)
+     * for detached thread; for joinable thread, it is left for the pthread_join caller to clean up.
+     *
+     * The thread type is specified when thread create, default joinable for new thread if not set attribute with
+     * PTHREAD_CREATE_DETATCHED, or not call pthread_detach before thread exit.
+     */
+    /* Always do pthread_join no matter the target thread has exited or not */
+    pthread_join(btinit_ctrl.worker_thread, NULL);
+
     return;
 }
-
-const bt_vendor_interface_t BLUETOOTH_VENDOR_LIB_INTERFACE = {
-    sizeof(bt_vendor_interface_t),
-    mtk_bt_init,
-    mtk_bt_op,
-    mtk_bt_cleanup
-};
