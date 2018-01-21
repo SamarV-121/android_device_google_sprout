@@ -16,11 +16,32 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := \
-    sprout_ril.cpp \
-    sprout_wpa_supplicant.cpp
+    sprout_ril.cpp
 
 LOCAL_SHARED_LIBRARIES := libbinder
-LOCAL_MODULE := libsprout_shims
+LOCAL_MODULE := libsprout_ril_shim
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES := \
+    sprout_bionic.cpp
+
+LOCAL_SHARED_LIBRARIES := libbinder
+LOCAL_MODULE := libsprout_omx_shim
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES := \
+    sprout_xlog.c
+
+LOCAL_SHARED_LIBRARIES := liblog
+LOCAL_MODULE := libsprout_log_shim
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_SHARED_LIBRARY)

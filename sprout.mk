@@ -119,6 +119,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     wpa_supplicant.conf \
     wificond
 
+PRODUCT_PACKAGES += \
+    libsprout_ril_shim \
+    libsprout_omx_shim \
+    libsprout_log_shim
+
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     camera.disable_zsl_mode=1 \
     ro.adb.secure=0 \
