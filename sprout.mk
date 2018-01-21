@@ -124,6 +124,10 @@ PRODUCT_PACKAGES += \
     libsprout_omx_shim \
     libsprout_log_shim
 
+PRODUCT_PACKAGES += \
+    libion \
+    libcurl
+
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     camera.disable_zsl_mode=1 \
     ro.adb.secure=0 \
