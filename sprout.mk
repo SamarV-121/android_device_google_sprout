@@ -143,7 +143,8 @@ PRODUCT_SYSTEM_PROPERTY_BLACKLIST := \
 
 # Bluetooth
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.0-impl
+    android.hardware.bluetooth@1.0-impl \
+    android.hardware.bluetooth@1.0-service
 
 PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl \
@@ -168,15 +169,18 @@ PRODUCT_PACKAGES += \
 
 # Vibrator
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.0-impl
+    android.hardware.vibrator@1.0-impl \
+    android.hardware.vibrator@1.0-service
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-impl
+    android.hardware.power@1.0-impl \
+    android.hardware.power@1.0-service
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-impl
+    android.hardware.light@2.0-impl \
+    android.hardware.light@2.0-service
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -185,7 +189,8 @@ PRODUCT_PACKAGES += \
 
 # Memtrack
 PRODUCT_PACKAGES += \
-    android.hardware.memtrack@1.0-impl
+    android.hardware.memtrack@1.0-impl \
+    android.hardware.memtrack@1.0-service
 
 # Keymaster
 PRODUCT_PACKAGES += \
