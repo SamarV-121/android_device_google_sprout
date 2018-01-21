@@ -8,7 +8,7 @@ on early-init
     setprop ro.mtk.hardware mt6582
 
 on init
-    export LD_PRELOAD "/system/lib/libsprout_shims.so"
+    export LD_SHIM_LIBS "/system/lib/hw/hwcomposer.mt6582.so|libsprout_log_shim.so:/system/lib/libMtkOmxVdec.so|libsprout_omx_shim.so:/system/lib/librilmtk.so|libsprout_ril_shim.so"
     mkdir /protect_f 0771 system system
     mkdir /protect_s 0771 system system
 
@@ -94,7 +94,7 @@ on post-fs
 
 on post-fs-data
     # create basic filesystem structure
-    mkdir /data/nvram 0771 root system
+    mkdir /data/nvram 0771 system system
     mkdir /data/nvram/bt 2771 bluetooth bluetooth
     mkdir /data/nvram/media 0771 media audio
     mkdir /data/misc/touchpanel 0755 root system
@@ -203,11 +203,13 @@ on post-fs-data
     chmod 0660 /sys/class/misc/m_acc_misc/accbatch
     chmod 0660 /sys/class/misc/m_acc_misc/accflush
     chmod 0660 /sys/class/misc/m_acc_misc/smactive
+    chmod 0660 /sys/class/misc/m_acc_misc/accdevnum
     chown system system /sys/class/misc/m_acc_misc/accenablenodata
     chown system system /sys/class/misc/m_acc_misc/accactive
     chown system system /sys/class/misc/m_acc_misc/accdelay
     chown system system /sys/class/misc/m_acc_misc/accbatch
     chown system system /sys/class/misc/m_acc_misc/accflush
+    chown system system /sys/class/misc/m_acc_misc/accdevnum
     chown system system /sys/class/misc/m_acc_misc/smactive
     chmod 0660 /sys/class/misc/m_mag_misc/magactive
     chmod 0660 /sys/class/misc/m_mag_misc/magdelay
@@ -335,7 +337,7 @@ on post-fs-data
     chown root diag /sys/bus/platform/drivers/eint/current_eint
 
     # for ppp options file
-    mkdir /data/misc/ppp 0770 bluetooth net_bt
+    mkdir /data/misc/ppp 0770 bluetooth bluetooth
 
     # Android SEC related device nodes
     chmod 0660 /dev/sec
@@ -352,7 +354,7 @@ on post-fs-data
     chmod 0660 /dev/ttyGS2
 
     #Use uinput's default permission
-    chown system net_bt_admin /dev/uinput
+    chown system bluetooth /dev/uinput
 
     #TV-out
     chmod 0664 /dev/TV-out
@@ -439,6 +441,8 @@ on post-fs-data
 #/dev/ttyMT2 for Connectivity BT/FM/GPS usage
     chmod 0660 /dev/ttyMT2
     chown system system /dev/ttyMT2
+    chown bluetooth bluetooth /dev/stpbt
+	chown system system /dev/block/mmcblk0p2
 
 # GPS
     chown gps gps /sys/devices/virtual/gpsdrv/gps/pwrctl
@@ -452,6 +456,7 @@ on post-fs-data
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/wpa_supplicant 0770 wifi wifi
     chown wifi wifi /data/misc/wifi
+    chown wifi wifi /dev/wmtWifi
 #
 # Connectivity related device nodes & configuration (end)
 #
@@ -665,7 +670,7 @@ service rmmod rmmod
 
 #remove -puse_p2p_group_interface=1, our driver doesnot support this feature
 #
-service p2p_supplicant /system/bin/wpa_supplicant \
+service p2p_supplicant /system/vendor/bin/hw/wpa_supplicant \
 	-iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
 	-I/system/etc/wifi/wpa_supplicant_overlay.conf -N \
 	-ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf -e/data/misc/wifi/entropy.bin \
@@ -680,7 +685,7 @@ service p2p_supplicant /system/bin/wpa_supplicant \
     disabled
     oneshot
 
-service wpa_supplicant /system/bin/wpa_supplicant \
+service wpa_supplicant /system/vendor/bin/hw/wpa_supplicant \
 	-iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf -e/data/misc/wifi/entropy.bin \
 	-I/system/etc/wifi/wpa_supplicant_overlay.conf \
 	-O/data/misc/wifi/sockets -g@android:wpa_wlan0
@@ -748,7 +753,7 @@ service bluetoothd /system/bin/bluetoothd -n
     socket dbus_bluetooth stream 660 bluetooth bluetooth
     # init.rc does not yet support applying capabilities, so run as root and
     # let bluetoothd drop uid to bluetooth with the right linux capabilities
-    group bluetooth net_bt_admin misc
+    group bluetooth misc
     disabled
 
 #
