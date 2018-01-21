@@ -38,6 +38,7 @@
  * 2017/9/23: handle only mtk unsol commands now	by: daniel_hk
  * 2017/9/23: use custom spn list to match plmn		by: daniel_hk
  * 2017/9/23: fix newSmsInd for SMS not received	by: daniel_hk
+ * 2018/1/13: fix convertRilCellInfoListToHal		by: daniel_hk
  */
 
 #define LOG_TAG "RILC"
@@ -7793,24 +7794,30 @@ int radio::voiceRadioTechChangedInd(int slotId,
 }
 
 void convertRilCellInfoListToHal(void *response, size_t responseLen, hidl_vec<CellInfo>& records) {
-// TODO:**** check for the version and action accordingly
-#ifdef MTK_HARDWARE
-    int num = responseLen / sizeof(RIL_CellInfo);
-#else
     int num = responseLen / sizeof(RIL_CellInfo_v12);
-#endif
     records.resize(num);
+#if VDBG
+    RLOGD("convertRilCellInfoListToHal: responseLen=%d, num=%d", (int)responseLen, num);
+#endif
 
 #ifdef MTK_HARDWARE
-    RIL_CellInfo *rillCellInfo = (RIL_CellInfo *) response;
+    // response is an array of RIL_CellInfo*
+    RIL_CellInfo **rilCellInfohd = (RIL_CellInfo **) response;
 #else
-    RIL_CellInfo_v12 *rillCellInfo = (RIL_CellInfo_v12 *) response;
+    RIL_CellInfo_v12 *rilCellInfo = (RIL_CellInfo_v12 *) response;
 #endif
     for (int i = 0; i < num; i++) {
-	records[i].cellInfoType = (CellInfoType) rillCellInfo->cellInfoType;
-	records[i].registered = rillCellInfo->registered;
-	records[i].timeStampType = (TimeStampType) rillCellInfo->timeStampType;
-	records[i].timeStamp = rillCellInfo->timeStamp;
+#ifdef MTK_HARDWARE
+	RIL_CellInfo *rilCellInfo = rilCellInfohd[i];
+#endif
+	records[i].celInfoType = (CellInfoType) rilCellInfo->cellInfoType;
+#if VDBG
+    RLOGD("rilCellInfo->cellInfoType=%d records[%d].cellInfoType=%d",
+	(int)rilCellInfo->cellInfoType, i, (int)records[i].cellInfoType);
+#endif
+	records[i].registered = rilCellInfo->registered;
+	records[i].timeStampType = (TimeStampType) rilCellInfo->timeStampType;
+	records[i].timeStamp = rilCellInfo->timeStamp;
 	// All vectors should be size 0 except one which will be size 1. Set everything to
 	// size 0 initially.
 	records[i].gsm.resize(0);
@@ -7818,28 +7825,30 @@ void convertRilCellInfoListToHal(void *response, size_t responseLen, hidl_vec<Ce
 	records[i].cdma.resize(0);
 	records[i].lte.resize(0);
 	records[i].tdscdma.resize(0);
-	switch(rillCellInfo->cellInfoType) {
+	switch(rilCellInfo->cellInfoType) {
 	    case RIL_CELL_INFO_TYPE_GSM: {
 		records[i].gsm.resize(1);
 		CellInfoGsm *cellInfoGsm = &records[i].gsm[0];
 		cellInfoGsm->cellIdentityGsm.mcc =
-			std::to_string(rillCellInfo->CellInfo.gsm.cellIdentityGsm.mcc);
+			std::to_string(rilCellInfo->CellInfo.gsm.cellIdentityGsm.mcc);
 		cellInfoGsm->cellIdentityGsm.mnc =
-			std::to_string(rillCellInfo->CellInfo.gsm.cellIdentityGsm.mnc);
+			std::to_string(rilCellInfo->CellInfo.gsm.cellIdentityGsm.mnc);
 		cellInfoGsm->cellIdentityGsm.lac =
-			rillCellInfo->CellInfo.gsm.cellIdentityGsm.lac;
+			rilCellInfo->CellInfo.gsm.cellIdentityGsm.lac;
 		cellInfoGsm->cellIdentityGsm.cid =
-			rillCellInfo->CellInfo.gsm.cellIdentityGsm.cid;
-//		cellInfoGsm->cellIdentityGsm.arfcn =
-//			rillCellInfo->CellInfo.gsm.cellIdentityGsm.arfcn;
-//		cellInfoGsm->cellIdentityGsm.bsic =
-//			rillCellInfo->CellInfo.gsm.cellIdentityGsm.bsic;
+			rilCellInfo->CellInfo.gsm.cellIdentityGsm.cid;
+#ifndef MTK_HARDWARE
+		cellInfoGsm->cellIdentityGsm.arfcn =
+			rilCellInfo->CellInfo.gsm.cellIdentityGsm.arfcn;
+		cellInfoGsm->cellIdentityGsm.bsic =
+			rilCellInfo->CellInfo.gsm.cellIdentityGsm.bsic;
+		cellInfoGsm->signalStrengthGsm.timingAdvance =
+			rilCellInfo->CellInfo.gsm.signalStrengthGsm.timingAdvance;
+#endif
 		cellInfoGsm->signalStrengthGsm.signalStrength =
-			rillCellInfo->CellInfo.gsm.signalStrengthGsm.signalStrength;
+			rilCellInfo->CellInfo.gsm.signalStrengthGsm.signalStrength;
 		cellInfoGsm->signalStrengthGsm.bitErrorRate =
-			rillCellInfo->CellInfo.gsm.signalStrengthGsm.bitErrorRate;
-//		cellInfoGsm->signalStrengthGsm.timingAdvance =
-//			rillCellInfo->CellInfo.gsm.signalStrengthGsm.timingAdvance;
+			rilCellInfo->CellInfo.gsm.signalStrengthGsm.bitErrorRate;
 		break;
 	    }
 
@@ -7847,21 +7856,23 @@ void convertRilCellInfoListToHal(void *response, size_t responseLen, hidl_vec<Ce
 		records[i].wcdma.resize(1);
 		CellInfoWcdma *cellInfoWcdma = &records[i].wcdma[0];
 		cellInfoWcdma->cellIdentityWcdma.mcc =
-			std::to_string(rillCellInfo->CellInfo.wcdma.cellIdentityWcdma.mcc);
+			std::to_string(rilCellInfo->CellInfo.wcdma.cellIdentityWcdma.mcc);
 		cellInfoWcdma->cellIdentityWcdma.mnc =
-			std::to_string(rillCellInfo->CellInfo.wcdma.cellIdentityWcdma.mnc);
+			std::to_string(rilCellInfo->CellInfo.wcdma.cellIdentityWcdma.mnc);
 		cellInfoWcdma->cellIdentityWcdma.lac =
-			rillCellInfo->CellInfo.wcdma.cellIdentityWcdma.lac;
+			rilCellInfo->CellInfo.wcdma.cellIdentityWcdma.lac;
 		cellInfoWcdma->cellIdentityWcdma.cid =
-			rillCellInfo->CellInfo.wcdma.cellIdentityWcdma.cid;
+			rilCellInfo->CellInfo.wcdma.cellIdentityWcdma.cid;
 		cellInfoWcdma->cellIdentityWcdma.psc =
-			rillCellInfo->CellInfo.wcdma.cellIdentityWcdma.psc;
-//		cellInfoWcdma->cellIdentityWcdma.uarfcn =
-//			rillCellInfo->CellInfo.wcdma.cellIdentityWcdma.uarfcn;
+			rilCellInfo->CellInfo.wcdma.cellIdentityWcdma.psc;
+#ifndef MTK_HARDWARE
+		cellInfoWcdma->cellIdentityWcdma.uarfcn =
+			rilCellInfo->CellInfo.wcdma.cellIdentityWcdma.uarfcn;
+#endif
 		cellInfoWcdma->signalStrengthWcdma.signalStrength =
-			rillCellInfo->CellInfo.wcdma.signalStrengthWcdma.signalStrength;
+			rilCellInfo->CellInfo.wcdma.signalStrengthWcdma.signalStrength;
 		cellInfoWcdma->signalStrengthWcdma.bitErrorRate =
-			rillCellInfo->CellInfo.wcdma.signalStrengthWcdma.bitErrorRate;
+			rilCellInfo->CellInfo.wcdma.signalStrengthWcdma.bitErrorRate;
 		break;
 	    }
 
@@ -7869,25 +7880,25 @@ void convertRilCellInfoListToHal(void *response, size_t responseLen, hidl_vec<Ce
 		records[i].cdma.resize(1);
 		CellInfoCdma *cellInfoCdma = &records[i].cdma[0];
 		cellInfoCdma->cellIdentityCdma.networkId =
-			rillCellInfo->CellInfo.cdma.cellIdentityCdma.networkId;
+			rilCellInfo->CellInfo.cdma.cellIdentityCdma.networkId;
 		cellInfoCdma->cellIdentityCdma.systemId =
-			rillCellInfo->CellInfo.cdma.cellIdentityCdma.systemId;
+			rilCellInfo->CellInfo.cdma.cellIdentityCdma.systemId;
 		cellInfoCdma->cellIdentityCdma.baseStationId =
-			rillCellInfo->CellInfo.cdma.cellIdentityCdma.basestationId;
+			rilCellInfo->CellInfo.cdma.cellIdentityCdma.basestationId;
 		cellInfoCdma->cellIdentityCdma.longitude =
-			rillCellInfo->CellInfo.cdma.cellIdentityCdma.longitude;
+			rilCellInfo->CellInfo.cdma.cellIdentityCdma.longitude;
 		cellInfoCdma->cellIdentityCdma.latitude =
-			rillCellInfo->CellInfo.cdma.cellIdentityCdma.latitude;
+			rilCellInfo->CellInfo.cdma.cellIdentityCdma.latitude;
 		cellInfoCdma->signalStrengthCdma.dbm =
-			rillCellInfo->CellInfo.cdma.signalStrengthCdma.dbm;
+			rilCellInfo->CellInfo.cdma.signalStrengthCdma.dbm;
 		cellInfoCdma->signalStrengthCdma.ecio =
-			rillCellInfo->CellInfo.cdma.signalStrengthCdma.ecio;
+			rilCellInfo->CellInfo.cdma.signalStrengthCdma.ecio;
 		cellInfoCdma->signalStrengthEvdo.dbm =
-			rillCellInfo->CellInfo.cdma.signalStrengthEvdo.dbm;
+			rilCellInfo->CellInfo.cdma.signalStrengthEvdo.dbm;
 		cellInfoCdma->signalStrengthEvdo.ecio =
-			rillCellInfo->CellInfo.cdma.signalStrengthEvdo.ecio;
+			rilCellInfo->CellInfo.cdma.signalStrengthEvdo.ecio;
 		cellInfoCdma->signalStrengthEvdo.signalNoiseRatio =
-			rillCellInfo->CellInfo.cdma.signalStrengthEvdo.signalNoiseRatio;
+			rilCellInfo->CellInfo.cdma.signalStrengthEvdo.signalNoiseRatio;
 		break;
 	    }
 
@@ -7895,29 +7906,31 @@ void convertRilCellInfoListToHal(void *response, size_t responseLen, hidl_vec<Ce
 		records[i].lte.resize(1);
 		CellInfoLte *cellInfoLte = &records[i].lte[0];
 		cellInfoLte->cellIdentityLte.mcc =
-			std::to_string(rillCellInfo->CellInfo.lte.cellIdentityLte.mcc);
+			std::to_string(rilCellInfo->CellInfo.lte.cellIdentityLte.mcc);
 		cellInfoLte->cellIdentityLte.mnc =
-			std::to_string(rillCellInfo->CellInfo.lte.cellIdentityLte.mnc);
+			std::to_string(rilCellInfo->CellInfo.lte.cellIdentityLte.mnc);
 		cellInfoLte->cellIdentityLte.ci =
-			rillCellInfo->CellInfo.lte.cellIdentityLte.ci;
+			rilCellInfo->CellInfo.lte.cellIdentityLte.ci;
 		cellInfoLte->cellIdentityLte.pci =
-			rillCellInfo->CellInfo.lte.cellIdentityLte.pci;
+			rilCellInfo->CellInfo.lte.cellIdentityLte.pci;
 		cellInfoLte->cellIdentityLte.tac =
-			rillCellInfo->CellInfo.lte.cellIdentityLte.tac;
-//		cellInfoLte->cellIdentityLte.earfcn =
-//			rillCellInfo->CellInfo.lte.cellIdentityLte.earfcn;
+			rilCellInfo->CellInfo.lte.cellIdentityLte.tac;
+#ifndef MTK_HARDWARE
+		cellInfoLte->cellIdentityLte.earfcn =
+			rilCellInfo->CellInfo.lte.cellIdentityLte.earfcn;
+		cellInfoLte->signalStrengthLte.timingAdvance =
+			rilCellInfo->CellInfo.lte.signalStrengthLte.timingAdvance;
+#endif
 		cellInfoLte->signalStrengthLte.signalStrength =
-			rillCellInfo->CellInfo.lte.signalStrengthLte.signalStrength;
+			rilCellInfo->CellInfo.lte.signalStrengthLte.signalStrength;
 		cellInfoLte->signalStrengthLte.rsrp =
-			rillCellInfo->CellInfo.lte.signalStrengthLte.rsrp;
+			rilCellInfo->CellInfo.lte.signalStrengthLte.rsrp;
 		cellInfoLte->signalStrengthLte.rsrq =
-			rillCellInfo->CellInfo.lte.signalStrengthLte.rsrq;
+			rilCellInfo->CellInfo.lte.signalStrengthLte.rsrq;
 		cellInfoLte->signalStrengthLte.rssnr =
-			rillCellInfo->CellInfo.lte.signalStrengthLte.rssnr;
+			rilCellInfo->CellInfo.lte.signalStrengthLte.rssnr;
 		cellInfoLte->signalStrengthLte.cqi =
-			rillCellInfo->CellInfo.lte.signalStrengthLte.cqi;
-//		cellInfoLte->signalStrengthLte.timingAdvance =
-//			rillCellInfo->CellInfo.lte.signalStrengthLte.timingAdvance;
+			rilCellInfo->CellInfo.lte.signalStrengthLte.cqi;
 		break;
 	    }
 
@@ -7925,24 +7938,26 @@ void convertRilCellInfoListToHal(void *response, size_t responseLen, hidl_vec<Ce
 		records[i].tdscdma.resize(1);
 		CellInfoTdscdma *cellInfoTdscdma = &records[i].tdscdma[0];
 		cellInfoTdscdma->cellIdentityTdscdma.mcc =
-			std::to_string(rillCellInfo->CellInfo.tdscdma.cellIdentityTdscdma.mcc);
+			std::to_string(rilCellInfo->CellInfo.tdscdma.cellIdentityTdscdma.mcc);
 		cellInfoTdscdma->cellIdentityTdscdma.mnc =
-			std::to_string(rillCellInfo->CellInfo.tdscdma.cellIdentityTdscdma.mnc);
+			std::to_string(rilCellInfo->CellInfo.tdscdma.cellIdentityTdscdma.mnc);
 		cellInfoTdscdma->cellIdentityTdscdma.lac =
-			rillCellInfo->CellInfo.tdscdma.cellIdentityTdscdma.lac;
+			rilCellInfo->CellInfo.tdscdma.cellIdentityTdscdma.lac;
 		cellInfoTdscdma->cellIdentityTdscdma.cid =
-			rillCellInfo->CellInfo.tdscdma.cellIdentityTdscdma.cid;
+			rilCellInfo->CellInfo.tdscdma.cellIdentityTdscdma.cid;
 		cellInfoTdscdma->cellIdentityTdscdma.cpid =
-			rillCellInfo->CellInfo.tdscdma.cellIdentityTdscdma.cpid;
+			rilCellInfo->CellInfo.tdscdma.cellIdentityTdscdma.cpid;
 		cellInfoTdscdma->signalStrengthTdscdma.rscp =
-			rillCellInfo->CellInfo.tdscdma.signalStrengthTdscdma.rscp;
+			rilCellInfo->CellInfo.tdscdma.signalStrengthTdscdma.rscp;
 		break;
 	    }
 	    default: {
 		break;
 	    }
 	}
-	rillCellInfo += 1;
+#ifndef MTK_HARDWARE
+	rilCellInfo += 1;
+#endif
     }
 }
 
