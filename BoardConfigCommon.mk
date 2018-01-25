@@ -84,6 +84,9 @@ BOARD_USES_MTK_HARDWARE := true
 BOARD_HAS_MTK_HARDWARE := true
 MTK_HARDWARE := true
 
+# Symbols for Sprout
+TARGET_LDPRELOAD += libsprout.so
+
 # Enable Minikin text layout engine (will be the default soon)
 USE_MINIKIN := true
 
