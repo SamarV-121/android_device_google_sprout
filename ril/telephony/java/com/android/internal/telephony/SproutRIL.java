@@ -17,16 +17,20 @@
 package com.android.internal.telephony;
 
 import static com.android.internal.telephony.RILConstants.*;
-
-import com.android.internal.telephony.uicc.IccRefreshResponse;
 import android.content.Context;
 import android.os.AsyncResult;
 import android.os.Message;
 import android.os.Parcel;
 import android.telephony.Rlog;
 
+/*
+ * Custom wrapper for MTK requests
+ *
+ * {@hide}
+ */
+ 
 public class SproutRIL extends RIL implements CommandsInterface {
-
+    // Custom States
     static final int RIL_REQUEST_DUAL_SIM_MODE_SWITCH = 2012;
     static final int RIL_REQUEST_SET_GPRS_CONNECT_TYPE = 2016;
     static final int RIL_REQUEST_SET_GPRS_TRANSFER_TYPE = 2017;
@@ -64,7 +68,6 @@ public class SproutRIL extends RIL implements CommandsInterface {
     static final int RIL_UNSOL_STK_EVDL_CALL = 3031;
 
     private boolean dataAllowed = false;
-    private boolean setPreferredNetworkTypeSeen = false;
     private String voiceRegState = "0";
     private String voiceDataTech = "0";
 
@@ -186,7 +189,7 @@ public class SproutRIL extends RIL implements CommandsInterface {
     protected void
     processUnsolicited (Parcel p, int type) {
         Object ret;
-        int dataPosition = p.dataPosition();
+        int dataPosition = p.dataPosition(); // save off position within the Parcel
         int response = p.readInt();
 
         switch(response) {
@@ -200,7 +203,9 @@ public class SproutRIL extends RIL implements CommandsInterface {
             case RIL_UNSOL_SMS_READY_NOTIFICATION: ret = responseVoid(p); break;
             case RIL_UNSOL_RESPONSE_RADIO_STATE_CHANGED: ret =  responseVoid(p); break;
             default:
+                // Rewind the Parcel
                 p.setDataPosition(dataPosition);
+                // Forward responses that we are not overriding to the super class
                 super.processUnsolicited(p, type);
                 return;
         }
@@ -245,7 +250,6 @@ public class SproutRIL extends RIL implements CommandsInterface {
 
         if (rewindAndReplace) {
             Rlog.w(RILJ_LOG_TAG, "Rewriting MTK unsolicited response to " + newResponseCode);
-
             // Rewrite
             p.setDataPosition(dataPosition);
             p.writeInt(newResponseCode);
@@ -282,27 +286,14 @@ public class SproutRIL extends RIL implements CommandsInterface {
 
     // Override setupDataCall as the MTK RIL needs 8th param CID (hardwired to 1?)
     @Override
-    protected Object
-    responseSimRefresh(Parcel p) {
-        IccRefreshResponse response = new IccRefreshResponse();
-
-        response.refreshResult = p.readInt();
-        String rawefId = p.readString();
-        response.efId   = rawefId == null ? 0 : Integer.parseInt(rawefId);
-        response.aid = p.readString();
-
-        return response;
-    }
-
-    @Override
     public void
     setupDataCall(int radioTechnology, int profile, String apn,
             String user, String password, int authType, String protocol,
             Message result) {
+        RILRequest rr
+                = RILRequest.obtain(RIL_REQUEST_SETUP_DATA_CALL, result);
 
-        RILRequest rr = RILRequest.obtain(RIL_REQUEST_SETUP_DATA_CALL, result);
-
-        rr.mParcel.writeInt(8);
+        rr.mParcel.writeInt(8); //bumped by one
 
         rr.mParcel.writeString(Integer.toString(radioTechnology + 2));
         rr.mParcel.writeString(Integer.toString(profile));
@@ -375,28 +366,4 @@ public class SproutRIL extends RIL implements CommandsInterface {
         }
         return failCause;
     }
-
-    @Override
-    public void setPreferredNetworkType(int networkType , Message response) {
-        riljLog("setPreferredNetworkType: " + networkType);
-
-        if (!setPreferredNetworkTypeSeen) {
-            setPreferredNetworkTypeSeen = true;
-        }
-
-        super.setPreferredNetworkType(networkType, response);
-    }
-	
-	
-	    @Override
-    public void
-    iccIOForApp (int command, int fileid, String path, int p1, int p2, int p3,
-            String data, String pin2, String aid, Message result) {
-        if (command == 0xc0 && p3 == 0) {
-            Rlog.i("SproutRIL", "Override the size for the COMMAND_GET_RESPONSE 0 => 15");
-            p3 = 15;
-        }
-        super.iccIOForApp(command, fileid, path, p1, p2, p3, data, pin2, aid, result);
-    }
-
 }
