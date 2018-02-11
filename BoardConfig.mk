@@ -1,5 +1,8 @@
 LOCAL_PATH := device/google/sprout
 
+# Headers
+TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
+
 # Platform
 TARGET_BOARD_PLATFORM := mt6582
 
@@ -48,6 +51,10 @@ TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/root/fstab.sprout
 
 # Resolution
 DEVICE_RESOLUTION := 480x854
+
+# RIL
+BOARD_PROVIDES_RILD := true
+BOARD_PROVIDES_LIBRIL := true
 
 # System properties
 TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
