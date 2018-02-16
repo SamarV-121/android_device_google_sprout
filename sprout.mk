@@ -105,7 +105,9 @@ ifeq ($(WITH_MICROG),true)
 $(call inherit-product, $(LOCAL_PATH)/microG.mk)
 endif
 
-# Misc
+# Inherit common Android Go configurations
+$(call inherit-product, build/target/product/go_defaults.mk)
+
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
