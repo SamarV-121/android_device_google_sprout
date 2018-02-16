@@ -1,4 +1,7 @@
-LOCAL_PATH := device/google/sprout-common
+LOCAL_PATH := device/google/sprout
+
+# Assert 
+TARGET_OTA_ASSERT_DEVICE := sprout,sprout4,sprout8
 
 TARGET_BOARD_PLATFORM := mt6582
 TARGET_CPU_ABI := armeabi-v7a
@@ -24,7 +27,7 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 
 # kernel stuff
 TARGET_KERNEL_SOURCE := kernel/mediatek/sprout
-TARGET_KERNEL_CONFIG := cyanogenmod_sprout_defconfig
+TARGET_KERNEL_CONFIG := lineageos_sprout_defconfig
 BOARD_KERNEL_CMDLINE :=
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x04000000 --tags_offset 0x00000100
 BOARD_KERNEL_BASE := 0x80000000
@@ -90,4 +93,4 @@ USE_CAMERA_STUB := true
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
-    device/google/sprout-common/sepolicy
+    device/google/sprout/sepolicy
