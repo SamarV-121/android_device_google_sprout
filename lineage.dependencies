@@ -6,6 +6,9 @@
   {
     "repository": "android_packages_apps_FMRadio",
     "target_path": "packages/apps/FMRadio"
+  },
+  {
+    "repository": "android_packages_resources_devicesettings",
+    "target_path": "packages/resources/devicesettings"
   }
- 
 ]
