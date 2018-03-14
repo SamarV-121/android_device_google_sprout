@@ -17,7 +17,7 @@ ro.kernel.zio=38,108,105,16
 ro.zygote.preload.enable=0
 				  
 # LCD 
-ro.sf.lcd_density=240
+ro.sf.lcd_density=210
 
 # Media
 media.stagefright.legacyencoder=true
@@ -81,6 +81,25 @@ ro.mediatek.wlan.p2p=1
 mediatek.wlan.ctia=0
 wifi.tethering.interface=ap0
 wifi.direct.interface=p2p0
+
+#Enable Miracast and Tethering
+net.tethering.noprovisioning=true
+ro.hdmi.enable=true 
+ro.hdmi.mirror.enable=true 
+persist.debug.wfd.enable=1 
+
+#Disable ADB Notify
+persist.adb.notify=0
+
+#Camera Tweaks
+persist.camera.HAL3.enabled=1
+persist.camera.eis.enable=1
+persist.camera.is_mode=4
+persist.camera.gyro.android=4
+persist.camera.tof.direct=1
+persist.camera.tnr.preview=1
+persist.camera.tnr.video=1
+ro.camera.notify_nfc=1
 
 # OEM props
 import /oem/oem.prop ro.product.name
