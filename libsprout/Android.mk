@@ -45,3 +45,15 @@ LOCAL_MODULE := libsprout_log_shim
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES := \
+    sprout_camera.cpp
+
+LOCAL_SHARED_LIBRARIES := libgui libutils liblog libbinder libandroid libui
+
+LOCAL_MODULE := libsprout_camera
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_SHARED_LIBRARY)
