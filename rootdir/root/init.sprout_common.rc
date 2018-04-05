@@ -8,7 +8,7 @@ on early-init
     setprop ro.mtk.hardware mt6582
 
 on init
-    export LD_SHIM_LIBS "/system/lib/hw/hwcomposer.mt6582.so|libsprout_log_shim.so:/system/lib/libMtkOmxVdec.so|libsprout_omx_shim.so:/system/lib/librilmtk.so|libsprout_ril_shim.so"
+    export LD_SHIM_LIBS "/system/lib/libMtkOmxVdec.so|libsprout_omx_shim.so:/system/lib/librilmtk.so|libsprout_ril_shim.so:/system/lib/libcam_utils.so|libsprout_camera.so:/system/lib/libmtkjpeg.so|libsprout_omx_shim.so"
     mkdir /protect_f 0771 system system
     mkdir /protect_s 0771 system system
 
@@ -94,7 +94,7 @@ on post-fs
 
 on post-fs-data
     # create basic filesystem structure
-    mkdir /data/nvram 0771 system system
+    mkdir /data/nvram 0771 root system
     mkdir /data/nvram/bt 2771 bluetooth bluetooth
     mkdir /data/nvram/media 0771 media audio
     mkdir /data/misc/touchpanel 0755 root system
@@ -629,7 +629,7 @@ service netdiag /system/bin/netdiag
 service nvram_daemon /system/bin/nvram_daemon
     class main
     user root
-    group system bluetooth
+    group root system
     oneshot
 
 service atci_service /system/bin/atci_service
