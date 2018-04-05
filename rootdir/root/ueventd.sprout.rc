@@ -1,6 +1,6 @@
 #change partition permission
 /dev/block/mmcblk0p1      0640	 root	    system
-/dev/block/mmcblk0p2      0640	 system	    system
+/dev/block/mmcblk0p2      0660	 root	    system
 /dev/block/mmcblk0p18     0660	 system	    system
 /dev/misc-sd              0660   root       system
 
