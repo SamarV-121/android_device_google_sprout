@@ -122,6 +122,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     libsprout_ril_shim \
     libsprout_omx_shim \
+    libsprout_camera \
     libsprout_log_shim
 
 PRODUCT_PACKAGES += \
@@ -178,6 +179,13 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.mapper@2.0-impl \
     android.hardware.graphics.composer@2.1-impl \
     android.hardware.graphics.composer@2.1-service
+
+# Camera HAL
+PRODUCT_PACKAGES += \
+    camera.device@1.0-impl \
+    camera.device@3.2-impl \
+    android.hardware.camera.provider@2.4-impl \
+    android.hardware.camera.provider@2.4-service
 
 # Vibrator
 PRODUCT_PACKAGES += \
