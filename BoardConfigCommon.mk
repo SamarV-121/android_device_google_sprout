@@ -79,11 +79,8 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 # Recovery
 TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/fstab.sprout
 
-# Seccomp Policy
-BOARD_SECCOMP_POLICY += device/google/sprout-common/seccomp
-
 # SELinux Policy
-BOARD_SEPOLICY_DIRS += device/google/sprout-common/sepolicy
+# BOARD_SEPOLICY_DIRS += device/google/sprout-common/sepolicy
 
 # Symbols for Sprout
 TARGET_LDPRELOAD += libsprout.so
