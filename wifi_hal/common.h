@@ -70,6 +70,19 @@ typedef enum {
 } ANDROID_VENDOR_SUB_COMMAND;
 
 typedef enum {
+    WIFI_SUBCMD_GET_CHANNEL_LIST = ANDROID_NL80211_SUBCMD_WIFI_RANGE_START,
+
+    WIFI_SUBCMD_GET_FEATURE_SET,                      /* 0x0002 */
+    WIFI_SUBCMD_GET_FEATURE_SET_MATRIX,               /* 0x0003 */
+    WIFI_SUBCMD_SET_PNO_RANDOM_MAC_OUI,               /* 0x0004 */
+    WIFI_SUBCMD_NODFS_SET,                            /* 0x0005 */
+    WIFI_SUBCMD_SET_COUNTRY_CODE,                     /* 0x0006 */
+
+    WIFI_SUBCMD_SET_RSSI_MONITOR,                     /* 0x0007 */
+    /* Add more sub commands here */
+} WIFI_SUB_COMMAND;
+
+typedef enum {
     GSCAN_SUBCMD_GET_CAPABILITIES = ANDROID_NL80211_SUBCMD_GSCAN_RANGE_START,
 
     GSCAN_SUBCMD_SET_CONFIG,                          /* 0x1001 */
@@ -82,7 +95,6 @@ typedef enum {
 
     GSCAN_SUBCMD_SET_SIGNIFICANT_CHANGE_CONFIG,       /* 0x1007 */
     GSCAN_SUBCMD_ENABLE_FULL_SCAN_RESULTS,            /* 0x1008 */
-    GSCAN_SUBCMD_GET_CHANNEL_LIST,                    /* 0x1009 */
 
     GSCAN_SUBCMD_SET_EPNO_SSID = 0x100F,              /* 0x100F */
 
@@ -98,114 +110,20 @@ typedef enum {
 } GSCAN_SUB_COMMAND;
 
 typedef enum {
-    GSCAN_ATTRIBUTE_CAPABILITIES = 1,
+    WIFI_ATTRIBUTE_BAND = 1,
+    WIFI_ATTRIBUTE_NUM_CHANNELS,
+    WIFI_ATTRIBUTE_CHANNEL_LIST,
 
-    GSCAN_ATTRIBUTE_NUM_BUCKETS = 10,
-    GSCAN_ATTRIBUTE_BASE_PERIOD,
-    GSCAN_ATTRIBUTE_BUCKETS_BAND,
-    GSCAN_ATTRIBUTE_BUCKET_ID,
-    GSCAN_ATTRIBUTE_BUCKET_PERIOD,
-    GSCAN_ATTRIBUTE_BUCKET_NUM_CHANNELS,
-    GSCAN_ATTRIBUTE_BUCKET_CHANNELS,
-    GSCAN_ATTRIBUTE_NUM_AP_PER_SCAN,
-    GSCAN_ATTRIBUTE_REPORT_THRESHOLD,
-    GSCAN_ATTRIBUTE_NUM_SCANS_TO_CACHE,
+    WIFI_ATTRIBUTE_NUM_FEATURE_SET,
+    WIFI_ATTRIBUTE_FEATURE_SET,
+    WIFI_ATTRIBUTE_PNO_RANDOM_MAC_OUI,
+    WIFI_ATTRIBUTE_NODFS_VALUE,
+    WIFI_ATTRIBUTE_COUNTRY_CODE,
 
-    GSCAN_ATTRIBUTE_ENABLE_FEATURE = 20,
-    GSCAN_ATTRIBUTE_SCAN_RESULTS_COMPLETE,            /* indicates no more results */
-    GSCAN_ATTRIBUTE_FLUSH_FEATURE,                    /* Flush all the configs */
-    GSCAN_ENABLE_FULL_SCAN_RESULTS,
-    GSCAN_ATTRIBUTE_REPORT_EVENTS,
-    /* Adaptive scan attributes */
-    GSCAN_ATTRIBUTE_BUCKET_STEP_COUNT,
-    GSCAN_ATTRIBUTE_BUCKET_MAX_PERIOD,
-
-    GSCAN_ATTRIBUTE_NUM_OF_RESULTS = 30,
-    GSCAN_ATTRIBUTE_FLUSH_RESULTS,
-    GSCAN_ATTRIBUTE_SCAN_RESULTS,                     /* flat array of wifi_scan_result */
-    GSCAN_ATTRIBUTE_SCAN_ID,                          /* indicates scan number */
-    GSCAN_ATTRIBUTE_SCAN_FLAGS,                       /* indicates if scan was aborted */
-    GSCAN_ATTRIBUTE_AP_FLAGS,                         /* flags on significant change event */
-    GSCAN_ATTRIBUTE_NUM_CHANNELS,
-    GSCAN_ATTRIBUTE_CHANNEL_LIST,
-    GSCAN_ATTRIBUTE_CH_BUCKET_BITMASK,
-
-    GSCAN_ATTRIBUTE_SSID = 40,
-    GSCAN_ATTRIBUTE_BSSID,
-    GSCAN_ATTRIBUTE_CHANNEL,
-    GSCAN_ATTRIBUTE_RSSI,
-    GSCAN_ATTRIBUTE_TIMESTAMP,
-    GSCAN_ATTRIBUTE_RTT,
-    GSCAN_ATTRIBUTE_RTTSD,
-
-    GSCAN_ATTRIBUTE_HOTLIST_BSSIDS = 50,
-    GSCAN_ATTRIBUTE_RSSI_LOW,
-    GSCAN_ATTRIBUTE_RSSI_HIGH,
-    GSCAN_ATTRIBUTE_HOTLIST_ELEM,
-    GSCAN_ATTRIBUTE_HOTLIST_FLUSH,
-    
-    GSCAN_ATTRIBUTE_RSSI_SAMPLE_SIZE = 60,
-    GSCAN_ATTRIBUTE_LOST_AP_SAMPLE_SIZE,
-    GSCAN_ATTRIBUTE_MIN_BREACHING,
-    GSCAN_ATTRIBUTE_NUM_AP,                     /* TBD */
-    GSCAN_ATTRIBUTE_SIGNIFICANT_CHANGE_BSSIDS,
-    GSCAN_ATTRIBUTE_SIGNIFICANT_CHANGE_FLUSH,
-
-    /* EPNO */
-    GSCAN_ATTRIBUTE_EPNO_SSID_LIST = 70,
-    GSCAN_ATTRIBUTE_EPNO_SSID,
-    GSCAN_ATTRIBUTE_EPNO_SSID_LEN,
-    GSCAN_ATTRIBUTE_EPNO_RSSI,
-    GSCAN_ATTRIBUTE_EPNO_FLAGS,
-    GSCAN_ATTRIBUTE_EPNO_AUTH,
-    GSCAN_ATTRIBUTE_EPNO_SSID_NUM,
-    GSCAN_ATTRIBUTE_EPNO_FLUSH,
-
-    GSCAN_ATTRIBUTE_WHITELIST_SSID = 80,
-    GSCAN_ATTRIBUTE_NUM_WL_SSID,
-    GSCAN_ATTRIBUTE_WL_SSID_LEN,
-    GSCAN_ATTRIBUTE_WL_SSID_FLUSH,
-    GSCAN_ATTRIBUTE_WHITELIST_SSID_ELEM,
-    GSCAN_ATTRIBUTE_NUM_BSSID,
-    GSCAN_ATTRIBUTE_BSSID_PREF_LIST,
-    GSCAN_ATTRIBUTE_BSSID_PREF_FLUSH,
-    GSCAN_ATTRIBUTE_BSSID_PREF,
-    GSCAN_ATTRIBUTE_RSSI_MODIFIER,
-
-    GSCAN_ATTRIBUTE_A_BAND_BOOST_THRESHOLD = 90,
-    GSCAN_ATTRIBUTE_A_BAND_PENALTY_THRESHOLD,
-    GSCAN_ATTRIBUTE_A_BAND_BOOST_FACTOR,
-    GSCAN_ATTRIBUTE_A_BAND_PENALTY_FACTOR,
-    GSCAN_ATTRIBUTE_A_BAND_MAX_BOOST,
-    GSCAN_ATTRIBUTE_LAZY_ROAM_HYSTERESIS,
-    GSCAN_ATTRIBUTE_ALERT_ROAM_RSSI_TRIGGER,
-    GSCAN_ATTRIBUTE_LAZY_ROAM_ENABLE,
-
-    /* BSSID blacklist */
-    GSCAN_ATTRIBUTE_BSSID_BLACKLIST_FLUSH = 100,
-    GSCAN_ATTRIBUTE_BLACKLIST_BSSID,
-
-    /* ANQPO */
-    GSCAN_ATTRIBUTE_ANQPO_HS_LIST = 110,
-    GSCAN_ATTRIBUTE_ANQPO_HS_LIST_SIZE,
-    GSCAN_ATTRIBUTE_ANQPO_HS_NETWORK_ID,
-    GSCAN_ATTRIBUTE_ANQPO_HS_NAI_REALM,
-    GSCAN_ATTRIBUTE_ANQPO_HS_ROAM_CONSORTIUM_ID,
-    GSCAN_ATTRIBUTE_ANQPO_HS_PLMN,
-
-    /* ePNO cfg */
-    GSCAN_ATTRIBUTE_EPNO_5G_RSSI_THR = 130,
-    GSCAN_ATTRIBUTE_EPNO_2G_RSSI_THR,
-    GSCAN_ATTRIBUTE_EPNO_INIT_SCORE_MAX,
-    GSCAN_ATTRIBUTE_EPNO_CUR_CONN_BONUS,
-    GSCAN_ATTRIBUTE_EPNO_SAME_NETWORK_BONUS,
-    GSCAN_ATTRIBUTE_EPNO_SECURE_BONUS,
-    GSCAN_ATTRIBUTE_EPNO_5G_BONUS,
-
-    GSCAN_ATTRIBUTE_MAX
-
-} GSCAN_ATTRIBUTE;
-
+    WIFI_ATTRIBUTE_MAX_RSSI,
+    WIFI_ATTRIBUTE_MIN_RSSI,
+    WIFI_ATTRIBUTE_RSSI_MONITOR_START,
+} WIFI_ATTRIBUTE;
 
 typedef enum {
     GSCAN_EVENT_SIGNIFICANT_CHANGE_RESULTS,
@@ -251,7 +169,7 @@ typedef struct {
     int cleanup_socks[2];                           // sockets used to implement wifi_cleanup
 
     bool in_event_loop;                             // Indicates that event loop is active
-    bool clean_up;                                  // Indication to clean up the socket
+    bool clean_up;                                  // Indication to exit since cleanup has started
 
     wifi_internal_event_handler event_handler;      // default event handler
     wifi_cleaned_up_handler cleaned_up_handler;     // socket cleaned up handler
@@ -276,7 +194,7 @@ typedef struct {
 #define PNO_SSID_LOST    0x2
 
 typedef struct wifi_pno_result {
-    unsigned char ssid[32];
+    unsigned char ssid[DOT11_MAX_SSID_LEN];
     unsigned char ssid_len;
     signed char rssi;
     u16 channel;
@@ -329,6 +247,14 @@ wifi_error wifi_cancel_cmd(wifi_request_id id, wifi_interface_handle iface);
 
 #define min(x, y)       ((x) < (y) ? (x) : (y))
 #define max(x, y)       ((x) > (y) ? (x) : (y))
+
+#define NULL_CHECK_RETURN(ptr, str, ret) \
+    do { \
+        if (!(ptr)) { \
+            ALOGE("%s(): null pointer - #ptr (%s)\n", __FUNCTION__, str); \
+            return ret; \
+        } \
+    } while (0)
 
 #endif
 

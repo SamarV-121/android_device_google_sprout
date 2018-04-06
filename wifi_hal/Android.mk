@@ -1,4 +1,4 @@
-# Copyright (C) 2016 The Android Open Source Project
+# Copyright (C) 2011 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # limitations under the License.
 
 LOCAL_PATH := $(call my-dir)
+
 # Make the HAL library
 # ============================================================
 include $(CLEAR_VARS)
@@ -38,9 +39,11 @@ LOCAL_SRC_FILES := \
 	common.cpp \
 	cpp_bindings.cpp \
 	gscan.cpp \
-	link_layer_stats.cpp \
 	wifi_offload.cpp
 
 LOCAL_MODULE := libwifi-hal-mt66xx
+LOCAL_PROPRIETARY_MODULE := true
+LOCAL_MODULE_OWNER := mtk
 
 include $(BUILD_STATIC_LIBRARY)
+

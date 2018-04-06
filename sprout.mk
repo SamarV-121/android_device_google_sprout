@@ -175,6 +175,9 @@ $(call inherit-product, $(VENDOR_BLOBS))
 
 # Wifi
  PRODUCT_PACKAGES += \
+    lib_driver_cmd_mt66xx \
+    libwifi-hal-mt66xx \
+    wifi_hal \
     libwpa_client \
     hostapd \
     wpa_supplicant \
