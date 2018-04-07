@@ -196,6 +196,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl \
     android.hardware.sensors@1.0-service \
+    sensors.sprout
+
+PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/configs/_hals.conf:system/vendor/etc/sensors/_hals.conf
 
 # Symbols for Sprout
 PRODUCT_PACKAGES += \
