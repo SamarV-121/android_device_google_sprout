@@ -57,6 +57,9 @@ PRODUCT_PACKAGES += \
     setup_fs
 
 # GPS
+PRODUCT_PACKAGES += \
+    libcurl
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/agps_profiles_conf2.xml:system/etc/agps_profiles_conf2.xml
 
@@ -66,7 +69,8 @@ PRODUCT_COPY_FILES += \
     android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.composer@2.1-impl \
     android.hardware.graphics.composer@2.1-service \
-    android.hardware.graphics.mapper@2.0-impl
+    android.hardware.graphics.mapper@2.0-impl \
+    libion
 
 # Keylayout
 PRODUCT_COPY_FILES += \
