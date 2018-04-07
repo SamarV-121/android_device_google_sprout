@@ -2,14 +2,28 @@ LOCAL_PATH := device/google/sprout-common
 
 # Audio
 PRODUCT_PACKAGES += \
+    android.hardware.audio@2.0-impl \
+    android.hardware.audio.effect@2.0-impl \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default \
     libaudio-resampler \
     tinymix
 
+# Bluetooth
+PRODUCT_PACKAGES += \
+    android.hardware.bluetooth@1.0-impl \
+    android.hardware.bluetooth@1.0-service
+
 # Bootanimation
 TARGET_BOOTANIMATION_MULTITHREAD_DECODE := true
+
+# Camera
+PRODUCT_PACKAGES += \
+    camera.device@1.0-impl \
+    camera.device@3.2-impl \
+    android.hardware.camera.provider@2.4-impl \
+    android.hardware.camera.provider@2.4-service
 
 # Charger
 PRODUCT_PACKAGES += \
@@ -46,9 +60,26 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/agps_profiles_conf2.xml:system/etc/agps_profiles_conf2.xml
 
+# Graphics
+ PRODUCT_PACKAGES += \
+    android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.allocator@2.0-service \
+    android.hardware.graphics.composer@2.1-impl \
+    android.hardware.graphics.composer@2.1-service \
+    android.hardware.graphics.mapper@2.0-impl
+
 # Keylayout
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/mtk-kpd.kl:system/usr/keylayout/mtk-kpd.kl
+
+# Keymaster
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@3.0-impl
+
+# Light
+PRODUCT_PACKAGES += \
+    android.hardware.light@2.0-impl \
+    android.hardware.light@2.0-service
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -60,6 +91,11 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:system/etc/media_codecs_google_video_le.xml
 
+# Memtrack
+ PRODUCT_PACKAGES += \
+    android.hardware.memtrack@1.0-impl \
+    android.hardware.memtrack@1.0-service
+
 # MicroG
 ifeq ($(WITH_MICROG),true)
 $(call inherit-product, $(LOCAL_PATH)/microG.mk)
@@ -68,6 +104,11 @@ endif
 # Misc
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+
+# Power
+PRODUCT_PACKAGES += \
+     android.hardware.power@1.0-impl \
+     android.hardware.power@1.0-service
 
 # Properties
 ## Dynamically set props
@@ -135,9 +176,18 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml
 
+# Proprietary Blobs
+VENDOR_BLOBS ?= vendor/google/sprout/sprout-vendor.mk
+$(call inherit-product, $(VENDOR_BLOBS))
+
 # Screen density
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
+
+# Sensors
+PRODUCT_PACKAGES += \
+    android.hardware.sensors@1.0-impl \
+    android.hardware.sensors@1.0-service \
 
 # Symbols for Sprout
 PRODUCT_PACKAGES += \
@@ -166,15 +216,17 @@ PRODUCT_COPY_FILES += \
 # USB
 PRODUCT_PACKAGES += \
     librs_jni \
-    com.android.future.usb.accessory
+    com.android.future.usb.accessory \
+    android.hardware.usb@1.0-service
 
-VENDOR_BLOBS ?= vendor/google/sprout/sprout-vendor.mk
-$(call inherit-product, $(VENDOR_BLOBS))
-# Vendor Blobs
-# $(call inherit-product, vendor/google/sprout/sprout-vendor.mk)
+# Vibrator
+PRODUCT_PACKAGES += \
+    android.hardware.vibrator@1.0-impl \
+    android.hardware.vibrator@1.0-service
 
 # Wifi
  PRODUCT_PACKAGES += \
+    android.hardware.wifi@1.0-service \
     lib_driver_cmd_mt66xx \
     libwifi-hal-mt66xx \
     wifi_hal \
