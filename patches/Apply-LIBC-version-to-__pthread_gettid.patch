@@ -1,0 +1,33 @@
+From 548981068c0f297d4a13993fc8d3bfe18d365538 Mon Sep 17 00:00:00 2001
+From: SamarV-121 <samarvispute121@gmail.com>
+Date: Thu, 18 Jan 2018 18:45:03 +0530
+Subject: [PATCH] libc: __pthread_gettid symbol needed for mm base mtk blobs
+
+* E/MtkCam/devicemgr(194): [getPlatform] dlopen: libcam_platform.so error=dlopen failed: cannot locate symbol "__pthread_gettid" referenced by "/system/lib/libmtkjpeg.so"... (getPlatform){#96:vendor/mediatek/proprietary/hardware/mtkcam/module_hal/devicemgr/CamDeviceManagerBase.platform.cpp}
+---
+ libc/bionic/ndk_cruft.cpp | 9 ++++++++-
+ 1 files changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/libc/bionic/ndk_cruft.cpp b/libc/bionic/ndk_cruft.cpp
+index 3ac88f8..602adb4 100644
+--- a/libc/bionic/ndk_cruft.cpp
++++ b/libc/bionic/ndk_cruft.cpp
+@@ -340,10 +340,17 @@ size_t dlmalloc_usable_size(void* ptr) {
+ }
+ 
+ // In L we added a public pthread_gettid_np, but some apps were using the private API.
+-pid_t __pthread_gettid(pthread_t t) {
++pid_t __pthread_gettid_libc(pthread_t t) {
+   return pthread_gettid_np(t);
+ }
+ 
++pid_t __pthread_gettid_libc_private(pthread_t t) {
++  return pthread_gettid_np(t);
++}
++
++__asm__(".symver __pthread_gettid_libc,__pthread_gettid@LIBC");
++__asm__(".symver __pthread_gettid_libc_private,__pthread_gettid@@LIBC_PRIVATE");
++
+ // Older versions of apportable used dlmalloc directly instead of malloc,
+ // so export this compatibility shim that simply calls malloc.
+ void* dlmalloc(size_t size) {
