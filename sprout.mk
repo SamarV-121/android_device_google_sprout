@@ -42,6 +42,10 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 # Dalvik heap
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 
+# Display
+PRODUCT_PACKAGES += \
+    libion
+
 # Doze
 PRODUCT_PACKAGES += \
     Doze
@@ -69,8 +73,7 @@ PRODUCT_COPY_FILES += \
     android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.composer@2.1-impl \
     android.hardware.graphics.composer@2.1-service \
-    android.hardware.graphics.mapper@2.0-impl \
-    libion
+    android.hardware.graphics.mapper@2.0-impl
 
 # Keylayout
 PRODUCT_COPY_FILES += \
@@ -113,47 +116,21 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Power
 PRODUCT_PACKAGES += \
-     android.hardware.power@1.0-impl \
-     android.hardware.power@1.0-service
+    android.hardware.power@1.0-impl \
+    android.hardware.power@1.0-service
 
 # Properties
-## Dynamically set props
+# Dynamically set props
 PRODUCT_SYSTEM_PROPERTY_BLACKLIST := \
     ro.product.name \
     ro.product.manufacturer \
     ro.product.model
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
-	ro.crypto.state=unencrypted \
-	ro.mount.fs=EXT4 \
-	ro.secure=0 \
-        ro.adb.secure=0 \
-	ro.allow.mock.location=0 \
-	ro.debuggable=1 \
-	ro.zygote=zygote32 \
-	dalvik.vm.dex2oat-Xms=64m \
-	dalvik.vm.dex2oat-Xmx=512m \
-	dalvik.vm.image-dex2oat-Xms=64m \
-	dalvik.vm.image-dex2oat-Xmx=64m \
-	ro.dalvik.vm.native.bridge=0 \
-	ro.hardware=sprout \
-	ro.telephony.ril_class=SproutRIL \
-        camera.disable_zsl_mode=1
-
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    pm.dexopt.first-boot=verify-at-runtime \
-    pm.dexopt.boot=verify-at-runtime \
-    pm.dexopt.install=interpret-only \
-    pm.dexopt.bg-dexopt=speed-profile \
-    pm.dexopt.ab-ota=speed-profile \
-    pm.dexopt.nsys-library=speed \
-    pm.dexopt.shared-apk=speed \
-    pm.dexopt.forced-dexopt=speed \
-    pm.dexopt.core-app=speed
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.dex2oat-filter=speed \
-    dalvik.vm.dex2oat-swap=false
+    ro.secure=0 \
+    ro.adb.secure=0 \
+    ro.telephony.ril_class=SproutRIL \
+    camera.disable_zsl_mode=1
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -203,9 +180,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/configs/_hals.conf:system/vendor/etc/sensors/_hals.conf
 
-# Symbols for Sprout
+# Symbols
 PRODUCT_PACKAGES += \
-    libsprout
+        libshim_ril \
+	libshim_camera \
+	libshim_bionic
 
 # Ramdisk
 PRODUCT_COPY_FILES += \
@@ -245,8 +224,6 @@ PRODUCT_PACKAGES += \
 # Wifi
  PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
-    lib_driver_cmd_mt66xx \
-    libwifi-hal-mt66xx \
     wificond \
     libwpa_client \
     hostapd \
@@ -255,6 +232,3 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf
-
-
-
