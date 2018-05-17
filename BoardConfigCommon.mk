@@ -57,7 +57,7 @@ EXTENDED_FONT_FOOTPRINT := true
 
 # Kernel
 TARGET_KERNEL_SOURCE := kernel/mediatek/sprout
-TARGET_KERNEL_CONFIG := lineageos_sprout_defconfig
+TARGET_KERNEL_CONFIG := sprout_defconfig
 BOARD_KERNEL_IMAGE_NAME := zImage
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x04000000 --tags_offset 0x00000100
 BOARD_KERNEL_BASE := 0x80000000
