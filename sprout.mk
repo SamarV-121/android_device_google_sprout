@@ -139,10 +139,15 @@ PRODUCT_COPY_FILES += \
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
-# Symbols for Sprout
+# Symbols
 PRODUCT_PACKAGES += \
-    libsprout
-
+    libshim_camera \
+    libshim_bionic \
+    libshim_ril \
+    libshim_wpa \
+    libshim_wvm \
+    libshim_agps
+	
 # Ramdisk
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/init.sprout_common.rc:root/init.sprout_common.rc \
@@ -170,8 +175,6 @@ PRODUCT_PACKAGES += \
 
 VENDOR_BLOBS ?= vendor/google/sprout/sprout-vendor.mk
 $(call inherit-product, $(VENDOR_BLOBS))
-# Vendor Blobs
-# $(call inherit-product, vendor/google/sprout/sprout-vendor.mk)
 
 # Wifi
  PRODUCT_PACKAGES += \

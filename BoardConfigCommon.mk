@@ -89,8 +89,12 @@ BOARD_SECCOMP_POLICY += device/google/sprout-common/seccomp
 # SELinux Policy
 BOARD_SEPOLICY_DIRS += device/google/sprout-common/sepolicy
 
-# Symbols for Sprout
-TARGET_LDPRELOAD += libsprout.so
+# Linker
+LINKER_FORCED_SHIM_LIBS := /system/lib/librilmtk.so|libshim_ril.so
+LINKER_FORCED_SHIM_LIBS += /system/bin/wpa_supplicant|libshim_wpa.so
+LINKER_FORCED_SHIM_LIBS += /system/lib/libcam.utils.so|libshim_camera.so
+LINKER_FORCED_SHIM_LIBS += /system/bin/mtk_agpsd|libshim_agps.so
+LINKER_FORCED_SHIM_LIBS += /system/lib/libmtkjpeg.so|libshim_bionic.so
 
 # Common Properties
 TARGET_SYSTEM_PROP := $(COMMON_PATH)/system.prop
