@@ -28,7 +28,7 @@ include $(BUILD_SHARED_LIBRARY)
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := icu55.c
 LOCAL_SHARED_LIBRARIES := libicuuc
-LOCAL_MODULE := libshim_
+LOCAL_MODULE := libshim_agps
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_SHARED_LIBRARY)
 
