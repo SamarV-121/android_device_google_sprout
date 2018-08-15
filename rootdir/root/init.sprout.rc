@@ -96,6 +96,9 @@ on post-fs
     chown root system /proc/bootprof
     chown root system /proc/mtprof/cputime
 
+    # Allow writing to the kernel trace log.
+    chmod 0222 /sys/kernel/debug/tracing/trace_marker
+
 on post-fs-data
     # create basic filesystem structure
     mkdir /data/nvram 0771 root system
