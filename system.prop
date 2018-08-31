@@ -77,6 +77,8 @@ ro.sf.hwrotation=0
 ril.current.share_modem=2
 ril.radiooff.poweroffMD=0
 
+ro.boot.btmacaddr=00:00:00:00:00:00
+
 # OEM props
 import /oem/oem.prop ro.product.name
 import /oem/oem.prop ro.product.manufacturer
