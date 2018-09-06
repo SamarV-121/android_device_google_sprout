@@ -199,7 +199,7 @@ PRODUCT_COPY_FILES += \
 
 # USB	
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service \
+    android.hardware.usb@1.0-service.basic \
     librs_jni \
     com.android.future.usb.accessory
 
