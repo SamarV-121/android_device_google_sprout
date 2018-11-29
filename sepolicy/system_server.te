@@ -11,4 +11,4 @@ allow system_server debugfs:dir { read open };
 allow system_server wmtWifi_device:chr_file { write open };  
 allow system_server wifi_data_file:sock_file unlink;
 allow system_server unlabeled:file unlink;
-
+allow system_server wcn_combo_chip_prop:file { r_file_perms };
