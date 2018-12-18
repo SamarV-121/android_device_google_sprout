@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2008 The Android Open Source Project
+# Copyright (C) 2012 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,9 @@
 
 LOCAL_PATH := $(call my-dir)
 
+ifeq ($(BOARD_USES_MTK_HARDWARE),true)
 ifeq ($(WPA_SUPPLICANT_VERSION),VER_0_8_X)
+$(warning Build wpa_supplicant_lib...)
     WPA_SUPPL_DIR = external/wpa_supplicant_8
     WPA_SRC_FILE :=
 
@@ -67,4 +69,5 @@ include $(BUILD_STATIC_LIBRARY)
 
 ########################
 
+endif
 endif
