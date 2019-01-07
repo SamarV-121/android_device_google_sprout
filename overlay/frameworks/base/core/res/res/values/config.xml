@@ -169,22 +169,18 @@
     <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
          The N entries of this array define N + 1 control points as follows:
          (1-based arrays)
-
          Point 1:            (0, value[1]):             lux <= 0
          Point 2:     (level[1], value[2]):  0        < lux <= level[1]
          Point 3:     (level[2], value[3]):  level[2] < lux <= level[3]
          ...
          Point N+1: (level[N], value[N+1]):  level[N] < lux
-
          The control points must be strictly increasing.  Each control point
          corresponds to an entry in the brightness backlight values arrays.
          For example, if LUX == level[1] (first element of the levels array)
          then the brightness will be determined by value[2] (second element
          of the brightness values array).
-
          Spline interpolation is used to determine the auto-brightness
          backlight values for LUX levels between these control points.
-
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
         <item>16</item>
@@ -250,18 +246,21 @@
     <!-- enable doze powersaving mode -->
     <bool name="config_enableAutoPowerModes">true</bool>
 
+    <!-- Whether to allow process with media UID to access CameraServiceProxy -->
+    <bool name="config_allowMediaUidForCameraServiceProxy">true</bool>
+
     <!-- Performance profiles -->
-	<!--
+    <!--
     <string name="config_perf_profile_prop">sys.perf.profile</string>
     <string name="config_perf_profile_default_entry">1</string> -->
 
     <!-- Enable the option to check proximity sensor when deciding whether to
          turn the screen on
          NOTE ! - Enable for devices that have a fast response proximity sensor -->
-	<!--
+    <!--
     <bool name="config_proximityCheckOnWake">true</bool>
     <integer name="config_proximityCheckTimeout">400</integer> -->
-	<!-- The RadioAccessFamilies supported by the device.
+    <!-- The RadioAccessFamilies supported by the device.
          Empty is viewed as "all".  Only used on devices which
          don't support RIL_REQUEST_GET_RADIO_CAPABILITY
          format is UMTS|LTE|... -->
