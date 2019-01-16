@@ -174,7 +174,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/root/ueventd.sprout.rc:system/vendor/ueventd.rc \
     $(LOCAL_PATH)/rootdir/root/init.sprout.usb.rc:system/vendor/etc/init/hw/init.sprout.usb.rc \
     $(LOCAL_PATH)/rootdir/root/init.sprout.rc:system/vendor/etc/init/hw/init.sprout.rc \
-    $(LOCAL_PATH)/rootdir/root/fstab.sprout:system/vendor/etc/fstab.sprout
+    $(LOCAL_PATH)/rootdir/root/fstab.sprout:system/vendor/etc/fstab.sprout \
+    $(LOCAL_PATH)/rootdir/root/fstab.sprout:ramdisk/fstab.sprout
 
 # Seccomp
 PRODUCT_COPY_FILES += \
