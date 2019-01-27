@@ -17,14 +17,15 @@
         <value>1.5</value>
         <value>1.5</value>
     </array>
-    <array name="cpu.speeds">
+    <item name="cpu.clusters.cores">4</item>
+    <array name="cpu.core_speeds.cluster0">
         <value>1209000</value>
         <value>988000</value>
         <value>754000</value>
         <value>497250</value>
     </array>
-    <item name="cpu.idle">2.0</item>
-    <array name="cpu.active">
+    <item name="cpu.suspend">2.0</item>
+    <array name="cpu.core_power.cluster0">
         <value>120</value>
         <value>98</value>
         <value>75</value>
