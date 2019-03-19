@@ -274,4 +274,7 @@
          don't support RIL_REQUEST_GET_RADIO_CAPABILITY
          format is UMTS|LTE|... -->
     <string translatable="false" name="config_radio_access_family">GSM|WCDMA</string>
+
+    <!-- True if the firmware supports Wi-Fi link probing -->
+    <bool name="config_wifi_link_probing_supported">true</bool>
 </resources>
