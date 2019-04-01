@@ -201,7 +201,8 @@ public:
 
 /* API to send specified mkeep_alive packet periodically. */
 wifi_error wifi_start_sending_offloaded_packet(wifi_request_id index, wifi_interface_handle iface,
-        u8 *ip_packet, u16 ip_packet_len, u8 *src_mac_addr, u8 *dst_mac_addr, u32 period_msec)
+        u16 /* ether_type */, u8 *ip_packet, u16 ip_packet_len, u8 *src_mac_addr, u8 *dst_mac_addr,
+        u32 period_msec)
 {
     if ((index > 0 && index <= N_AVAIL_ID) && (ip_packet != NULL) && (src_mac_addr != NULL)
             && (dst_mac_addr != NULL) && (period_msec > 0)
