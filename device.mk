@@ -15,11 +15,118 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/go_defaults.mk)
-
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
+
+# Call the proprietary setup
+$(call inherit-product, vendor/google/sprout/sprout-vendor.mk)
+
+PRODUCT_AAPT_CONFIG := normal hdpi
+PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
+
+# Audio	
+PRODUCT_PACKAGES += \
+    android.hardware.audio@2.0-impl \
+    android.hardware.audio.effect@2.0-impl \
+    audio.a2dp.default \
+    audio.usb.default \
+    audio.r_submix.default \
+    libaudio-resampler \
+    tinymix
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/system/etc/media_profiles.xml:system/etc/media_profiles.xml \
+    $(LOCAL_PATH)/rootdir/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
+    $(LOCAL_PATH)/rootdir/system/etc/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
+    $(LOCAL_PATH)/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
+    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:system/etc/media_codecs_google_video_le.xml
+
+# Bluetooth
+PRODUCT_PACKAGES += \
+    android.hardware.bluetooth@1.0-impl \
+    android.hardware.bluetooth@1.0-service
+
+# Bootanimation
+TARGET_SCREEN_HEIGHT := 854
+TARGET_SCREEN_WIDTH := 480
+
+# Camera
+PRODUCT_PACKAGES += \
+    camera.device@1.0-impl \
+    camera.device@3.2-impl \
+    android.hardware.camera.provider@2.4-impl \
+    android.hardware.camera.provider@2.4-service
+	
+# Dalvik	
+PRODUCT_TAGS += dalvik.gc.type-precise
+	
+# Display	
+PRODUCT_PACKAGES += \
+    libion
+
+# Dynamically set props
+PRODUCT_SYSTEM_PROPERTY_BLACKLIST := \
+    ro.product.name \
+    ro.product.manufacturer \
+    ro.product.model
+
+# FS-manag
+PRODUCT_PACKAGES += \
+    setup_fs \
+    e2fsck
+
+# GPS
+PRODUCT_PACKAGES += \
+    libcurl
+
+PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/configs/agps_profiles_conf2.xml:system/etc/agps_profiles_conf2.xml
+
+# Graphics
+PRODUCT_PACKAGES += \
+    android.hardware.graphics.allocator@2.0-service \
+    android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.mapper@2.0-impl \
+    android.hardware.graphics.composer@2.1-impl \
+    android.hardware.graphics.composer@2.1-service
+
+# HIDL
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/manifest.xml:system/vendor/manifest.xml
+
+# Keylayout
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/system/usr/keylayout/mtk-kpd.kl:system/usr/keylayout/mtk-kpd.kl
+
+# Keymaster
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@3.0-impl
+
+# Lights
+PRODUCT_PACKAGES += \
+    android.hardware.light@2.0-impl \
+    android.hardware.light@2.0-service
+
+# Memtrack
+PRODUCT_PACKAGES += \
+    android.hardware.memtrack@1.0-impl \
+    android.hardware.memtrack@1.0-service
+
+# Misc
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    camera.disable_zsl_mode=1 \
+    ro.adb.secure=0 \
+    ro.secure=0
+
+PRODUCT_PACKAGES += \
+    charger \
+    charger_res_images \
+    libnl_2 \
+    libtinyxml
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -45,42 +152,14 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.software.midi.xml:system/etc/permissions/android.software.midi.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-    packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
+    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
 
-# GPS
-PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/configs/agps_profiles_conf2.xml:system/etc/agps_profiles_conf2.xml \
+# Power
+PRODUCT_PACKAGES += \
+    android.hardware.power@1.0-impl \
+    android.hardware.power@1.0-service
 
-# Audio	
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/system/etc/media_profiles.xml:system/etc/media_profiles.xml \
-    $(LOCAL_PATH)/rootdir/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/rootdir/system/etc/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
-    $(LOCAL_PATH)/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
-    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:system/etc/media_codecs_google_video_le.xml
-
-
-# Thermal
-PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/configs/thermal.conf:system/etc/.tp/thermal.conf \
-     $(LOCAL_PATH)/configs/.ht120.mtc:system/etc/.tp/.ht120.mtc \
-     $(LOCAL_PATH)/configs/thermal.off.conf:system/etc/.tp/thermal.off.conf \
-     $(LOCAL_PATH)/configs/sensors/_hals.conf:system/vendor/etc/sensors/_hals.conf
-	
-# Keylayout
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/system/usr/keylayout/mtk-kpd.kl:system/usr/keylayout/mtk-kpd.kl \
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf \
-    $(LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd.accept:system/etc/hostapd/hostapd.accept \
-    $(LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd.deny:system/etc/hostapd/hostapd.deny
-	
-PRODUCT_TAGS += dalvik.gc.type-precise
-
+# Ramdisk
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/root/init.sprout_common.rc:root/init.sprout_common.rc \
     $(LOCAL_PATH)/rootdir/root/sbin/multi_init:root/sbin/multi_init \
@@ -92,145 +171,60 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/root/init.sprout.rc:root/init.sprout.rc \
     $(LOCAL_PATH)/rootdir/root/fstab.sprout:root/fstab.sprout
 
-# Correct bootanimation size for the screen
-TARGET_SCREEN_HEIGHT := 854
-TARGET_SCREEN_WIDTH := 480
-	
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/root/twrp.fstab:recovery/root/etc/twrp.fstab
-	
-PRODUCT_PACKAGES += \
-    audio.a2dp.default \
-    audio.usb.default \
-    audio.r_submix.default \
-    libaudio-resampler \
-    tinymix
-
-# USE_CUSTOM_AUDIO_POLICY := 1
-
+# RIL
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.ril_class=SproutRIL
 
-# FM Radio
-# PRODUCT_PACKAGES += \
-#     FMRadioGoogle \
-#    FmRadioTrampoline2
+# Seccomp
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/seccomp_policy/mediacodec.policy:system/vendor/etc/seccomp_policy/mediacodec.policy
 
-# Wifi
- PRODUCT_PACKAGES += \
-    libwpa_client \
-    hostapd \
-    dhcpcd.conf \
-    wpa_supplicant \
-    wpa_supplicant.conf \
-    wificond
+# Sensors
+PRODUCT_PACKAGES += \
+    android.hardware.sensors@1.0-impl \
+    android.hardware.sensors@1.0-service \
+    sensors.sprout
 
+PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/configs/sensors/_hals.conf:system/vendor/etc/sensors/_hals.conf
+
+# Symbols
 PRODUCT_PACKAGES += \
     libsprout_ril_shim \
     libsprout_omx_shim \
     libsprout_camera \
     libsprout_log_shim
 
-PRODUCT_PACKAGES += \
-    libion \
-    libcurl
+# Thermal
+PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/configs/thermal.conf:system/etc/.tp/thermal.conf \
+     $(LOCAL_PATH)/configs/.ht120.mtc:system/etc/.tp/.ht120.mtc \
+     $(LOCAL_PATH)/configs/thermal.off.conf:system/etc/.tp/thermal.off.conf
 
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    camera.disable_zsl_mode=1 \
-    ro.adb.secure=0 \
-    ro.secure=0
-	
+# USB	
 PRODUCT_PACKAGES += \
+    android.hardware.usb@1.0-service \
     librs_jni \
     com.android.future.usb.accessory
-
-PRODUCT_PACKAGES += \
-    charger \
-    charger_res_images \
-    libnl_2 \
-    libtinyxml
-
-PRODUCT_PACKAGES += \
-    setup_fs \
-    e2fsck \
-
-# Dynamically set props
-PRODUCT_SYSTEM_PROPERTY_BLACKLIST := \
-    ro.product.name \
-    ro.product.manufacturer \
-    ro.product.model
-
-# Bluetooth
-PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.0-impl \
-    android.hardware.bluetooth@1.0-service
-
-PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-impl \
-    android.hardware.sensors@1.0-service \
-    sensors.sprout
-
-# WiFi
-PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service
-
-# USB
-PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service
-
-# Graphics
-PRODUCT_PACKAGES += \
-    android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.allocator@2.0-impl \
-    android.hardware.graphics.mapper@2.0-impl \
-    android.hardware.graphics.composer@2.1-impl \
-    android.hardware.graphics.composer@2.1-service
-
-# Camera HAL
-PRODUCT_PACKAGES += \
-    camera.device@1.0-impl \
-    camera.device@3.2-impl \
-    android.hardware.camera.provider@2.4-impl \
-    android.hardware.camera.provider@2.4-service
 
 # Vibrator
 PRODUCT_PACKAGES += \
     android.hardware.vibrator@1.0-impl \
     android.hardware.vibrator@1.0-service
 
-# Power
-PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-impl \
-    android.hardware.power@1.0-service
-
-# Lights
-PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-impl \
-    android.hardware.light@2.0-service
-
-# Audio
-PRODUCT_PACKAGES += \
-    android.hardware.audio@2.0-impl \
-    android.hardware.audio.effect@2.0-impl
-
-# Memtrack
-PRODUCT_PACKAGES += \
-    android.hardware.memtrack@1.0-impl \
-    android.hardware.memtrack@1.0-service
-
-# Keymaster
-PRODUCT_PACKAGES += \
-    android.hardware.keymaster@3.0-impl
-
-# HIDL
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/manifest.xml:system/vendor/manifest.xml
+# Wifi
+ PRODUCT_PACKAGES += \
+    android.hardware.wifi@1.0-service \
+    libwpa_client \
+    hostapd \
+    dhcpcd.conf \
+    wpa_supplicant \
+    wpa_supplicant.conf \
+    wificond \
+    libwifi-hal-mt66xx \
+    lib_driver_cmd_mt66xx
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/seccomp_policy/mediacodec.policy:system/vendor/etc/seccomp_policy/mediacodec.policy
-	
-PRODUCT_AAPT_CONFIG := normal hdpi
-PRODUCT_AAPT_PREF_CONFIG := hdpi
-
-# call the proprietary setup
-$(call inherit-product, vendor/google/sprout/sprout-vendor.mk)
+    $(LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf \
+    $(LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd.accept:system/etc/hostapd/hostapd.accept \
+    $(LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd.deny:system/etc/hostapd/hostapd.deny
