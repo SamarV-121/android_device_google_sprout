@@ -26,12 +26,6 @@ TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 # Filesystem
 TARGET_USERIMAGES_USE_EXT4 := true
 
-# Fonts
-EXTENDED_FONT_FOOTPRINT := true
-
-# Enable Minikin text layout engine (will be the default soon)
-USE_MINIKIN := true
-
 # Kernel
 TARGET_KERNEL_SOURCE := kernel/mediatek/sprout
 TARGET_KERNEL_CONFIG := lineageos_sprout_defconfig
@@ -49,6 +43,7 @@ USE_OPENGL_RENDERER := true
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 6291456
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 956964608
+BOARD_CACHEIMAGE_PARTITION_SIZE := 234217728
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # Recovery
