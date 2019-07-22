@@ -14,6 +14,7 @@ ro.opengles.version=131072
 debug.hwui.renderer=skiagl
 persist.sys.strictmode.visual=0
 persist.sys.strictmode.disable=1
+debug.sf.enable_gl_backpressure=1
 
 # Media
 debug.stagefright.ccodec=0
