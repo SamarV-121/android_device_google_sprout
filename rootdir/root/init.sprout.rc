@@ -806,9 +806,11 @@ service thermal_manager /system/bin/thermal_manager
     user root
     oneshot
 
-service battery_charger /charger
+service charger /system/bin/charger
     class charger
-    seclabel u:r:healthd:s0
+    user system
+    group system graphics input
+    seclabel u:r:charger:s0
 #
 # Connectivity related services (Begin)
 #
