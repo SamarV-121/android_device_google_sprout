@@ -17,6 +17,8 @@ persist.sys.strictmode.disable=1
 
 # Media
 debug.stagefright.ccodec=0
+debug.stagefright.omx_default_rank.sw-audio=1
+debug.stagefright.omx_default_rank=0
 
 # Kernel 
 ro.kernel.zio=38,108,105,16
