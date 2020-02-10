@@ -6,7 +6,8 @@ LOCAL_SRC_FILES := \
     bionic.cpp \
     ui.cpp \
     camera.cpp \
-    buffer.cpp
+    buffer.cpp \
+    gles.cpp
 
 LOCAL_SHARED_LIBRARIES := libbinder libui libgui libcutils libutils libc liblog libstagefright_foundation
 LOCAL_C_INCLUDES += frameworks/av/media/ndk/include
