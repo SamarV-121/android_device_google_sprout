@@ -8,7 +8,7 @@ on early-init
     setprop ro.mtk.hardware mt6582
 
 on init
-    export LD_SHIM_LIBS "/system/lib/libMtkOmxVdec.so|libsprout_omx_shim.so:/system/lib/librilmtk.so|libsprout_ril_shim.so:/system/lib/libcam_utils.so|libsprout_camera.so:/system/lib/libmtkjpeg.so|libsprout_omx_shim.so"
+    export LD_PRELOAD "/system/lib/libsprout.so"
     mkdir /protect_f 0771 system system
     mkdir /protect_s 0771 system system
 

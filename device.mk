@@ -189,10 +189,7 @@ PRODUCT_COPY_FILES += \
 
 # Symbols
 PRODUCT_PACKAGES += \
-    libsprout_ril_shim \
-    libsprout_omx_shim \
-    libsprout_camera \
-    libsprout_log_shim
+    libsprout
 
 # Thermal
 PRODUCT_COPY_FILES += \
