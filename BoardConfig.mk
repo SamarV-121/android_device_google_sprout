@@ -1,14 +1,14 @@
 LOCAL_PATH := device/google/sprout
 
-# Assert 
-TARGET_OTA_ASSERT_DEVICE := sprout,sprout4,sprout8
-
+# Platform
 TARGET_BOARD_PLATFORM := mt6582
+
+# Arch
+TARGET_ARCH := arm
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 ARCH_ARM_HAVE_VFP := true
 TARGET_CPU_SMP := true
-TARGET_ARCH := arm
 ARCH_ARM_HAVE_NEON := true
 TARGET_NO_BOOTLOADER := true
 TARGET_ARCH_VARIANT := armv7-a-neon
