@@ -170,10 +170,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/root/init.sprout.rc:root/init.sprout.rc \
     $(LOCAL_PATH)/rootdir/root/fstab.sprout:root/fstab.sprout
 
-# RIL
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.ril_class=SproutRIL
-
 # Seccomp
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/seccomp_policy/mediacodec.policy:system/vendor/etc/seccomp_policy/mediacodec.policy

@@ -49,9 +49,6 @@ TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/root/fstab.sprout
 # Resolution
 DEVICE_RESOLUTION := 480x854
 
-# RIL
-BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril/
-
 # System properties
 TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 
