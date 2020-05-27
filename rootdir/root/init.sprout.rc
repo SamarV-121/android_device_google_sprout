@@ -1,5 +1,5 @@
 # sprout storage specific rc file.
-import /init.sprout.usb.rc
+import /vendor/etc/init/hw/init.sprout.usb.rc
 
 on init
     # Support legacy paths
@@ -27,8 +27,8 @@ on init
 
 on fs
     write /proc/bootprof "INIT:eMMC:Mount_All_START"
-    mount_all /fstab.sprout
-    swapon_all /fstab.sprout
+    mount_all /vendor/etc/fstab.sprout
+    swapon_all /vendor/etc/fstab.sprout
     write /proc/bootprof "INIT:eMMC:Mount_All_END"
 
 # mount different fs end
