@@ -57,8 +57,9 @@ TARGET_SCREEN_WIDTH := 480
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl-legacy \
     libcam.client \
-    libcam.utils.sensorlistener
-	
+    libcam.utils.sensorlistener \
+    Snap
+
 # Dalvik	
 PRODUCT_TAGS += dalvik.gc.type-precise
 	
