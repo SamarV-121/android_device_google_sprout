@@ -74,6 +74,9 @@ BOARD_PROVIDES_LIBRIL := true
 ENABLE_VENDOR_RIL_SERVICE := true
 SIM_COUNT := 2
 
+# SEpolicy
+BOARD_SEPOLICY_DIRS += device/google/sprout/sepolicy
+
 # System properties
 TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
 

@@ -1,0 +1,2 @@
+type protect_s_data_file, file_type;
+type protect_f_data_file, file_type;

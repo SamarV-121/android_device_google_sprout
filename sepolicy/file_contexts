@@ -1,0 +1,2 @@
+/protect_f(/.*)?         u:object_r:protect_f_data_file:s0
+/protect_s(/.*)?         u:object_r:protect_s_data_file:s0
