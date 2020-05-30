@@ -1,7 +1,7 @@
-LOCAL_PATH := device/google/sprout
+DEVICE_PATH := device/google/sprout
 
 # Headers
-TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
+TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
 # Platform
 TARGET_BOARD_PLATFORM := mt6582
@@ -50,7 +50,7 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 234217728
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # Recovery
-TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/root/fstab.sprout
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/root/fstab.sprout
 
 # Resolution
 DEVICE_RESOLUTION := 480x854
@@ -61,7 +61,7 @@ BOARD_PROVIDES_LIBRIL := true
 ENABLE_VENDOR_RIL_SERVICE := true
 
 # System properties
-TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
+TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
 
 # WiFi
 BOARD_WLAN_DEVICE := MediaTek
