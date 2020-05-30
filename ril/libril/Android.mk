@@ -46,13 +46,13 @@ endif
 
 # something wrong, cause channel occupied after oNewCommandConnect
 # workaround but not complete yet
-ifeq ($(BOARD_USES_RIL_UNSOL_PENDING_,true)
+ifeq ($(BOARD_USES_RIL_UNSOL_PENDING),true)
   ril_cflags += -DRIL_UNSOL_PENDING
 endif
 
 # queuing request when channel busy
 # emulate the enqueue action but not fully working yet
-ifeq ($(BOARD_USES_RIL_CHANNEL_QUEUING_,true)
+ifeq ($(BOARD_USES_RIL_CHANNEL_QUEUING),true)
   ril_cflags += -DRIL_CHANNEL_QUEUING
 endif
 

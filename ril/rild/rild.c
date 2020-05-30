@@ -235,7 +235,7 @@ int main(int argc, char **argv) {
     }
 
     if (rilLibPath == NULL) {
-	if ( 0 == property_get(LIB_PATH_PROPERTY, libPath, "/system/lib/mtk-ril.so")) {
+	if ( 0 == property_get(LIB_PATH_PROPERTY, libPath, "mtk-ril.so")) {
 	    // No lib sepcified on the command line, and nothing set in props.
 	    // Assume "no-ril" case.
 	    goto done;
