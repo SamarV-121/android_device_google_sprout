@@ -47,7 +47,9 @@ PRODUCT_COPY_FILES += \
 # Bluetooth
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl \
-    android.hardware.bluetooth@1.0-service
+    android.hardware.bluetooth@1.0-service \
+    libbluetooth_mtk \
+    libbt-vendor
 
 # Bootanimation
 TARGET_SCREEN_HEIGHT := 854
