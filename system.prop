@@ -79,6 +79,8 @@ ril.radiooff.poweroffMD=0
 
 ro.boot.btmacaddr=00:00:00:00:00:00
 
+debug.hwui.renderer=skiagl
+
 # OEM props
 import /oem/oem.prop ro.product.name
 import /oem/oem.prop ro.product.manufacturer
