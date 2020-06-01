@@ -29,6 +29,9 @@ TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 # Filesystem
 TARGET_USERIMAGES_USE_EXT4 := true
 
+# Graphics
+TARGET_ADDITIONAL_GRALLOC_10_USAGE_BITS := 0x400U | 0x2000U
+ 
 # Kernel
 TARGET_KERNEL_SOURCE := kernel/mediatek/sprout
 TARGET_KERNEL_CONFIG := lineageos_sprout_defconfig
