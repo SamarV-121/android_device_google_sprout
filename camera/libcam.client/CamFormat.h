@@ -35,131 +35,158 @@
  * any receiver's applicable license agreements with MediaTek Inc.
  */
 
-#ifndef _MTK_HARDWARE_INCLUDE_MTKCAM_UTILS_FORMAT_H_
-#define _MTK_HARDWARE_INCLUDE_MTKCAM_UTILS_FORMAT_H_
+#ifndef _MTK_HARDWARE_INCLUDE_MTKCAM_V1_CAMUTILS_CAMFORMAT_H_
+#define _MTK_HARDWARE_INCLUDE_MTKCAM_V1_CAMUTILS_CAMFORMAT_H_
 //
 
 
-/******************************************************************************
+namespace android {
+namespace MtkCamUtils {
+namespace FmtUtils {
+
+
+/*****************************************************************************
+ * @brief Query the imageio format.
+ *
+ * @details Given a CameraParameters::PIXEL_FORMAT_xxx, return its corresponding
+ * imageio format.
+ *
+ * @note
+ *
+ * @param[in] szPixelFormat: A null-terminated string for pixel format (i.e. 
+ * CameraParameters::PIXEL_FORMAT_xxx)
+ *
+ * @return its corresponding imageio format (i.e. EImageFormat)
  *
  ******************************************************************************/
-namespace NSCam {
-namespace Utils {
-namespace Format {
-
-bool
-checkValidFormat(
-    int const imageFormat
+uint_t
+queryImageioFormat(
+    char const* szPixelFormat
 );
+
+
+/*****************************************************************************
+ * @brief Query the bits per pixel.
+ *
+ * @details Given a CameraParameters::PIXEL_FORMAT_xxx, return its corresponding
+ * bits per pixel.
+ *
+ * @note
+ *
+ * @param[in] szPixelFormat: A null-terminated string for pixel format (i.e. 
+ * CameraParameters::PIXEL_FORMAT_xxx)
+ *
+ * @return its corresponding bits per pixel.
+ *
+ ******************************************************************************/
+int
+queryBitsPerPixel(
+    char const* szPixelFormat
+);
+
 
 /*****************************************************************************
  * @brief Query the plane count.
  *
- * @details Given a format of type EImageFormat, return its corresponding
+ * @details Given a CameraParameters::PIXEL_FORMAT_xxx, return its corresponding
  * plane count.
  *
  * @note
  *
- * @param[in] imageFormat: A format of type EImageFormat.
+ * @param[in] szPixelFormat: A null-terminated string for pixel format (i.e. 
+ * CameraParameters::PIXEL_FORMAT_xxx)
  *
  * @return its corresponding plane count.
  *
  ******************************************************************************/
 size_t
 queryPlaneCount(
-    int const imageFormat
+    char const* szPixelFormat
 );
 
 
 /*****************************************************************************
- * @brief Query the width in pixels of a specific plane.
+ * @brief Query a specific plane's width stride.
  *
- * @details Given a format of type EImageFormat, a plane index, and the width in
- * in pixels of the 0-th plane, return the width in pixels of the given plane.
+ * @details Given a CameraParameters::PIXEL_FORMAT_xxx, image width and plane's 
+ * index, return its corresponding plane's stride.
  *
  * @note
  *
- * @param[in] imageFormat: A format of type EImageFormat.
- * @param[in] planeIndex: a specific plane index.
- * @param[in] widthInPixels: the width in pixels of the 0-th plane.
+ * @param[in] szPixelFormat: A null-terminated string for pixel format (i.e. 
+ * CameraParameters::PIXEL_FORMAT_xxx)
  *
- * @return the width in pixels of the given plane.
+ * @param[in] imgWidth: image width, in pixel.
+ *
+ * @param[in] planeIndex: plane's index; 0, 1, and 2 refer to 1st-, 2nd-, and 
+ * 3rd plane, respectively.
+ *
+ * @return its corresponding plane's stride, in pixel
  *
  ******************************************************************************/
 size_t
-queryPlaneWidthInPixels(
-    int const imageFormat, 
-    size_t planeIndex, 
-    size_t widthInPixels
-);
-
-
-/*****************************************************************************
- * @brief Query the height in pixels of a specific plane.
- *
- * @details Given a format of type EImageFormat, a plane index, and the height 
- * in pixels of the 0-th plane, return the height in pixels of the given plane.
- *
- * @note
- *
- * @param[in] imageFormat: A format of type EImageFormat.
- * @param[in] planeIndex: a specific plane index.
- * @param[in] heightInPixels: the height in pixels of the 0-th plane.
- *
- * @return the height in pixels of the given plane.
- *
- ******************************************************************************/
-size_t
-queryPlaneHeightInPixels(
-    int const imageFormat, 
-    size_t planeIndex, 
-    size_t heightInPixels
-);
-
-
-/*****************************************************************************
- * @brief Query the bits per pixel of a specific plane.
- *
- * @details Given a format of type EImageFormat and a plane index, return
- * the bits per pixel of the given plane.
- *
- * @note
- *
- * @param[in] imageFormat: A format of type EImageFormat.
- * @param[in] planeIndex: a specific plane index.
- *
- * @return the bits per pixel of the given plane.
- *
- ******************************************************************************/
-int
-queryPlaneBitsPerPixel(
-    int const imageFormat, 
+queryImgWidthStride(
+    char const* szPixelFormat, 
+    size_t imgWidth, 
     size_t planeIndex
 );
 
 
 /*****************************************************************************
- * @brief Query the bits per pixel of a specific format.
+ * @brief Query a specific plane's height stride.
  *
- * @details Given a format of type EImageFormat, return the bits per pixel.
+ * @details Given a CameraParameters::PIXEL_FORMAT_xxx, image height and plane's 
+ * index, return its corresponding plane's stride.
  *
  * @note
  *
- * @param[in] imageFormat: A format of type EImageFormat.
+ * @param[in] szPixelFormat: A null-terminated string for pixel format (i.e. 
+ * CameraParameters::PIXEL_FORMAT_xxx)
  *
- * @return the bits per pixel.
+ * @param[in] imgHeight: image height, in pixel.
+ *
+ * @param[in] planeIndex: plane's index; 0, 1, and 2 refer to 1st-, 2nd-, and 
+ * 3rd plane, respectively.
+ *
+ * @return its corresponding plane's stride, in pixel
  *
  ******************************************************************************/
-int
-queryImageBitsPerPixel(
-    int const imageFormat
+size_t
+queryImgHeightStride(
+    char const* szPixelFormat, 
+    size_t imgHeight, 
+    size_t planeIndex
 );
 
 
-/******************************************************************************
+/*****************************************************************************
+ * @brief Query a striding buffer size, in bytes.
+ *
+ * @details Given a CameraParameters::PIXEL_FORMAT_xxx, image width/height, 
+ * return its corresponding striding buffer size, in bytes.
+ *
+ * @note
+ *
+ * @param[in] szPixelFormat: A null-terminated string for pixel format (i.e. 
+ * CameraParameters::PIXEL_FORMAT_xxx)
+ *
+ * @param[in] imgWidth: image width, in pixel.
+ *
+ * @param[in] imgHeight: image height, in pixel.
+ *
+ * @return its corresponding striding buffer size, in bytes
  *
  ******************************************************************************/
-};  // namespace Format
-};  // namespace Utils
-};  // namespace NSCam
-#endif  //_MTK_HARDWARE_INCLUDE_MTKCAM_UTILS_FORMAT_H_
+size_t
+queryImgBufferSize(
+    char const* szPixelFormat, 
+    size_t imgWidth, 
+    size_t imgHeight
+);
+
+
+};  // namespace FmtUtils
+};  // namespace MtkCamUtils
+};  // namespace android
+#endif  //_MTK_HARDWARE_INCLUDE_MTKCAM_V1_CAMUTILS_CAMFORMAT_H_
+

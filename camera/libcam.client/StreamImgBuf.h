@@ -43,6 +43,7 @@
 #include <cutils/native_handle.h>
 #include <nativebase/nativebase.h>
 #include "IBuffer.h"
+#include "CamFormat.h"
 
 using namespace android::MtkCamUtils;
 
@@ -64,15 +65,13 @@ struct ImgInfo : public LightRefBase<ImgInfo>
     uint32_t                        mu4ImgWidth;
     uint32_t                        mu4ImgHeight;
     uint32_t                        mu4BitsPerPixel;
-    uint32_t                        mi4Orientation;
     //
                                     ImgInfo(
-                                        uint32_t const u4ImgWidth,
-                                        uint32_t const u4ImgHeight,
-                                        char const*const ImgFormat,
-                                        int32_t const i4ImgFormat,
-                                        char const*const pImgName = "",
-                                        uint32_t const u4Orientation = 0
+                                        uint32_t const u4ImgWidth, 
+                                        uint32_t const u4ImgHeight, 
+                                        char const*const ImgFormat, 
+                                        int32_t const i4ImgFormat, 
+                                        char const*const pImgName = ""
                                     );
 };
 
@@ -126,21 +125,18 @@ public:     ////    Attributes.
 public:     ////                    Instantiation.
     virtual                         ~StreamImgBuf();
                                     StreamImgBuf(
-                                        sp<ImgInfo const>const& rpImgInfo,
-                                        int32_t const   i4Stride,
-                                        void*const      pBufBase,
-                                        buffer_handle_t*pBufHndl,
-                                        int const       fdIon    = -1,
+                                        sp<ImgInfo const>const& rpImgInfo, 
+                                        int32_t const   i4Stride, 
+                                        void*const      pBufBase, 
+                                        buffer_handle_t*pBufHndl, 
+                                        int const       fdIon    = -1, 
                                         int64_t const   timestamp= 0
                                     );
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 public:     ////                    Debug.
     void                            dump() const;
-    //
-    uint32_t                        getOrientation();
-    void                            setNeedDisplayRotation(bool bNeed);
-    bool                            getNeedDisplayRotation();
+
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //  Data Members.
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -150,10 +146,9 @@ protected:  ////                    Memory.
     int                             mfdIon;         //  ion shared file descriptor.
     void*                           mpBufBase;      //  Pointer to the locked buffer base address.
     buffer_handle_t*                mpBufHndl;      //  Pointer to the locked buffer handle.
-    sp<ANativeWindowBuffer>         mpANWBuffer;    //
+    sp<ANativeWindowBuffer>         mpANWBuffer;    //  
     int32_t                         mi4Stride;      //
     size_t                          mBufSize;       //
-    bool                            mbNeedRotation; //  for display rotation
 };
 
 

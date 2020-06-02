@@ -116,4 +116,3 @@ public:     ////
 };  // namespace MtkCamUtils
 };  // namespace android
 #endif  //_MTK_CAMERA_INC_COMMON_CAMUTILS_IBUFFER_H_
-
