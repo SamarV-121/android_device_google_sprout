@@ -1,67 +1,45 @@
 #
 # system.prop for sprout
 #
-rild.libpath=/system/lib/mtk-ril.so
-rild.libargs=-d /dev/ttyC0
 
-
-# MTK, Infinity, 20090720 {
-wifi.interface=wlan0
-ro.hardware=sprout
-# MTK, Infinity, 20090720 }
-
-# MTK, mtk03034, 20101210 {
-ro.mediatek.wlan.wsc=1
-# MTK, mtk03034 20101210}
-# MTK, mtk03034, 20110318 {
-ro.mediatek.wlan.p2p=1
-# MTK, mtk03034 20110318}
-
-# MTK, mtk03034, 20101213 {
-mediatek.wlan.ctia=0
-# MTK, mtk03034 20101213}
-
-
-#
-wifi.tethering.interface=ap0
-#
-ro.sf.lcd_density=240
-ro.opengles.version=131072
-
-wifi.direct.interface=p2p0
-dalvik.vm.heapgrowthlimit=96m
-dalvik.vm.heapsize=128m
-
-# USB MTP WHQL
-ro.sys.usb.mtp.whql.enable=0
-
-# Power off opt in IPO
-sys.ipo.pwrdncap=2
-
-ro.sys.usb.storage.type=mtp,adb
-
-# USB BICR function
-ro.sys.usb.bicr=yes
-
-# USB Charge only function
-# ro.sys.usb.charging.only=yes
-
-# audio
+# Audio
 ro.camera.sound.forced=0
 ro.audio.silent=0
 
-ro.zygote.preload.enable=0
+# Bluetooth
+ro.boot.btmacaddr=00:00:00:00:00:00
 
-ro.kernel.zio=38,108,105,16
-ro.boot.selinux=disable
+# Dalvik
+dalvik.vm.heapgrowthlimit=96m
+dalvik.vm.heapsize=128m
 
 # Disable dirty region for Mali
 debug.hwui.render_dirty_regions=false
 
+# GPS
+persist.force.gps.mode=gnss
+
+# Kernel 
+ro.kernel.zio=38,108,105,16
+ro.zygote.preload.enable=0
+				  
+# LCD 
+ro.sf.lcd_density=240
+
+# MediaTek Hardware
 ro.mediatek.chip_ver=S01
 ro.mediatek.version.release=ALPS.W10.24.p0
 ro.mediatek.platform=MT6582
 ro.mediatek.version.sdk=1
+
+# OpenGL					   
+ro.opengles.version=131072
+debug.hwui.renderer=skiagl
+
+# Power off opt in IPO
+sys.ipo.pwrdncap=2
+
+# RIL
 ro.telephony.sim.count=2
 persist.radio.default.sim=0
 persist.radio.multisim.config=dsds
@@ -73,15 +51,36 @@ persist.mtk.wcn.combo.chipid=-1
 ril.specific.sm_cause=0
 bgw.current3gband=0
 ril.external.md=0
-ro.sf.hwrotation=0
 ril.current.share_modem=2
 ril.radiooff.poweroffMD=0
+# RIL Daemon
+rild.libpath=/system/lib/mtk-ril.so
+rild.libargs=-d /dev/ttyC0
 
-persist.force.gps.mode=gnss
+# Rotation
+ro.sf.hwrotation=0
 
-ro.boot.btmacaddr=00:00:00:00:00:00
+# Selinux
+ro.boot.selinux=disable
 
-debug.hwui.renderer=skiagl
+# temporary enables NAV bar (soft keys)
+qemu.hw.mainkeys=0
+
+# USB 
+ro.sys.usb.storage.type=mtp,adb
+ro.sys.usb.bicr=yes
+ro.sys.usb.charging.only=yes
+ro.sys.usb.mtp.whql.enable=0
+
+# Wireless Networks
+wifi.supplicant_scan_interval=15
+wifi.interface=wlan0
+ro.hardware=sprout
+ro.mediatek.wlan.wsc=1
+ro.mediatek.wlan.p2p=1
+mediatek.wlan.ctia=0
+wifi.tethering.interface=ap0
+wifi.direct.interface=p2p0
 
 # OEM props
 import /oem/oem.prop ro.product.name
