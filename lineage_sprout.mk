@@ -1,4 +1,5 @@
 $(call inherit-product, device/google/sprout/device.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_k.mk)
 
 # Bootanimation
 TARGET_BOOTANIMATION_HALF_RES := true
