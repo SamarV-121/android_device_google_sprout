@@ -12,6 +12,8 @@ persist.force.gps.mode=gnss
 debug.hwui.use_partial_updates=false
 ro.opengles.version=131072
 debug.hwui.renderer=skiagl
+persist.sys.strictmode.visual=0
+persist.sys.strictmode.disable=1
 
 # Kernel 
 ro.kernel.zio=38,108,105,16
