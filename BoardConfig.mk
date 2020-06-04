@@ -63,7 +63,7 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_ROOT_EXTRA_FOLDERS := protect_f protect_s
 
 # Recovery
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/root/fstab.sprout
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/fstab.sprout
 
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)

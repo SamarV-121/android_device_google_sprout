@@ -603,12 +603,12 @@ on property:vold.decrypt=trigger_restart_framework
 on property:vold.decrypt=trigger_shutdown_framework
     start stop_modem
 
-service stop_modem /system/bin/md_ctrl 0
+service stop_modem /vendor/bin/md_ctrl 0
     class main
     disabled
     oneshot
 
-service start_modem /system/bin/md_ctrl 1
+service start_modem /vendor/bin/md_ctrl 1
     class main
     disabled
     oneshot
@@ -628,7 +628,7 @@ service netdiag /system/bin/netdiag
     class main
     socket netdiag stream 0660 root inet
 
-service nvram_daemon /system/bin/nvram_daemon
+service nvram_daemon /vendor/bin/nvram_daemon
     class main
     user root
     group root system
@@ -670,7 +670,7 @@ service rmmod rmmod
     disabled
     oneshot
 
-service wpa_supplicant /system/vendor/bin/hw/wpa_supplicant \
+service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     -O/data/vendor/wifi/wpa/sockets -puse_p2p_group_interface=1 \
 	-g@android:wpa_wlan0
     interface android.hardware.wifi.supplicant@1.0::ISupplicant default
@@ -698,15 +698,16 @@ service bluetoothd /system/bin/bluetoothd -n
 #  External Modme control related services
 #
 
-# service agpsd /system/bin/mtk_agpsd
-#     class main
-#     socket agpsd stream 660 gps system
-#     socket agpsd2 stream 660 gps inet
-#     socket agpsd3 stream 660 gps inet
-#     user gps
-#     group gps inet sdcard_r sdcard_rw misc radio
 
-service mnld /system/xbin/mnld
+# service agpsd /vendor/bin/mtk_agpsd
+#    class main
+#    socket agpsd stream 660 gps system
+#    socket agpsd2 stream 660 gps inet
+#    socket agpsd3 stream 660 gps inet
+#    user gps
+#    group gps inet sdcard_r sdcard_rw misc radio
+
+service mnld /vendor/xbin/mnld
     class main
     user gps
     group system gps inet misc sdcard_rw sdcard_r media_rw
@@ -731,7 +732,7 @@ service dualmdlogger /system/bin/dualmdlogger
 #sensor service (begin)
 #
 
-service msensord /system/bin/msensord
+service msensord /vendor/bin/msensord
     class main
     oneshot
 
@@ -781,12 +782,12 @@ service geomagneticd /system/bin/geomagneticd
     disabled
     user system
     group system input
-service bmc156d /system/bin/bmc156d
+service bmc156d /vendor/bin/bmc156d
     disabled
     class main
     user system
     group system input
-service lsm303md /system/bin/lsm303md
+service lsm303md /vendor/bin/lsm303md
     disabled
     class main
     user system
@@ -800,7 +801,7 @@ service shutdown /system/bin/shutdown
     group root
     disabled
 
-service thermal_manager /system/bin/thermal_manager
+service thermal_manager /vendor/bin/thermal_manager
     class main
     user root
     oneshot
@@ -812,14 +813,14 @@ service battery_charger /charger
 # Connectivity related services (Begin)
 #
 
-service wmtLoader /system/bin/wmt_loader
+service wmtLoader /vendor/bin/wmt_loader
     user root
     group root
     class main
     oneshot
 
 
-service conn_launcher /system/bin/6620_launcher -p /system/etc/firmware/
+service conn_launcher /vendor/bin/6620_launcher -p /vendor/etc/firmware/
     user system
     group system
     class core
@@ -875,14 +876,14 @@ on post-fs-data
     chown radio radio /sys/kernel/ccci/boot
 
 
-service gsm0710muxd /system/bin/gsm0710muxd -s /dev/ttyC0 -f 512 -n 8 -m basic
+service gsm0710muxd /vendor/bin/gsm0710muxd -s /dev/ttyC0 -f 512 -n 8 -m basic
     class core
     user root
     group radio cache inet misc
     disabled
     oneshot
 
-service muxreport-daemon /system/bin/muxreport
+service muxreport-daemon /vendor/bin/muxreport
     class core
     user radio
     group radio cache inet misc
@@ -905,13 +906,13 @@ service md_minilog_util /system/bin/md_minilog_util
 #  Modem related services (Begin)
 #
 
-service ccci_fsd /system/bin/ccci_fsd 0
+service ccci_fsd /vendor/bin/ccci_fsd 0
     user root
     group radio system
     class core
     oneshot
 
-service ccci_mdinit /system/bin/ccci_mdinit 0
+service ccci_mdinit /vendor/bin/ccci_mdinit 0
     user root
     group radio system
     class core
