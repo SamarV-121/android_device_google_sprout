@@ -13,8 +13,8 @@ ro.boot.btmacaddr=00:00:00:00:00:00
 dalvik.vm.heapgrowthlimit=96m
 dalvik.vm.heapsize=128m
 
-# Disable dirty region for Mali
-debug.hwui.render_dirty_regions=false
+# Disable partial updates (formerly known as 'dirty region') for Mali
+debug.hwui.use_partial_updates=false
 
 # GPS
 persist.force.gps.mode=gnss
