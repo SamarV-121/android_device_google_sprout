@@ -1,160 +1,158 @@
 # Bluetooth
-lib/libbluetooth_mtk_pure.so
+lib/libbluetooth_mtk_pure.so:vendor/lib/libbluetooth_mtk_pure.so
 
 # Camera
-lib/lib3a.so
--lib/libcam1client.so|a16edce298219463f329ad59adb2a77ac66303d6
-lib/libcam_mmp.so
-lib/libcamdrv_FrmB.so
-lib/libcam3_hwnode.so
-lib/libcam3_pipeline.so
-lib/libcam.device3.so
-lib/libcam.exif.so
-lib/libcam.hal3a.v3.so
-lib/libcamdrv.so
--lib/libcam.utils.so
-lib/libimageio_plat_drv_FrmB.so
-lib/libmtkcamera_client.so
-lib/libfeatureio.so
-lib/libcam3_utils.so
--lib/libcam_utils.so
-lib/libimageio_plat_drv.so
-lib/libimageio.so
-lib/libcam.paramsmgr.so
-lib/libcam_platform.so
-lib/libfile_op.so
-lib/libcam3_app.so
-lib/libimageio_FrmB.so
-lib/libcam.metadata.so
-lib/libcameracustom.so
-lib/libcam.iopipe.so
-lib/libcam.exif.v3.so
-lib/libcam.device1.so
-lib/libcam.camadapter.so
-lib/libcam.camshot.so
-lib/libcam.halsensor.so
-lib/libcamalgo.so
-lib/libcam.campipe.so
-lib/libcam.metadataprovider.so
-lib/libcam_hwutils.so
-lib/libmtkjpeg.so
-lib/libcam3_hwpipeline.so
-lib/libcam.iopipe_FrmB.so
-lib/hw/camera.mt6582.so
+lib/lib3a.so:vendor/lib/lib3a.so
+-lib/libcam1client.so:vendor/lib/libcam1client.so|a16edce298219463f329ad59adb2a77ac66303d6
+lib/libcam_mmp.so:vendor/lib/libcam_mmp.so
+lib/libcamdrv_FrmB.so:vendor/lib/libcamdrv_FrmB.so
+lib/libcam3_hwnode.so:vendor/lib/libcam3_hwnode.so
+lib/libcam3_pipeline.so:vendor/lib/libcam3_pipeline.so
+lib/libcam.device3.so:vendor/lib/libcam.device3.so
+lib/libcam.exif.so:vendor/lib/libcam.exif.so
+lib/libcam.hal3a.v3.so:vendor/lib/libcam.hal3a.v3.so
+lib/libcamdrv.so:vendor/lib/libcamdrv.so
+-lib/libcam.utils.so:vendor/lib/libcam.utils.so
+lib/libimageio_plat_drv_FrmB.so:vendor/lib/libimageio_plat_drv_FrmB.so
+lib/libmtkcamera_client.so:vendor/lib/libmtkcamera_client.so
+lib/libfeatureio.so:vendor/lib/libmtkcamera_client.so
+lib/libcam3_utils.so:vendor/lib/libcam3_utils.so
+-lib/libcam_utils.so:vendor/lib/libcam_utils.so
+lib/libimageio_plat_drv.so:vendor/lib/libimageio_plat_drv.so
+lib/libimageio.so:vendor/lib/libimageio.so
+lib/libcam.paramsmgr.so:vendor/lib/libcam.paramsmgr.so
+lib/libcam_platform.so:vendor/lib/libcam_platform.so
+lib/libfile_op.so:vendor/lib/libfile_op.so
+lib/libcam3_app.so:vendor/lib/libcam3_app.so
+lib/libimageio_FrmB.so:vendor/lib/libimageio_FrmB.so
+lib/libcam.metadata.so:vendor/lib/libcam.metadata.so
+lib/libcameracustom.so:vendor/lib/libcameracustom.so
+lib/libcam.iopipe.so:vendor/lib/libcam.iopipe.so
+lib/libcam.exif.v3.so:vendor/lib/libcam.exif.v3.so
+lib/libcam.device1.so:vendor/lib/libcam.device1.so
+lib/libcam.camadapter.so:vendor/lib/libcam.camadapter.so
+lib/libcam.camshot.so:vendor/lib/libcam.camshot.so
+lib/libcam.halsensor.so:vendor/lib/libcam.halsensor.so
+lib/libcamalgo.so:vendor/lib/libcamalgo.so
+lib/libcam.campipe.so:vendor/lib/libcam.campipe.so
+lib/libcam.metadataprovider.so:vendor/lib/libcam.metadataprovider.so
+lib/libcam_hwutils.so:vendor/lib/libcam_hwutils.so
+lib/libmtkjpeg.so:vendor/lib/libmtkjpeg.so
+lib/libcam3_hwpipeline.so:vendor/lib/libcam3_hwpipeline.so
+lib/libcam.iopipe_FrmB.so:vendor/lib/libcam.iopipe_FrmB.so
+lib/hw/camera.mt6582.so:vendor/lib/hw/camera.mt6582.so
 vendor/lib/libskia.so|80215e6c9d4810836e2677f3bc6add88ad086e0d
 
 # Display
-lib/libdpframework.so
--lib/libged.so|4022e83492ad5db2c936544d27541d8a2240af63
-lib/libMali.so
-lib/egl/libGLESv2_mali.so
-lib/egl/libGLESv1_CM_mali.so
-lib/egl/libEGL_mali.so
-lib/libblisrc.so
-lib/libblisrc32.so
--lib/libion_mtk.so
-lib/libmtk_mali_user.so
-lib/libm4u.so
-lib/hw/gralloc.mt6582.so|918c805b7046f05ce95cfe90a8ca503550f324e3
-lib/hw/hwcomposer.mt6582.so
+lib/libdpframework.so:vendor/lib/libdpframework.so
+-lib/libged.so:vendor/lib/libged.so|4022e83492ad5db2c936544d27541d8a2240af63
+lib/libMali.so:vendor/lib/libMali.so
+lib/egl/libGLESv2_mali.so:vendor/lib/egl/libGLESv2_mali.so
+lib/egl/libGLESv1_CM_mali.so:vendor/lib/egl/libGLESv1_CM_mali.so
+lib/egl/libEGL_mali.so:vendor/lib/egl/libEGL_mali.so
+lib/libblisrc.so:vendor/lib/libblisrc.so
+lib/libblisrc32.so:vendor/lib/libblisrc32.so
+-lib/libion_mtk.so:vendor/lib/libion_mtk.so
+lib/libmtk_mali_user.so:vendor/lib/libmtk_mali_user.so
+lib/libm4u.so:vendor/lib/libm4u.so
+lib/hw/gralloc.mt6582.so:vendor/lib/hw/gralloc.mt6582.so|918c805b7046f05ce95cfe90a8ca503550f324e3
+lib/hw/hwcomposer.mt6582.so:vendor/lib/hw/hwcomposer.mt6582.so
+lib/hw/memtrack.mt6582.so:vendor/lib/hw/memtrack.mt6582.so
 
 # FM
 -app/FMRadioGoogle/FMRadioGoogle.apk
 -app/FmRadioTrampoline2/FmRadioTrampoline2.apk
-etc/firmware/mt6627/mt6627_fm_v2_coeff.bin
-etc/firmware/mt6627/mt6627_fm_v4_patch.bin
-etc/firmware/mt6627/mt6627_fm_v3_patch.bin
-etc/firmware/mt6627/mt6627_fm_v5_coeff.bin
-etc/firmware/mt6627/mt6627_fm_v2_patch.bin
-etc/firmware/mt6627/mt6627_fm_v1_patch.bin
-etc/firmware/mt6627/mt6627_fm_v4_coeff.bin
-etc/firmware/mt6627/mt6627_fm_v3_coeff.bin
-etc/firmware/mt6627/mt6627_fm_v1_coeff.bin
-etc/firmware/mt6627/mt6627_fm_v5_patch.bin
-lib/libfmcust.so
-lib/libfmjni.so|8b4ac8d45659615df3fbdbc4fcc1ff0b2ed7e6c0
-lib/hw/radio.fm.mt6582.so
+etc/firmware/mt6627/mt6627_fm_v2_coeff.bin:vendor/etc/firmware/mt6627/mt6627_fm_v2_coeff.bin
+etc/firmware/mt6627/mt6627_fm_v4_patch.bin:vendor/etc/firmware/mt6627/mt6627_fm_v4_patch.bin
+etc/firmware/mt6627/mt6627_fm_v3_patch.bin:vendor/etc/firmware/mt6627/mt6627_fm_v3_patch.bin
+etc/firmware/mt6627/mt6627_fm_v5_coeff.bin:vendor/etc/firmware/mt6627/mt6627_fm_v5_coeff.bin
+etc/firmware/mt6627/mt6627_fm_v2_patch.bin:vendor/etc/firmware/mt6627/mt6627_fm_v2_patch.bin
+etc/firmware/mt6627/mt6627_fm_v1_patch.bin:vendor/etc/firmware/mt6627/mt6627_fm_v1_patch.bin
+etc/firmware/mt6627/mt6627_fm_v4_coeff.bin:vendor/etc/firmware/mt6627/mt6627_fm_v4_coeff.bin
+etc/firmware/mt6627/mt6627_fm_v3_coeff.bin:vendor/etc/firmware/mt6627/mt6627_fm_v3_coeff.bin
+etc/firmware/mt6627/mt6627_fm_v1_coeff.bin:vendor/etc/firmware/mt6627/mt6627_fm_v1_coeff.bin
+etc/firmware/mt6627/mt6627_fm_v5_patch.bin:vendor/etc/firmware/mt6627/mt6627_fm_v5_patch.bin
+lib/libfmcust.so:vendor/lib/libfmcust.so
+lib/libfmjni.so:vendor/lib/libfmjni.so|8b4ac8d45659615df3fbdbc4fcc1ff0b2ed7e6c0
+lib/hw/radio.fm.mt6582.so:vendor/lib/hw/radio.fm.mt6582.so
 
 # GPS
-bin/mtk_agpsd
-lib/libmnl.so
-lib/libssladp.so
-xbin/mnld
+bin/mtk_agpsd:vendor/bin/mtk_agpsd
+lib/libmnl.so:vendor/lib/libmnl.so
+lib/libssladp.so:vendor/lib/libssladp.so
+xbin/mnld:vendor/xbin/mnld
 
 # Lights
-lib/hw/lights.default.so
-
-# Memtrack
-lib/hw/memtrack.mt6582.so
+lib/hw/lights.default.so:vendor/lib/hw/lights.default.so
 
 # Media
-etc/mtk_omx_core.cfg
-lib/libaudiosetting.so
-lib/libaudiocompensationfilter.so
-lib/libaudiocomponentengine.so
-lib/libaudiocustparam.so
-lib/libMtkOmxVenc.so
-lib/libMtkOmxCore.so
-lib/libMtkOmxVdec.so|28ef0fa4a3fb609d6c3a60bed8e56a0e44dca185
-lib/libaudiomtkdcremoval.so
-lib/libaudiodcrflt.so
-lib/libmtk_mmutils.so
-lib/libJpgEncPipe.so
-lib/libbessound_hd_mtk.so
-lib/libbwc.so
-lib/libmtk_drvb.so
-lib/libvcodecdrv.so
-lib/libvcodec_utility.so
-lib/libspeech_enh_lib.so
-lib/libstagefrighthw.so
-lib/libmsbc_mtk.so
-lib/libcvsd_mtk.so
-lib/hw/audio.primary.mt6582.so
+etc/mtk_omx_core.cfg:vendor/etc/mtk_omx_core.cfg
+lib/libaudiosetting.so:vendor/lib/libaudiosetting.so
+lib/libaudiocompensationfilter.so:vendor/lib/libaudiocompensationfilter.so
+lib/libaudiocomponentengine.so:vendor/lib/libaudiocomponentengine.so
+lib/libaudiocustparam.so:vendor/lib/libaudiocustparam.so
+lib/libMtkOmxVenc.so:vendor/lib/libMtkOmxVenc.so
+lib/libMtkOmxCore.so:vendor/lib/libMtkOmxCore.so
+lib/libMtkOmxVdec.so:vendor/lib/libMtkOmxVdec.so|28ef0fa4a3fb609d6c3a60bed8e56a0e44dca185
+lib/libaudiomtkdcremoval.so:vendor/lib/libaudiomtkdcremoval.so
+lib/libaudiodcrflt.so:vendor/lib/libaudiodcrflt.so
+lib/libmtk_mmutils.so:vendor/lib/libmtk_mmutils.so
+lib/libJpgEncPipe.so:vendor/lib/libJpgEncPipe.so
+lib/libbessound_hd_mtk.so:vendor/lib/libbessound_hd_mtk.so
+lib/libbwc.so:vendor/lib/libbwc.so
+lib/libmtk_drvb.so:vendor/lib/libmtk_drvb.so
+lib/libvcodecdrv.so:vendor/lib/libvcodecdrv.so
+lib/libvcodec_utility.so:vendor/lib/libvcodec_utility.so
+lib/libspeech_enh_lib.so:vendor/lib/libspeech_enh_lib.so
+lib/libstagefrighthw.so:vendor/lib/libstagefrighthw.so
+lib/libmsbc_mtk.so:vendor/lib/libmsbc_mtk.so
+lib/libcvsd_mtk.so:vendor/lib/libcvsd_mtk.so
+lib/hw/audio.primary.mt6582.so:vendor/lib/hw/audio.primary.mt6582.so
 
 # Misc
-vendor/lib/libfrsdk.so
+vendor/lib/libfrsdk.so:vendor/vendor/lib/libfrsdk.so
 
 # Nvram
-bin/nvram_daemon
-lib/libcustom_nvram.so
--lib/libnvram.so
-lib/libnvram_daemon_callback.so
-lib/libnvram_platform.so
+bin/nvram_daemon:vendor/bin/nvram_daemon
+lib/libcustom_nvram.so:vendor/lib/libcustom_nvram.so
+-lib/libnvram.so:vendor/lib/libnvram.so
+lib/libnvram_daemon_callback.so:vendor/lib/libnvram_daemon_callback.so
+lib/libnvram_platform.so:vendor/lib/libnvram_platform.so
 
 # Sensor
-bin/bmc156d
-bin/lsm303md
-bin/msensord
-lib/libhwm.so
-lib/hw/sensors.mt6582.so:lib/sensors.mt6582
+bin/bmc156d:vendor/bin/bmc156d
+bin/lsm303md:vendor/bin/lsm303md
+bin/msensord:vendor/bin/msensord
+lib/libhwm.so:vendor/lib/libhwm.so
+lib/hw/sensors.mt6582.so:vendor/lib/sensors.mt6582
 
 # Telephony
-bin/6620_launcher
-bin/ccci_fsd
-bin/ccci_mdinit
-bin/gsm0710muxd
-bin/md_ctrl
-bin/muxreport
-etc/firmware/modem_1_wg_n.img
-etc/firmware/catcher_filter_1_wg_n.bin
--lib/librilmtk.so|e747f8f157b02854a379f7bd4ab56a2fd3bd26b3
--lib/mtk-ril.so|b766b3a61842c9ebba82a3f75ef405b7fcd88166
+bin/6620_launcher:vendor/bin/6620_launcher
+bin/ccci_fsd:vendor/bin/ccci_fsd
+bin/ccci_mdinit:vendor/bin/ccci_mdinit
+bin/gsm0710muxd:vendor/bin/gsm0710muxd
+bin/md_ctrl:vendor/bin/md_ctrl
+bin/muxreport:vendor/bin/muxreport
+etc/firmware/modem_1_wg_n.img:vendor/etc/firmware/modem_1_wg_n.img
+etc/firmware/catcher_filter_1_wg_n.bin:vendor/etc/firmware/catcher_filter_1_wg_n.bin
+-lib/librilmtk.so:vendor/lib/librilmtk.so|e747f8f157b02854a379f7bd4ab56a2fd3bd26b3
+-lib/mtk-ril.so:vendor/lib/mtk-ril.so|b766b3a61842c9ebba82a3f75ef405b7fcd88166
 
 # Thermal
-bin/thermal_manager
+bin/thermal_manager:vendor/bin/thermal_manager
 
 # WiFi
-bin/wmt_loader
-etc/firmware/WIFI_RAM_CODE_SOC
-etc/firmware/WMT_SOC.cfg
-etc/firmware/ROMv1_patch_1_0_hdr.bin
-etc/firmware/ROMv1_patch_1_1_hdr.bin
-etc/wifi/wpa_supplicant_overlay.conf
-etc/wifi/p2p_supplicant_overlay.conf
-etc/wifi/wpa_supplicant.conf
+bin/wmt_loader:vendor/bin/wmt_loader
+etc/firmware/WIFI_RAM_CODE_SOC:vendor/etc/firmware/WIFI_RAM_CODE_SOC
+etc/firmware/WMT_SOC.cfg:vendor/etc/firmware/WMT_SOC.cfg
+etc/firmware/ROMv1_patch_1_0_hdr.bin:vendor/etc/firmware/ROMv1_patch_1_0_hdr.bin
+etc/firmware/ROMv1_patch_1_1_hdr.bin:vendor/etc/firmware/ROMv1_patch_1_1_hdr.bin
+etc/wifi/wpa_supplicant_overlay.conf:vendor/etc/wifi/wpa_supplicant_overlay.conf
+etc/wifi/p2p_supplicant_overlay.conf:vendor/etc/wifi/p2p_supplicant_overlay.conf
+etc/wifi/wpa_supplicant.conf:vendor/etc/wifi/wpa_supplicant.conf
 
 # Widevine DRM
-lib/libdrmmtkutil.so
+lib/libdrmmtkutil.so:vendor/lib/libdrmmtkutil.so
 vendor/lib/drm/libdrmwvmplugin.so
 vendor/lib/mediadrm/libwvdrmengine.so
 vendor/lib/libwvm.so

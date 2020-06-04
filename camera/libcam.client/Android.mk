@@ -12,4 +12,5 @@ LOCAL_C_INCLUDES := \
 LOCAL_SHARED_LIBRARIES := liblog libutils libcutils libdl libcam1client libcam_utils libcam.utils
 LOCAL_MODULE := libcam.client
 LOCAL_MODULE_TAGS := optional
+LOCAL_PROPRIETARY_MODULE = true
 include $(BUILD_SHARED_LIBRARY)
