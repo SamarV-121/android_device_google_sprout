@@ -126,7 +126,7 @@ bin/bmc156d
 bin/lsm303md
 bin/msensord
 lib/libhwm.so
-lib/hw/sensors.mt6582.so:lib/sensors.mt6582
+lib/hw/sensors.mt6582.so:lib/sensors.mt6582.so
 
 # Telephony
 bin/6620_launcher
