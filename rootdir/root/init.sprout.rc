@@ -709,7 +709,7 @@ service agpsd /system/bin/mtk_agpsd
     socket agpsd2 stream 660 gps inet
     socket agpsd3 stream 660 gps inet
     user gps
-    group gps inet sdcard_r sdcard_rw misc radio
+    group gps inet sdcard_r sdcard_rw misc radio system
 
 service mnld /system/xbin/mnld
     class main
