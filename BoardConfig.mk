@@ -57,6 +57,9 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 # Recovery
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/root/fstab.sprout
 
+# Releasetools
+TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
+
 # Resolution
 DEVICE_RESOLUTION := 480x854
 
