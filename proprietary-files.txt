@@ -95,7 +95,7 @@ lib/libaudiocomponentengine.so
 lib/libaudiocustparam.so
 lib/libMtkOmxVenc.so
 lib/libMtkOmxCore.so
-lib/libMtkOmxVdec.so|28ef0fa4a3fb609d6c3a60bed8e56a0e44dca185
+lib/libMtkOmxVdec.so
 lib/libaudiomtkdcremoval.so
 lib/libaudiodcrflt.so
 lib/libmtk_mmutils.so
