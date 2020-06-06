@@ -52,7 +52,7 @@ endif
 
 # temporary hack for broken vendor rils
 LOCAL_WHOLE_STATIC_LIBRARIES := \
-	librilutils_static
+	librilutils
 
 LOCAL_CFLAGS := -DRIL_SHLIB
 
