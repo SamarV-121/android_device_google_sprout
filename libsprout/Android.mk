@@ -10,6 +10,7 @@ LOCAL_SRC_FILES := \
     icu55.c
 
 LOCAL_SHARED_LIBRARIES := libbinder libui libgui libcutils libutils libc liblog libstagefright_foundation libicuuc libicui18n
+LOCAL_C_INCLUDES += frameworks/av/media/ndk/include
 LOCAL_MODULE := libsprout
 LOCAL_MODULE_TAGS := optional
 
