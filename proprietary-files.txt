@@ -59,8 +59,6 @@ lib/hw/gralloc.mt6582.so|918c805b7046f05ce95cfe90a8ca503550f324e3
 lib/hw/hwcomposer.mt6582.so
 
 # FM
--app/FMRadioGoogle/FMRadioGoogle.apk
--app/FmRadioTrampoline2/FmRadioTrampoline2.apk
 etc/firmware/mt6627/mt6627_fm_v2_coeff.bin
 etc/firmware/mt6627/mt6627_fm_v4_patch.bin
 etc/firmware/mt6627/mt6627_fm_v3_patch.bin
@@ -72,7 +70,6 @@ etc/firmware/mt6627/mt6627_fm_v3_coeff.bin
 etc/firmware/mt6627/mt6627_fm_v1_coeff.bin
 etc/firmware/mt6627/mt6627_fm_v5_patch.bin
 lib/libfmcust.so
-lib/libfmjni.so|8b4ac8d45659615df3fbdbc4fcc1ff0b2ed7e6c0
 lib/hw/radio.fm.mt6582.so
 
 # GPS

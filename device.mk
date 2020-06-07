@@ -81,6 +81,12 @@ PRODUCT_SYSTEM_PROPERTY_BLACKLIST := \
     ro.product.manufacturer \
     ro.product.model
 
+# FM Radio
+PRODUCT_PACKAGES += \
+    android.hardware.broadcastradio@1.0-impl \
+    FMRadio \
+    libfmjni
+
 # FS-manag
 PRODUCT_PACKAGES += \
     setup_fs \
