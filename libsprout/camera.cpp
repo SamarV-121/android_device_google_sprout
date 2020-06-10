@@ -27,3 +27,6 @@ extern "C" void _ZN7android13GraphicBufferC1EjjijjP13native_handleb(
         inFormat, static_cast<uint32_t>(1), static_cast<uint64_t>(inUsage), inStride);
 }
 
+extern "C" void _ZN7android9CallStackC1Ev() {}
+extern "C" void _ZN7android9CallStack6updateEii() {}
+extern "C" void _ZNK7android9CallStack3logEPKc19android_LogPriorityS2_() {}
