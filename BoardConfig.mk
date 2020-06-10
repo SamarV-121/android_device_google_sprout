@@ -77,6 +77,15 @@ BOARD_PROVIDES_LIBRIL := true
 ENABLE_VENDOR_RIL_SERVICE := true
 SIM_COUNT := 2
 
+# Symbols
+TARGET_LD_SHIM_LIBS := \
+/system/lib/libMtkOmxVdec.so|libsprout.so \
+/system/lib/libMtkOmxVenc.so|libsprout.so \
+/system/lib/libcam_utils.so|libsprout.so \
+/system/lib/libcam.utils.so|libsprout.so \
+/system/lib/libmtkjpeg.so|libsprout.so \
+/system/lib/hw/hwcomposer.mt6582.so|libsprout.so
+
 # SEpolicy
 BOARD_SEPOLICY_DIRS += device/google/sprout/sepolicy
 
