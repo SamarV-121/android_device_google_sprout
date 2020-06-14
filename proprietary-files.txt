@@ -46,7 +46,7 @@ vendor/lib/libskia.so|80215e6c9d4810836e2677f3bc6add88ad086e0d
 # Display
 lib/libdpframework.so:vendor/lib/libdpframework.so
 -lib/libged.so:vendor/lib/libged.so|4022e83492ad5db2c936544d27541d8a2240af63
-lib/libMali.so:vendor/lib/libMali.so
+lib/libMali.so:vendor/lib/libMali.so|bbef15210ef58847a87792eaf9d8602cc5d6bf94
 lib/egl/libGLESv2_mali.so:vendor/lib/egl/libGLESv2_mali.so
 lib/egl/libGLESv1_CM_mali.so:vendor/lib/egl/libGLESv1_CM_mali.so
 lib/egl/libEGL_mali.so:vendor/lib/egl/libEGL_mali.so
@@ -89,7 +89,7 @@ lib/libaudiocompensationfilter.so:vendor/lib/libaudiocompensationfilter.so
 lib/libaudiocomponentengine.so:vendor/lib/libaudiocomponentengine.so
 lib/libaudiocustparam.so:vendor/lib/libaudiocustparam.so
 lib/libMtkOmxVenc.so:vendor/lib/libMtkOmxVenc.so
-lib/libMtkOmxCore.so:vendor/lib/libMtkOmxCore.so
+lib/libMtkOmxCore.so:vendor/lib/libMtkOmxCore.so|bbef15210ef58847a87792eaf9d8602cc5d6bf94
 lib/libMtkOmxVdec.so:vendor/lib/libMtkOmxVdec.so
 lib/libaudiomtkdcremoval.so:vendor/lib/libaudiomtkdcremoval.so
 lib/libaudiodcrflt.so:vendor/lib/libaudiodcrflt.so
@@ -124,8 +124,8 @@ lib/libhwm.so:vendor/lib/libhwm.so
 lib/hw/sensors.mt6582.so:vendor/lib/sensors.mt6582.so
 
 # Telephony
-bin/6620_launcher:vendor/bin/6620_launcher
-bin/ccci_fsd:vendor/bin/ccci_fsd
+bin/6620_launcher:vendor/bin/6620_launcher|ecff3395ec6b9d70eda9fb738b2b3c0a0e1fc9a1
+bin/ccci_fsd:vendor/bin/ccci_fsd|86c60eb9d171d247b49399281ff786ce0b777a8b
 bin/ccci_mdinit:vendor/bin/ccci_mdinit
 bin/gsm0710muxd:vendor/bin/gsm0710muxd
 bin/md_ctrl:vendor/bin/md_ctrl
