@@ -81,6 +81,7 @@ SIM_COUNT := 2
 TARGET_LD_SHIM_LIBS := \
 /system/lib/libMtkOmxVdec.so|libsprout.so \
 /system/lib/libMtkOmxVenc.so|libsprout.so \
+/system/lib/libcam_utils.so|libutilscallstack.so \
 /system/lib/libcam_utils.so|libsprout.so \
 /system/lib/libcam.utils.so|libsprout.so \
 /system/lib/libcam1client.so|libsprout.so \
