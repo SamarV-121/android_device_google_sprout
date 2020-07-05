@@ -21,7 +21,7 @@
 /dev/wmtWifi             0660  wifi      wifi
 
 #FMRadio
-/dev/fm                  0660  media       media
+/dev/fm                  0666  media       media
 
 #BT SCO CVSD, for MT6572 and MT6582 CVSD codec on AP
 /dev/ebc                  0660  media       media
