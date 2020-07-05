@@ -41,7 +41,7 @@ lib/libmtkjpeg.so
 lib/libcam3_hwpipeline.so
 lib/libcam.iopipe_FrmB.so
 lib/hw/camera.mt6582.so
-vendor/lib/libskia.so|80215e6c9d4810836e2677f3bc6add88ad086e0d
+vendor/lib/libskia.so|3b436d248a04df727c39221f48b7451d25be6da6
 
 # Display
 lib/libdpframework.so
