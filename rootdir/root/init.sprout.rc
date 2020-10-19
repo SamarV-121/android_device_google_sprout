@@ -634,26 +634,6 @@ service nvram_daemon /system/bin/nvram_daemon
     group root system
     oneshot
 
-service atci_service /system/bin/atci_service
-    socket atci-service stream 660 radio system
-    socket atci-serv-fw stream 660 radio system
-    user root
-    disabled
-    group radio system
-service atcid-daemon-u /system/bin/atcid
-    user system
-    group radio system media
-    disabled
-    oneshot
-
-service atcid-daemon-e /system/bin/atcid
-    user root
-    group radio system
-    disabled
-    oneshot
-
-start atci_service
-start atcid-daemon-e
 service audio-daemon /system/bin/audiocmdservice_atci
     class main
     socket atci-audio stream 660 root system
