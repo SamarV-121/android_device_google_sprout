@@ -112,10 +112,6 @@ PRODUCT_PACKAGES += \
     libui_ext \
     libgui_ext
 
-# HIDL
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/manifest.xml:system/vendor/manifest.xml
-
 # Keylayout
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/system/usr/keylayout/mtk-kpd.kl:system/usr/keylayout/mtk-kpd.kl

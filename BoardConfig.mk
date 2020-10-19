@@ -37,6 +37,9 @@ TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 
+# HIDL
+DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
+
 # Kernel
 TARGET_KERNEL_SOURCE := kernel/mediatek/sprout
 TARGET_KERNEL_CONFIG := lineageos_sprout_defconfig
