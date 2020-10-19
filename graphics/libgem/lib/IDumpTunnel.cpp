@@ -38,7 +38,7 @@ public:
 // translation unit (see clang warning -Wweak-vtables)
 BpDumpTunnel::~BpDumpTunnel() {}
 
-IMPLEMENT_META_INTERFACE(DumpTunnel, "DumpTunnel");
+DO_NOT_DIRECTLY_USE_ME_IMPLEMENT_META_INTERFACE(DumpTunnel, "DumpTunnel");
 
 status_t BnDumpTunnel::onTransact(uint32_t code, const Parcel& data, Parcel* reply, uint32_t flags) {
     switch (code) {

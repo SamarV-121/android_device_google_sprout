@@ -30,10 +30,12 @@ LOCAL_C_INCLUDES := \
 	$(TOP)/external/zlib \
 	$(TOP)/external/skia/src/images \
 	$(TOP)/external/skia/include/core \
-    $(TOP)/external/skia/include/private \
-    $(TOP)/external/skia/include/config \
-    $(TOP)/external/skqp/include/config \
-    $(TOP)/external/pdfium/skia/config
+        $(TOP)/external/skia/include/config \
+        $(TOP)/external/skia/include/private \
+        $(TOP)/external/skia/android \
+	$(TOP)/external/skia \
+        $(TOP)/external/skqp/include/config \
+        $(TOP)/external/pdfium/skia/config
 
 
 LOCAL_SHARED_LIBRARIES := \
